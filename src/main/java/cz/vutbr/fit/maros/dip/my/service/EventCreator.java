@@ -1,39 +1,57 @@
 package cz.vutbr.fit.maros.dip.my.service;
 
+import cz.vutbr.fit.maros.dip.my.exception.CustomException;
 import java.io.IOException;
-import java.time.LocalDateTime;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
-
 public class EventCreator {
 
     private static final Logger LOG = LoggerFactory.getLogger(EventCreator.class);
 
-    public EventCreator() {
+    private final FileService fileService;
+
+    public EventCreator(FileService fileService) {
+        this.fileService = fileService;
     }
 
     //    @Scheduled(cron = "0 0 12 * * ?")
     @Scheduled(fixedRate = 1000)
-    public void create() {
+    public void getFPLData() {
 
-        Document doc = null;
+        String apiUrl = "https://fantasy.premierleague.com/api/bootstrap-static/";
+        Connection.Response response;
         try {
-            doc = Jsoup.connect("https://en.wikipedia.org/").get();
+            response = Jsoup.connect(apiUrl)
+                    .ignoreContentType(true)
+                    .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0")
+                    .timeout(10000)
+                    .execute();
+
+            int statusCode = response.statusCode();
+            if (HttpStatus.OK.value() == statusCode) {
+                Document doc = Jsoup.connect(apiUrl).ignoreContentType(true).get();
+                System.out.println(doc.text());
+                JSONParser parser = new JSONParser();
+                JSONObject json = (JSONObject) parser.parse(doc.text());
+                fileService.writeRawDataToFile(json);
+            } else {
+                throw new CustomException("Connection to FPL Api failed. Couldn't download data. Error code: " + statusCode + ".");
+            }
         } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println(doc.title());
-        Elements newsHeadlines = doc.select("#mp-itn b a");
-        for (Element headline : newsHeadlines) {
-            System.out.format(headline.attr("title") + "\n\t" + headline.absUrl("href"));
+            throw new CustomException("Connection to FPL Api failed. Couldn't download data.");
+        } catch (ParseException e) {
+            throw new CustomException("Invalid format of fetched data from the FPL Api. Couldn't download data.");
         }
 
     }

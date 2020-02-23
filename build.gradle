@@ -30,6 +30,8 @@ dependencies {
 	}
 	// jsoup HTML parser library @ https://jsoup.org/
 	compile 'org.jsoup:jsoup:1.12.2'
+	// https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+	compile 'com.googlecode.json-simple:json-simple:1.1.1'
 }
 
 test {
