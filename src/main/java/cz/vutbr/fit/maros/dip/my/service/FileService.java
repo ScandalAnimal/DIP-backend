@@ -4,6 +4,8 @@ import org.json.simple.JSONObject;
 
 public interface FileService {
 
-    void writeRawDataToFile(JSONObject data);
+    void writeRawObjectToFile(JSONObject data);
+
+    void writeRawPlayerDataToFile(String playerStatKeys, String playerStatValues);
 }
 

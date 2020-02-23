@@ -3,6 +3,9 @@ package cz.vutbr.fit.maros.dip.my.service;
 import cz.vutbr.fit.maros.dip.my.exception.CustomException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import lombok.NoArgsConstructor;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
@@ -11,7 +14,7 @@ import org.springframework.stereotype.Service;
 @NoArgsConstructor
 public class FileServiceImpl implements FileService {
 
-    public void writeRawDataToFile(JSONObject data) {
+    public void writeRawObjectToFile(JSONObject data) {
         FileWriter file;
 
         try {
@@ -24,4 +27,27 @@ public class FileServiceImpl implements FileService {
         }
 
     }
+
+    public void writeRawPlayerDataToFile(String playerStatKeys, String playerStatValues) {
+        FileWriter file;
+        Path path = Paths.get("data/players.csv");
+
+        try {
+            Files.deleteIfExists(path);
+        } catch (IOException e) {
+            throw new CustomException("Couldn't delete file for writing data.");
+        }
+
+        try {
+            file = new FileWriter("data/players.csv", true);
+            file.write(playerStatKeys);
+            file.write(playerStatValues);
+            file.flush();
+            file.close();
+        } catch (IOException e) {
+            throw new CustomException("Couldn't create file for writing data.");
+        }
+
+    }
+
 }

@@ -2,6 +2,7 @@ package cz.vutbr.fit.maros.dip.my.service;
 
 import cz.vutbr.fit.maros.dip.my.exception.CustomException;
 import java.io.IOException;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -26,7 +27,7 @@ public class EventCreator {
     }
 
     //    @Scheduled(cron = "0 0 12 * * ?")
-    @Scheduled(fixedRate = 1000)
+    @Scheduled(fixedRate = 10000)
     public void getFPLData() {
 
         String apiUrl = "https://fantasy.premierleague.com/api/bootstrap-static/";
@@ -41,10 +42,15 @@ public class EventCreator {
             int statusCode = response.statusCode();
             if (HttpStatus.OK.value() == statusCode) {
                 Document doc = Jsoup.connect(apiUrl).ignoreContentType(true).get();
-                System.out.println(doc.text());
                 JSONParser parser = new JSONParser();
                 JSONObject json = (JSONObject) parser.parse(doc.text());
-                fileService.writeRawDataToFile(json);
+                fileService.writeRawObjectToFile(json);
+
+
+                String playerStatKeys = getPlayerStatKeys(json);
+                String playerStatValues = getPlayerStatValues(json);
+                fileService.writeRawPlayerDataToFile(playerStatKeys, playerStatValues);
+
             } else {
                 throw new CustomException("Connection to FPL Api failed. Couldn't download data. Error code: " + statusCode + ".");
             }
@@ -54,6 +60,26 @@ public class EventCreator {
             throw new CustomException("Invalid format of fetched data from the FPL Api. Couldn't download data.");
         }
 
+    }
+
+    private String getPlayerStatKeys(JSONObject json) {
+        JSONObject firstPlayer = (JSONObject) ((JSONArray) json.get("elements")).get(0);
+        String x = firstPlayer.keySet().toString().substring(1);
+        return x.substring(0, x.length() - 1) + "\n";
+    }
+
+    private String getPlayerStatValues(JSONObject json) {
+        JSONArray players = (JSONArray) json.get("elements");
+        StringBuilder result = new StringBuilder();
+
+        for (Object o : players) {
+            JSONObject player = (JSONObject) o;
+            String x = player.values().toString().substring(1);
+            String y = x.substring(0, x.length() - 1) + "\n";
+            result.append(y);
+        }
+
+        return result.toString();
     }
 
 }
