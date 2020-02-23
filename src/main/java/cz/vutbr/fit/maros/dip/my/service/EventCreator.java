@@ -1,6 +1,7 @@
 package cz.vutbr.fit.maros.dip.my.service;
 
 import cz.vutbr.fit.maros.dip.my.exception.CustomException;
+import cz.vutbr.fit.maros.dip.my.util.StringUtils;
 import java.io.IOException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -46,9 +47,9 @@ public class EventCreator {
                 JSONObject json = (JSONObject) parser.parse(doc.text());
                 fileService.writeRawObjectToFile(json);
 
-
-                String playerStatKeys = getPlayerStatKeys(json);
-                String playerStatValues = getPlayerStatValues(json);
+                JSONArray players = (JSONArray) json.get("elements");
+                String playerStatKeys = getPlayerStatKeys(players);
+                String playerStatValues = getPlayerStatValues(players);
                 fileService.writeRawPlayerDataToFile(playerStatKeys, playerStatValues);
 
             } else {
@@ -62,21 +63,17 @@ public class EventCreator {
 
     }
 
-    private String getPlayerStatKeys(JSONObject json) {
-        JSONObject firstPlayer = (JSONObject) ((JSONArray) json.get("elements")).get(0);
-        String x = firstPlayer.keySet().toString().substring(1);
-        return x.substring(0, x.length() - 1) + "\n";
+    private String getPlayerStatKeys(JSONArray json) {
+        JSONObject firstPlayer = (JSONObject) json.get(0);
+        return StringUtils.stringifyJSONObject(firstPlayer.keySet().toString());
     }
 
-    private String getPlayerStatValues(JSONObject json) {
-        JSONArray players = (JSONArray) json.get("elements");
+    private String getPlayerStatValues(JSONArray json) {
         StringBuilder result = new StringBuilder();
 
-        for (Object o : players) {
+        for (Object o : json) {
             JSONObject player = (JSONObject) o;
-            String x = player.values().toString().substring(1);
-            String y = x.substring(0, x.length() - 1) + "\n";
-            result.append(y);
+            result.append(StringUtils.stringifyJSONObject(player.values().toString()));
         }
 
         return result.toString();
