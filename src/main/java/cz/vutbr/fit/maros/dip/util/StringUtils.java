@@ -1,4 +1,4 @@
-package cz.vutbr.fit.maros.dip.my.util;
+package cz.vutbr.fit.maros.dip.util;
 
 public class StringUtils {
 

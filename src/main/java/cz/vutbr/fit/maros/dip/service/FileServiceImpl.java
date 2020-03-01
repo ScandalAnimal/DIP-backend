@@ -1,6 +1,6 @@
-package cz.vutbr.fit.maros.dip.my.service;
+package cz.vutbr.fit.maros.dip.service;
 
-import cz.vutbr.fit.maros.dip.my.exception.CustomException;
+import cz.vutbr.fit.maros.dip.exception.CustomException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;

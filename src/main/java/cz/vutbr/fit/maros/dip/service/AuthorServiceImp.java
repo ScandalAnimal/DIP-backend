@@ -2,9 +2,7 @@ package cz.vutbr.fit.maros.dip.service;
 
 import cz.vutbr.fit.maros.dip.exception.ResourceNotFoundException;
 import cz.vutbr.fit.maros.dip.model.Author;
-import cz.vutbr.fit.maros.dip.model.Book;
 import cz.vutbr.fit.maros.dip.repository.AuthorRepository;
-import java.util.List;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,8 +14,12 @@ import org.springframework.stereotype.Service;
 @NoArgsConstructor
 public class AuthorServiceImp extends AuthorService {
 
-    @Autowired
     private AuthorRepository authorRepository;
+
+    @Autowired
+    public AuthorServiceImp(AuthorRepository authorRepository) {
+        this.authorRepository = authorRepository;
+    }
 
     @Override
     public Page<Author> getAll(Pageable pageable) {
@@ -47,11 +49,6 @@ public class AuthorServiceImp extends AuthorService {
         Author author = checkIfIdIsPresentandReturnAuthor(id);
         authorRepository.deleteById(id);
         return author;
-    }
-
-    @Override
-    public List<Book> getBooksById(int id) {
-        return checkIfIdIsPresentandReturnAuthor(id).getBookList();
     }
 
     private Author checkIfIdIsPresentandReturnAuthor(int id) {

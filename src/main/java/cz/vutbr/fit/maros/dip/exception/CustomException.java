@@ -1,4 +1,4 @@
-package cz.vutbr.fit.maros.dip.my.exception;
+package cz.vutbr.fit.maros.dip.exception;
 
 public class CustomException extends RuntimeException {
 

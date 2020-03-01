@@ -1,7 +1,7 @@
-package cz.vutbr.fit.maros.dip.my.service;
+package cz.vutbr.fit.maros.dip.service;
 
-import cz.vutbr.fit.maros.dip.my.exception.CustomException;
-import cz.vutbr.fit.maros.dip.my.util.StringUtils;
+import cz.vutbr.fit.maros.dip.exception.CustomException;
+import cz.vutbr.fit.maros.dip.util.StringUtils;
 import java.io.IOException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

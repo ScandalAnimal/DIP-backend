@@ -1,4 +1,4 @@
-package cz.vutbr.fit.maros.dip.my.service;
+package cz.vutbr.fit.maros.dip.service;
 
 import org.json.simple.JSONObject;
 
