@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+@SuppressWarnings("CheckStyle")
 @Component
 public class EventCreator {
 
@@ -28,7 +29,8 @@ public class EventCreator {
     }
 
     //    @Scheduled(cron = "0 0 12 * * ?")
-    @Scheduled(fixedRate = 10000)
+    @SuppressWarnings("checkstyle:CommentsIndentation")
+    @Scheduled(fixedRate = 100000)
     public void getFPLData() {
 
         String apiUrl = "https://fantasy.premierleague.com/api/bootstrap-static/";
@@ -45,12 +47,21 @@ public class EventCreator {
                 Document doc = Jsoup.connect(apiUrl).ignoreContentType(true).get();
                 JSONParser parser = new JSONParser();
                 JSONObject json = (JSONObject) parser.parse(doc.text());
-                fileService.writeRawObjectToFile(json);
+//                fileService.writeRawObjectToFile(json);
 
                 JSONArray players = (JSONArray) json.get("elements");
                 String playerStatKeys = getPlayerStatKeys(players);
                 String playerStatValues = getPlayerStatValues(players);
-                fileService.writeRawPlayerDataToFile(playerStatKeys, playerStatValues);
+//                fileService.writeRawPlayerDataToFile(playerStatKeys, playerStatValues);
+
+                JSONArray events = (JSONArray) json.get("events");
+//                System.out.println(events);
+                Long gameWeekNumber = getGameWeekNumber(events);
+                System.out.println(gameWeekNumber);
+//                String playerStatKeys = getPlayerStatKeys(players);
+//                String playerStatValues = getPlayerStatValues(players);
+//                fileService.writeRawPlayerDataToFile(playerStatKeys, playerStatValues);
+
 
             } else {
                 throw new CustomException("Connection to FPL Api failed. Couldn't download data. Error code: " + statusCode + ".");
@@ -77,6 +88,16 @@ public class EventCreator {
         }
 
         return result.toString();
+    }
+
+    private Long getGameWeekNumber(JSONArray json) {
+        for (final Object o : json) {
+            JSONObject event = (JSONObject) o;
+            if ((Boolean) event.get("is_current")) {
+                return (Long) event.get("id");
+            }
+        }
+        return 0L;
     }
 
 }
