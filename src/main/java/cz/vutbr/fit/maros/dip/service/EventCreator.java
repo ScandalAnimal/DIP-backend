@@ -3,6 +3,10 @@ package cz.vutbr.fit.maros.dip.service;
 import cz.vutbr.fit.maros.dip.exception.CustomException;
 import cz.vutbr.fit.maros.dip.util.StringUtils;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -47,20 +51,18 @@ public class EventCreator {
                 Document doc = Jsoup.connect(apiUrl).ignoreContentType(true).get();
                 JSONParser parser = new JSONParser();
                 JSONObject json = (JSONObject) parser.parse(doc.text());
-//                fileService.writeRawObjectToFile(json);
+                fileService.writeRawObjectToFile(json);
 
                 JSONArray players = (JSONArray) json.get("elements");
                 String playerStatKeys = getPlayerStatKeys(players);
                 String playerStatValues = getPlayerStatValues(players);
-//                fileService.writeRawPlayerDataToFile(playerStatKeys, playerStatValues);
+                fileService.writeRawPlayerDataToFile(playerStatKeys, playerStatValues);
 
                 JSONArray events = (JSONArray) json.get("events");
-//                System.out.println(events);
                 Long gameWeekNumber = getGameWeekNumber(events);
                 System.out.println(gameWeekNumber);
-//                String playerStatKeys = getPlayerStatKeys(players);
-//                String playerStatValues = getPlayerStatValues(players);
-//                fileService.writeRawPlayerDataToFile(playerStatKeys, playerStatValues);
+
+                getCleanedPlayerStatValues(players);
 
 
             } else {
@@ -98,6 +100,64 @@ public class EventCreator {
             }
         }
         return 0L;
+    }
+
+    private String getCleanedPlayerStatKeys(JSONObject player, List<String> keyList) {
+        StringBuilder resultKeys = new StringBuilder();
+        List<String> keyStatList = new ArrayList<>();
+
+        Iterator keyIterator = player.keySet().iterator();
+        Iterator valueIterator = player.values().iterator();
+        while (keyIterator.hasNext()) {
+            String key = (String) keyIterator.next();
+            if (keyList.contains(key)) {
+                if (valueIterator.hasNext()) {
+                    keyStatList.add(key);
+                }
+            } else {
+                if (valueIterator.hasNext()) {
+                    valueIterator.next();
+                }
+            }
+        }
+        resultKeys.append(StringUtils.stringifyJSONObject(keyStatList.toString()));
+        return resultKeys.toString();
+    }
+
+    private void getCleanedPlayerStatValues(JSONArray json) {
+        String[] keys = { "first_name", "second_name", "goals_scored", "assists", "total_points", "minutes", "goals_conceded",
+                "creativity", "influence", "threat", "bonus", "bps", "ict_index", "clean_sheets", "red_cards", "yellow_cards",
+                "selected_by_percent", "now_cost" };
+        List<String> keyList = Arrays.asList(keys);
+        List<Object> valueList = new ArrayList<>();
+
+        StringBuilder resultValues = new StringBuilder();
+
+        JSONObject firstPlayer = (JSONObject) json.get(0);
+        String keyStats = getCleanedPlayerStatKeys(firstPlayer, keyList);
+
+        for (Object o : json) {
+            JSONObject player = (JSONObject) o;
+
+            Iterator keyIterator = player.keySet().iterator();
+            Iterator valueIterator = player.values().iterator();
+            while (keyIterator.hasNext()) {
+                String key = (String) keyIterator.next();
+                if (keyList.contains(key)) {
+                    if (valueIterator.hasNext()) {
+                        valueList.add(valueIterator.next());
+                    }
+                } else {
+                    if (valueIterator.hasNext()) {
+                        valueIterator.next();
+                    }
+                }
+            }
+            resultValues.append(StringUtils.stringifyJSONObject(valueList.toString()));
+            valueList.clear();
+        }
+
+        fileService.writeCleanedPlayerDataToFile(keyStats, resultValues.toString());
     }
 
 }

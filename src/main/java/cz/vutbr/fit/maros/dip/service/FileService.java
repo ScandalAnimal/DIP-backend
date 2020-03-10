@@ -7,5 +7,7 @@ public interface FileService {
     void writeRawObjectToFile(JSONObject data);
 
     void writeRawPlayerDataToFile(String playerStatKeys, String playerStatValues);
+
+    void writeCleanedPlayerDataToFile(String playerStatKeys, String playerStatValues);
 }
 

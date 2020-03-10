@@ -22,6 +22,7 @@ public class FileServiceImpl implements FileService {
             file.write(data.toJSONString());
             file.flush();
             file.close();
+            System.out.println("Finished writing to raw.json.");
         } catch (IOException e) {
             throw new CustomException("Couldn't create file for writing data.");
         }
@@ -44,6 +45,30 @@ public class FileServiceImpl implements FileService {
             file.write(playerStatValues);
             file.flush();
             file.close();
+            System.out.println("Finished writing to players.csv.");
+        } catch (IOException e) {
+            throw new CustomException("Couldn't create file for writing data.");
+        }
+
+    }
+
+    public void writeCleanedPlayerDataToFile(String playerStatKeys, String playerStatValues) {
+        FileWriter file;
+        Path path = Paths.get("data/cleaned_players.csv");
+
+        try {
+            Files.deleteIfExists(path);
+        } catch (IOException e) {
+            throw new CustomException("Couldn't delete file for writing data.");
+        }
+
+        try {
+            file = new FileWriter("data/cleaned_players.csv", true);
+            file.write(playerStatKeys);
+            file.write(playerStatValues);
+            file.flush();
+            file.close();
+            System.out.println("Finished writing to cleaned_players.csv.");
         } catch (IOException e) {
             throw new CustomException("Couldn't create file for writing data.");
         }
