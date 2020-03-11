@@ -5,8 +5,10 @@ import cz.vutbr.fit.maros.dip.util.StringUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -25,7 +27,6 @@ import org.springframework.stereotype.Component;
 public class EventCreator {
 
     private static final Logger LOG = LoggerFactory.getLogger(EventCreator.class);
-
     private final FileService fileService;
 
     public EventCreator(FileService fileService) {
@@ -34,7 +35,7 @@ public class EventCreator {
 
     //    @Scheduled(cron = "0 0 12 * * ?")
     @SuppressWarnings("checkstyle:CommentsIndentation")
-    @Scheduled(fixedRate = 100000)
+    @Scheduled(fixedRate = 1000000000)
     public void getFPLData() {
 
         String apiUrl = "https://fantasy.premierleague.com/api/bootstrap-static/";
@@ -54,19 +55,27 @@ public class EventCreator {
                 fileService.writeRawObjectToFile(json);
 
                 JSONArray players = (JSONArray) json.get("elements");
-                getPlayerStatValues(players);
+                parseArrayToCsv(players, "players.csv");
 
                 JSONArray events = (JSONArray) json.get("events");
                 Long gameWeekNumber = getGameWeekNumber(events);
-                System.out.println(gameWeekNumber);
+                System.out.println("Gameweek: " + gameWeekNumber);
 
                 getCleanedPlayerStatValues(players);
 
                 getFixtures();
 
                 JSONArray teams = (JSONArray) json.get("teams");
-                getTeams(teams);
+                parseArrayToCsv(teams, "teams.csv");
 
+                Map<Long, String> playerIds = getPlayerIdList(players);
+                System.out.println(playerIds);
+
+                int numberOfPlayers = players.size();
+                System.out.println("Players: " + numberOfPlayers);
+
+                // TODO commented out for testing
+//                extractPlayerData(playerIds);
 
             } else {
                 throw new CustomException("Connection to FPL Api failed. Couldn't download data. Error code: " + statusCode + ".");
@@ -77,25 +86,6 @@ public class EventCreator {
             throw new CustomException("Invalid format of fetched data from the FPL Api. Couldn't download data.");
         }
 
-    }
-
-    private String getPlayerStatKeys(JSONArray json) {
-        JSONObject firstPlayer = (JSONObject) json.get(0);
-        return StringUtils.stringifyJSONObject(firstPlayer.keySet().toString());
-    }
-
-    private void getPlayerStatValues(JSONArray json) {
-
-        String playerStatKeys = getPlayerStatKeys(json);
-
-        StringBuilder result = new StringBuilder();
-
-        for (Object o : json) {
-            JSONObject player = (JSONObject) o;
-            result.append(StringUtils.stringifyJSONObject(player.values().toString()));
-        }
-
-        fileService.writeDataToCsv(playerStatKeys, result.toString(), "players.csv");
     }
 
     private Long getGameWeekNumber(JSONArray json) {
@@ -166,7 +156,7 @@ public class EventCreator {
         fileService.writeDataToCsv(keyStats, resultValues.toString(), "cleaned_players.csv");
     }
 
-    public void getFixtures() {
+    private void getFixtures() {
 
         String apiUrl = "https://fantasy.premierleague.com/api/fixtures/";
         Connection.Response response;
@@ -183,17 +173,7 @@ public class EventCreator {
                 JSONParser parser = new JSONParser();
                 JSONArray json = (JSONArray) parser.parse(doc.text());
 
-                JSONObject firstFixture = (JSONObject) json.get(0);
-                String fixtureKeys = StringUtils.stringifyJSONObject(firstFixture.keySet().toString());
-
-                StringBuilder result = new StringBuilder();
-
-                for (Object o : json) {
-                    JSONObject fixture = (JSONObject) o;
-                    result.append(StringUtils.stringifyJSONObject(fixture.values().toString()));
-                }
-
-                fileService.writeDataToCsv(fixtureKeys, result.toString(), "fixtures.csv");
+                parseArrayToCsv(json, "fixtures.csv");
 
             } else {
                 throw new CustomException("Connection to FPL Api failed. Couldn't download data. Error code: " + statusCode + ".");
@@ -206,19 +186,119 @@ public class EventCreator {
 
     }
 
-    public void getTeams(JSONArray teams) {
-
-        JSONObject firstTeam = (JSONObject) teams.get(0);
-        String teamKeys = StringUtils.stringifyJSONObject(firstTeam.keySet().toString());
+    private void parseArrayToCsv(JSONArray array, String fileName) {
+        JSONObject first = (JSONObject) array.get(0);
+        String keys = StringUtils.stringifyJSONObject(first.keySet().toString());
 
         StringBuilder result = new StringBuilder();
 
-        for (Object o : teams) {
-            JSONObject team = (JSONObject) o;
-            result.append(StringUtils.stringifyJSONObject(team.values().toString()));
+        for (Object o : array) {
+            JSONObject elem = (JSONObject) o;
+            result.append(StringUtils.stringifyJSONObject(elem.values().toString()));
         }
 
-        fileService.writeDataToCsv(teamKeys, result.toString(), "teams.csv");
+        fileService.writeDataToCsv(keys, result.toString(), fileName);
+    }
+
+    private Map<Long, String> getPlayerIdList(JSONArray json) {
+        Map<Long, String> playerIds = new HashMap<>();
+        String[] keys = { "first_name", "second_name", "id" };
+        List<String> keyList = Arrays.asList(keys);
+        List<Object> valueList = new ArrayList<>();
+
+        StringBuilder resultValues = new StringBuilder();
+
+        JSONObject firstPlayer = (JSONObject) json.get(0);
+        String keyStats = getCleanedPlayerStatKeys(firstPlayer, keyList);
+
+        for (Object o : json) {
+            JSONObject player = (JSONObject) o;
+
+            Iterator keyIterator = player.keySet().iterator();
+            Iterator valueIterator = player.values().iterator();
+            String firstName = "";
+            String secondName = "";
+            Long id = 0L;
+            while (keyIterator.hasNext()) {
+                String key = (String) keyIterator.next();
+                if (keyList.contains(key)) {
+                    if ("first_name".equals(key)) {
+                        if (valueIterator.hasNext()) {
+                            firstName = (String) valueIterator.next();
+                            valueList.add(firstName);
+                        }
+                    }
+                    else if ("second_name".equals(key)) {
+                        if (valueIterator.hasNext()) {
+                            secondName = (String) valueIterator.next();
+                            valueList.add(secondName);
+                        }
+                    }
+                    else if ("id".equals(key)) {
+                        if (valueIterator.hasNext()) {
+                            id = (Long) valueIterator.next();
+                            valueList.add(id);
+                        }
+                    }
+                } else {
+                    if (valueIterator.hasNext()) {
+                        valueIterator.next();
+                    }
+                }
+            }
+            playerIds.put(id, firstName + "_" + secondName);
+            resultValues.append(StringUtils.stringifyJSONObject(valueList.toString()));
+            valueList.clear();
+        }
+
+        fileService.writeDataToCsv(keyStats, resultValues.toString(), "player_idlist.csv");
+        return playerIds;
+    }
+
+    private void extractPlayerData(Map<Long, String> playerIds) {
+
+        for (Map.Entry<Long,String> entry : playerIds.entrySet()) {
+            Long id = entry.getKey();
+            String name = entry.getValue();
+            JSONObject playerData = getPlayerData(id);
+            JSONArray historyPast = (JSONArray) playerData.get("history_past");
+            if (historyPast.size() > 0) {
+                String fileName = "players/" + name + "_" + id + "/history.csv";
+                parseArrayToCsv(historyPast, fileName);
+            }
+            JSONArray history = (JSONArray) playerData.get("history");
+            if (history.size() > 0) {
+                String fileName = "players/" + name + "_" + id + "/gw.csv";
+                parseArrayToCsv(history, fileName);
+            }
+        }
+    }
+
+    private JSONObject getPlayerData(Long id) {
+
+        String apiUrl = "https://fantasy.premierleague.com/api/element-summary/" + id + "/";
+        Connection.Response response;
+        try {
+            response = Jsoup.connect(apiUrl)
+                    .ignoreContentType(true)
+                    .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0")
+                    .timeout(10000)
+                    .execute();
+
+            int statusCode = response.statusCode();
+            if (HttpStatus.OK.value() == statusCode) {
+                Document doc = Jsoup.connect(apiUrl).ignoreContentType(true).get();
+                JSONParser parser = new JSONParser();
+                return (JSONObject) parser.parse(doc.text());
+
+            } else {
+                throw new CustomException("Connection to FPL Api failed. Couldn't download data. Error code: " + statusCode + ".");
+            }
+        } catch (IOException e) {
+            throw new CustomException("Connection to FPL Api failed. Couldn't download data.");
+        } catch (ParseException e) {
+            throw new CustomException("Invalid format of fetched data from the FPL Api. Couldn't download data.");
+        }
 
     }
 
