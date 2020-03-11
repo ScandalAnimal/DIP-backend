@@ -8,5 +8,7 @@ public interface FileService {
 
     void writeDataToCsv(String keys, String values, String fileName);
 
+    void appendDataToCsv(String keys, String values, String fileName, boolean addKeys);
+
 }
 

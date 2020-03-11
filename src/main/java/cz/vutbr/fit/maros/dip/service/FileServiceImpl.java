@@ -1,5 +1,6 @@
 package cz.vutbr.fit.maros.dip.service;
 
+import cz.vutbr.fit.maros.dip.constants.ApiConstants;
 import cz.vutbr.fit.maros.dip.exception.CustomException;
 import java.io.File;
 import java.io.FileWriter;
@@ -15,10 +16,9 @@ import org.springframework.stereotype.Service;
 @NoArgsConstructor
 public class FileServiceImpl implements FileService {
 
-    private static final String baseUrl = "data/2019-20/";
 
     public void writeRawObjectToFile(JSONObject data) {
-        String filePath = baseUrl + "raw.json";
+        String filePath = ApiConstants.BASE_URL + "raw.json";
         File file = new File(filePath);
         file.getParentFile().mkdirs();
         Path path = Paths.get(filePath);
@@ -41,7 +41,7 @@ public class FileServiceImpl implements FileService {
     }
 
     public void writeDataToCsv(String keys, String values, String filename) {
-        String filePath = baseUrl + filename;
+        String filePath = ApiConstants.BASE_URL + filename;
 
         File file = new File(filePath);
         file.getParentFile().mkdirs();
@@ -59,7 +59,29 @@ public class FileServiceImpl implements FileService {
             writer.write(values);
             writer.flush();
             writer.close();
-            System.out.println("Finished writing to " + filename);
+            System.out.println("Finished writing to " + filePath);
+        } catch (IOException e) {
+            throw new CustomException("Couldn't create file for writing data.");
+        }
+
+    }
+
+    public void appendDataToCsv(String keys, String values, String filename, boolean addKeys) {
+        String filePath = ApiConstants.BASE_URL + filename;
+
+        File file = new File(filePath);
+        file.getParentFile().mkdirs();
+        Path path = Paths.get(filePath);
+
+        try {
+            FileWriter writer = new FileWriter(filePath, true);
+            if (addKeys) {
+                writer.write(keys);
+            }
+            writer.write(values);
+            writer.flush();
+            writer.close();
+            System.out.println("Finished writing to " + filePath);
         } catch (IOException e) {
             throw new CustomException("Couldn't create file for writing data.");
         }

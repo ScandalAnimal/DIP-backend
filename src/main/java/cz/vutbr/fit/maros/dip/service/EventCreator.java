@@ -1,7 +1,11 @@
 package cz.vutbr.fit.maros.dip.service;
 
+import cz.vutbr.fit.maros.dip.constants.ApiConstants;
 import cz.vutbr.fit.maros.dip.exception.CustomException;
 import cz.vutbr.fit.maros.dip.util.StringUtils;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -75,7 +79,9 @@ public class EventCreator {
                 System.out.println("Players: " + numberOfPlayers);
 
                 // TODO commented out for testing
-//                extractPlayerData(playerIds);
+//                extractPlayerData(playerIds, gameWeekNumber);
+
+//                mergeGws(gameWeekNumber);
 
             } else {
                 throw new CustomException("Connection to FPL Api failed. Couldn't download data. Error code: " + statusCode + ".");
@@ -255,23 +261,44 @@ public class EventCreator {
         return playerIds;
     }
 
-    private void extractPlayerData(Map<Long, String> playerIds) {
+    private void extractPlayerData(Map<Long, String> playerIds, Long gameWeek) {
 
+        StringBuilder playersInGameWeek = new StringBuilder();
+        String playersInGameWeekKeys = "";
+        String gwFileName = "gws/gw" + gameWeek.toString() + ".csv";
         for (Map.Entry<Long,String> entry : playerIds.entrySet()) {
             Long id = entry.getKey();
             String name = entry.getValue();
             JSONObject playerData = getPlayerData(id);
             JSONArray historyPast = (JSONArray) playerData.get("history_past");
-            if (historyPast.size() > 0) {
-                String fileName = "players/" + name + "_" + id + "/history.csv";
-                parseArrayToCsv(historyPast, fileName);
-            }
+//            if (historyPast.size() > 0) {
+//                String fileName = "players/" + name + "_" + id + "/history.csv";
+//                parseArrayToCsv(historyPast, fileName);
+//            }
             JSONArray history = (JSONArray) playerData.get("history");
             if (history.size() > 0) {
                 String fileName = "players/" + name + "_" + id + "/gw.csv";
-                parseArrayToCsv(history, fileName);
+
+                JSONObject first = (JSONObject) history.get(0);
+                String keys = StringUtils.stringifyJSONObject(first.keySet().toString());
+                playersInGameWeekKeys = "name, " + (StringUtils.stringifyJSONObject(first.keySet().toString()));
+
+                StringBuilder result = new StringBuilder();
+
+                for (Object o : history) {
+                    JSONObject elem = (JSONObject) o;
+                    if (elem.get("round").equals(gameWeek)) {
+                        String nameWithId = name + "_" + id + ", ";
+                        playersInGameWeek.append(nameWithId);
+                        playersInGameWeek.append(StringUtils.stringifyJSONObject(elem.values().toString()));
+                    }
+                    result.append(StringUtils.stringifyJSONObject(elem.values().toString()));
+                }
+
+//                fileService.writeDataToCsv(keys, result.toString(), fileName);
             }
         }
+        fileService.writeDataToCsv(playersInGameWeekKeys, playersInGameWeek.toString(), gwFileName);
     }
 
     private JSONObject getPlayerData(Long id) {
@@ -292,14 +319,39 @@ public class EventCreator {
                 return (JSONObject) parser.parse(doc.text());
 
             } else {
-                throw new CustomException("Connection to FPL Api failed. Couldn't download data. Error code: " + statusCode + ".");
+                throw new CustomException("Connection to FPL Api failed. Couldn't download data. Error code: " + statusCode + ". Url: " + apiUrl + ".");
             }
         } catch (IOException e) {
-            throw new CustomException("Connection to FPL Api failed. Couldn't download data.");
+            throw new CustomException("Connection to FPL Api failed. Couldn't download data. Url: " + apiUrl + ".");
         } catch (ParseException e) {
             throw new CustomException("Invalid format of fetched data from the FPL Api. Couldn't download data.");
         }
 
+    }
+
+    private void mergeGws(Long gameWeek) {
+        String gwFileName = ApiConstants.BASE_URL + "gws/gw" + gameWeek.toString() + ".csv";
+        String mergedFileName = "gws/merged_gw.csv";
+        String newGw = ", " + gameWeek.toString();
+
+        StringBuilder sb = new StringBuilder();
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader(gwFileName));
+            String header = br.readLine() + ", GW";
+            String line;
+            while ((line = br.readLine()) != null) {
+
+                line += newGw;
+                sb.append(line).append("\n");
+            }
+            fileService.appendDataToCsv(header, sb.toString(), mergedFileName, gameWeek == 1L);
+
+        } catch (FileNotFoundException e) {
+            throw new CustomException("File " + gwFileName + " does not exist, please generate gw file first.");
+        } catch (IOException e) {
+            throw new CustomException("Cannot read from file " + gwFileName + ".");
+        }
     }
 
 }

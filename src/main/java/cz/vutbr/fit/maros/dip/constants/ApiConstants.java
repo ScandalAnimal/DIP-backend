@@ -6,4 +6,5 @@ public class ApiConstants {
     public static final String MESSAGE_FOR_INVALID_PARAMETERS_ERROR = "Invalid Parameters";
     public static final String MESSAGE_FOR_INVALID_BODY_ERROR = "Invalid Method Body. Check JSON Objects";
     public static final String DATE_FORMAT = "dd-MM-yyyy hh:mm:ss";
+    public static final String BASE_URL = "data/2019-20/";
 }
