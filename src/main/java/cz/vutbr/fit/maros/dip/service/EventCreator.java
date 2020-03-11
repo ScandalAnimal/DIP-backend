@@ -288,7 +288,7 @@ public class EventCreator {
                 for (Object o : history) {
                     JSONObject elem = (JSONObject) o;
                     if (elem.get("round").equals(gameWeek)) {
-                        String nameWithId = name + "_" + id + ", ";
+                        String nameWithId = name + ", ";
                         playersInGameWeek.append(nameWithId);
                         playersInGameWeek.append(StringUtils.stringifyJSONObject(elem.values().toString()));
                     }
