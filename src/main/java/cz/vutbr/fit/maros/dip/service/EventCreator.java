@@ -54,15 +54,15 @@ public class EventCreator {
                 fileService.writeRawObjectToFile(json);
 
                 JSONArray players = (JSONArray) json.get("elements");
-                String playerStatKeys = getPlayerStatKeys(players);
-                String playerStatValues = getPlayerStatValues(players);
-                fileService.writeRawPlayerDataToFile(playerStatKeys, playerStatValues);
+                getPlayerStatValues(players);
 
                 JSONArray events = (JSONArray) json.get("events");
                 Long gameWeekNumber = getGameWeekNumber(events);
                 System.out.println(gameWeekNumber);
 
                 getCleanedPlayerStatValues(players);
+
+                getFixtures();
 
 
             } else {
@@ -81,7 +81,10 @@ public class EventCreator {
         return StringUtils.stringifyJSONObject(firstPlayer.keySet().toString());
     }
 
-    private String getPlayerStatValues(JSONArray json) {
+    private void getPlayerStatValues(JSONArray json) {
+
+        String playerStatKeys = getPlayerStatKeys(json);
+
         StringBuilder result = new StringBuilder();
 
         for (Object o : json) {
@@ -89,7 +92,7 @@ public class EventCreator {
             result.append(StringUtils.stringifyJSONObject(player.values().toString()));
         }
 
-        return result.toString();
+        fileService.writeRawPlayerDataToFile(playerStatKeys, result.toString());
     }
 
     private Long getGameWeekNumber(JSONArray json) {
@@ -158,6 +161,46 @@ public class EventCreator {
         }
 
         fileService.writeCleanedPlayerDataToFile(keyStats, resultValues.toString());
+    }
+
+    public void getFixtures() {
+
+        String apiUrl = "https://fantasy.premierleague.com/api/fixtures/";
+        Connection.Response response;
+        try {
+            response = Jsoup.connect(apiUrl)
+                    .ignoreContentType(true)
+                    .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0")
+                    .timeout(10000)
+                    .execute();
+
+            int statusCode = response.statusCode();
+            if (HttpStatus.OK.value() == statusCode) {
+                Document doc = Jsoup.connect(apiUrl).ignoreContentType(true).get();
+                JSONParser parser = new JSONParser();
+                JSONArray json = (JSONArray) parser.parse(doc.text());
+
+                JSONObject firstFixture = (JSONObject) json.get(0);
+                String fixtureKeys = StringUtils.stringifyJSONObject(firstFixture.keySet().toString());
+
+                StringBuilder result = new StringBuilder();
+
+                for (Object o : json) {
+                    JSONObject fixture = (JSONObject) o;
+                    result.append(StringUtils.stringifyJSONObject(fixture.values().toString()));
+                }
+
+                fileService.writeFixturesToFile(fixtureKeys, result.toString());
+
+            } else {
+                throw new CustomException("Connection to FPL Api failed. Couldn't download data. Error code: " + statusCode + ".");
+            }
+        } catch (IOException e) {
+            throw new CustomException("Connection to FPL Api failed. Couldn't download data.");
+        } catch (ParseException e) {
+            throw new CustomException("Invalid format of fetched data from the FPL Api. Couldn't download data.");
+        }
+
     }
 
 }

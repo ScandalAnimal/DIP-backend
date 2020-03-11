@@ -9,5 +9,8 @@ public interface FileService {
     void writeRawPlayerDataToFile(String playerStatKeys, String playerStatValues);
 
     void writeCleanedPlayerDataToFile(String playerStatKeys, String playerStatValues);
+
+    void writeFixturesToFile(String fixtureKeys, String fixtureValues);
+
 }
 

@@ -75,4 +75,27 @@ public class FileServiceImpl implements FileService {
 
     }
 
+    public void writeFixturesToFile(String fixtureKeys, String fixtureValues) {
+        FileWriter file;
+        Path path = Paths.get("data/fixtures.csv");
+
+        try {
+            Files.deleteIfExists(path);
+        } catch (IOException e) {
+            throw new CustomException("Couldn't delete file for writing data.");
+        }
+
+        try {
+            file = new FileWriter("data/fixtures.csv", true);
+            file.write(fixtureKeys);
+            file.write(fixtureValues);
+            file.flush();
+            file.close();
+            System.out.println("Finished writing to fixtures.csv.");
+        } catch (IOException e) {
+            throw new CustomException("Couldn't create file for writing data.");
+        }
+
+    }
+
 }
