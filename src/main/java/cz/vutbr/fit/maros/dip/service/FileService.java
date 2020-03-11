@@ -6,11 +6,7 @@ public interface FileService {
 
     void writeRawObjectToFile(JSONObject data);
 
-    void writeRawPlayerDataToFile(String playerStatKeys, String playerStatValues);
-
-    void writeCleanedPlayerDataToFile(String playerStatKeys, String playerStatValues);
-
-    void writeFixturesToFile(String fixtureKeys, String fixtureValues);
+    void writeDataToCsv(String keys, String values, String fileName);
 
 }
 

@@ -92,7 +92,7 @@ public class EventCreator {
             result.append(StringUtils.stringifyJSONObject(player.values().toString()));
         }
 
-        fileService.writeRawPlayerDataToFile(playerStatKeys, result.toString());
+        fileService.writeDataToCsv(playerStatKeys, result.toString(), "players.csv");
     }
 
     private Long getGameWeekNumber(JSONArray json) {
@@ -160,7 +160,7 @@ public class EventCreator {
             valueList.clear();
         }
 
-        fileService.writeCleanedPlayerDataToFile(keyStats, resultValues.toString());
+        fileService.writeDataToCsv(keyStats, resultValues.toString(), "cleaned_players.csv");
     }
 
     public void getFixtures() {
@@ -190,7 +190,7 @@ public class EventCreator {
                     result.append(StringUtils.stringifyJSONObject(fixture.values().toString()));
                 }
 
-                fileService.writeFixturesToFile(fixtureKeys, result.toString());
+                fileService.writeDataToCsv(fixtureKeys, result.toString(), "fixtures.csv");
 
             } else {
                 throw new CustomException("Connection to FPL Api failed. Couldn't download data. Error code: " + statusCode + ".");
