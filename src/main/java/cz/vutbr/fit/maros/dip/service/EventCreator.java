@@ -64,6 +64,9 @@ public class EventCreator {
 
                 getFixtures();
 
+                JSONArray teams = (JSONArray) json.get("teams");
+                getTeams(teams);
+
 
             } else {
                 throw new CustomException("Connection to FPL Api failed. Couldn't download data. Error code: " + statusCode + ".");
@@ -200,6 +203,22 @@ public class EventCreator {
         } catch (ParseException e) {
             throw new CustomException("Invalid format of fetched data from the FPL Api. Couldn't download data.");
         }
+
+    }
+
+    public void getTeams(JSONArray teams) {
+
+        JSONObject firstTeam = (JSONObject) teams.get(0);
+        String teamKeys = StringUtils.stringifyJSONObject(firstTeam.keySet().toString());
+
+        StringBuilder result = new StringBuilder();
+
+        for (Object o : teams) {
+            JSONObject team = (JSONObject) o;
+            result.append(StringUtils.stringifyJSONObject(team.values().toString()));
+        }
+
+        fileService.writeDataToCsv(teamKeys, result.toString(), "teams.csv");
 
     }
 
