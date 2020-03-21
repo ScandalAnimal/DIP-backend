@@ -36,6 +36,8 @@ dependencies {
 	// https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
 	compile 'com.googlecode.json-simple:json-simple:1.1.1'
 	compile 'com.googlecode.efficient-java-matrix-library:ejml:0.25'
+	compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
+	compile group: 'net.dongliu', name: 'requests', version: '5.0.8'
 }
 
 test {

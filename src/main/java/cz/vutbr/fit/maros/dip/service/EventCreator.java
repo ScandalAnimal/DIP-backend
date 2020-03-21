@@ -23,7 +23,6 @@ import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @SuppressWarnings("CheckStyle")
@@ -39,7 +38,7 @@ public class EventCreator {
 
     //    @Scheduled(cron = "0 0 12 * * ?")
     @SuppressWarnings("checkstyle:CommentsIndentation")
-    @Scheduled(fixedRate = 1000000000)
+//    @Scheduled(fixedRate = 1000000000)
     public void getFPLData() {
 
         String apiUrl = "https://fantasy.premierleague.com/api/bootstrap-static/";

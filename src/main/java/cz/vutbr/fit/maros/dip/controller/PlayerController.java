@@ -1,13 +1,12 @@
 package cz.vutbr.fit.maros.dip.controller;
 
 import cz.vutbr.fit.maros.dip.constants.ApiConstants;
-import cz.vutbr.fit.maros.dip.model.Author;
+import cz.vutbr.fit.maros.dip.model.Player;
 import cz.vutbr.fit.maros.dip.results.ResponseWrapper;
-import cz.vutbr.fit.maros.dip.service.AuthorService;
+import cz.vutbr.fit.maros.dip.service.PlayerService;
+import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,25 +16,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Validated
 @RestController
-@RequestMapping("/api/v1/author")
-public class AuthorController {
+@RequestMapping("/api/player")
+public class PlayerController {
 
-    private final AuthorService authorMainService;
+    private final PlayerService playerService;
 
-    public AuthorController(AuthorService authorMainService) {
-        this.authorMainService = authorMainService;
+    public PlayerController(PlayerService playerService) {
+        this.playerService = playerService;
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseWrapper<Author> getAuthorById(
+    public ResponseWrapper<Player> getPlayerById(
             @Valid @Pattern(regexp = ApiConstants.REGEX_FOR_NUMBERS, message = ApiConstants.MESSAGE_FOR_REGEX_NUMBER_MISMATCH) @PathVariable(value = "id")
                     String id) {
-        return new ResponseWrapper<>(authorMainService.getById(Integer.parseInt(id)), HttpStatus.OK);
+        return new ResponseWrapper<>(playerService.getById(Integer.parseInt(id)), HttpStatus.OK);
     }
 
     @GetMapping()
-    public ResponseWrapper<Page<Author>> getAuthorAll(Pageable pageable) {
-        return new ResponseWrapper<>(authorMainService.getAll(pageable), HttpStatus.OK);
+    public ResponseWrapper<List<Player>> getAllPlayers() {
+        return new ResponseWrapper<>(playerService.getAllPlayers(), HttpStatus.OK);
     }
 
 }
