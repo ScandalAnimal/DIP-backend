@@ -25,6 +25,33 @@ public class Player implements Serializable {
     private Long bps;
     private Double threat;
     private Double ictIndex;
+    private String team;
+    private Long teamCode;
+    private Long elementType;
+
+    public Long getElementType() {
+        return elementType;
+    }
+
+    public void setElementType(Long elementType) {
+        this.elementType = elementType;
+    }
+
+    public String getTeam() {
+        return team;
+    }
+
+    public void setTeam(String team) {
+        this.team = team;
+    }
+
+    public Long getTeamCode() {
+        return teamCode;
+    }
+
+    public void setTeamCode(Long teamCode) {
+        this.teamCode = teamCode;
+    }
 
     public Long getBonus() {
         return bonus;
@@ -191,6 +218,9 @@ public class Player implements Serializable {
                 ", bps=" + bps +
                 ", threat=" + threat +
                 ", ictIndex=" + ictIndex +
+                ", team='" + team + '\'' +
+                ", teamCode=" + teamCode +
+                ", elementType=" + elementType +
                 '}';
     }
 }
