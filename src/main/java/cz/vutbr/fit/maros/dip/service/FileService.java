@@ -10,5 +10,7 @@ public interface FileService {
 
     void appendDataToCsv(String keys, String values, String fileName, boolean addKeys);
 
+    void appendDataToDataset(String keys, String values, String fileName);
+
 }
 

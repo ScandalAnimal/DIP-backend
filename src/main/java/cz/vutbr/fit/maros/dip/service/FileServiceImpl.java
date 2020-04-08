@@ -87,4 +87,26 @@ public class FileServiceImpl implements FileService {
         }
 
     }
+
+    public void appendDataToDataset(String keys, String values, String filename) {
+        String filePath = ApiConstants.DATASET_URL + filename;
+
+        File file = new File(filePath);
+        file.getParentFile().mkdirs();
+        Path path = Paths.get(filePath);
+
+        try {
+            FileWriter writer = new FileWriter(filePath, true);
+            if (file.length() == 0) {
+                writer.write(keys + '\n');
+            }
+            writer.write(values);
+            writer.flush();
+            writer.close();
+            System.out.println("Finished writing to " + filePath);
+        } catch (IOException e) {
+            throw new CustomException("Couldn't create file for writing data.");
+        }
+
+    }
 }
