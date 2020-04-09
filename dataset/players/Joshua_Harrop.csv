@@ -1,2 +1,2 @@
-assists,bonus,bps,clean_sheets,creativity,element,fixture,goals_conceded,goals_scored,ict_index,influence,kickoff_time,minutes,opponent_team,own_goals,penalties_missed,penalties_saved,red_cards,round,saves,selected,team_a_score,team_h_score,threat,total_points,transfers_balance,transfers_in,transfers_out,value,was_home,yellow_cards
-0,0,32,1,20.2,674,377,0,1,7.7,36.2,2017-05-21T14:00:00Z,90,5,0,0,0,0,38,0,274,0,2,21.0,8,267,273,6,45,True,0
+kickoff_time,total_points,bps,creativity,threat,influence,ict_index,minutes,value,goals_scored,assists,yellow_cards,red_cards,goals_conceded,saves
+2017-05-21T14:00:00Z,8,32,20.2,21.0,36.2,7.7,90,45,1,0,0,0,0,0

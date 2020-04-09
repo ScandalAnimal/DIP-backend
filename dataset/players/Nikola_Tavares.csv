@@ -1,2 +1,2 @@
-assists,bonus,bps,clean_sheets,creativity,element,fixture,goals_conceded,goals_scored,ict_index,influence,kickoff_time,minutes,opponent_team,own_goals,penalties_missed,penalties_saved,red_cards,round,saves,selected,team_a_score,team_h_score,threat,total_points,transfers_balance,transfers_in,transfers_out,value,was_home,yellow_cards
-0,0,0,0,0.0,619,373,0,0,0.0,0.0,2019-05-12T14:00:00Z,0,2,0,0,0,0,38,0,0,3,5,0.0,0,0,0,0,40,True,0
+kickoff_time,total_points,bps,creativity,threat,influence,ict_index,minutes,value,goals_scored,assists,yellow_cards,red_cards,goals_conceded,saves
+2019-05-12T14:00:00Z,0,0,0.0,0.0,0.0,0.0,0,40,0,0,0,0,0,0

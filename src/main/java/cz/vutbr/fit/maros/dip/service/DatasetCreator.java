@@ -28,11 +28,8 @@ public class DatasetCreator {
     @Scheduled(fixedRate = 1000000000)
     public void createDataset() {
 
-        String[] keys = { "assists", "bonus", "bps", "clean_sheets", "creativity", "element", "fixture",
-            "goals_conceded", "goals_scored", "ict_index", "influence", "kickoff_time", "minutes", "opponent_team",
-            "own_goals", "penalties_missed", "penalties_saved", "red_cards", "round", "saves", "selected",
-            "team_a_score", "team_h_score", "threat", "total_points", "transfers_balance", "transfers_in",
-            "transfers_out", "value", "was_home", "yellow_cards" };
+        String[] keys = {"kickoff_time", "total_points", "bps", "creativity", "threat", "influence", "ict_index", "minutes", "value",
+            "goals_scored", "assists", "yellow_cards", "red_cards", "goals_conceded", "saves" };
 
         String url = "players/";
 
@@ -57,8 +54,8 @@ public class DatasetCreator {
                     try {
                         br = new BufferedReader(new FileReader(path + directory + "/gw.csv"));
                         String header = br.readLine();
-                        String filteredHeader = filterHeader(header, keys);
                         Integer[] indexes = getIndexes(header, keys);
+                        String filteredHeader = filterLine(header, indexes);
                         String line;
                         while ((line = br.readLine()) != null) {
 
@@ -78,20 +75,6 @@ public class DatasetCreator {
 
     }
 
-    private String filterHeader(String header, String[] keys) {
-
-        StringJoiner joiner = new StringJoiner(",");
-
-        List<String> keyList = Arrays.asList(keys);
-        String[] splitted = header.split(",");
-        for (final String s : splitted) {
-            if (keyList.contains(s)) {
-                joiner.add(s);
-            }
-        }
-        return joiner.toString();
-    }
-
     private String filterLine(String line, Integer[] indexes) {
 
         StringJoiner joiner = new StringJoiner(",");
@@ -108,14 +91,13 @@ public class DatasetCreator {
 
         String[] splitted = header.split(",");
         Integer[] indexes = new Integer[keys.length];
-        int x = 0;
 
         List<String> keyList = Arrays.asList(keys);
         for (int i = 0; i < splitted.length; i++) {
             final String s = splitted[i];
-            if (keyList.contains(s)) {
-                indexes[x] = i;
-                x++;
+            int pos = keyList.indexOf(s);
+            if (pos >= 0) {
+                indexes[pos] = i;
             }
         }
         return indexes;
