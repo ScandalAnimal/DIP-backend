@@ -79,22 +79,22 @@ public class DatasetCreator {
 
         StringJoiner joiner = new StringJoiner(",");
 
-        String[] splitted = line.split(",");
+        String[] split = line.split(",");
 
         for (final Integer index : indexes) {
-            joiner.add(splitted[index]);
+            joiner.add(split[index]);
         }
         return joiner.toString();
     }
 
     private Integer[] getIndexes(String header, String[] keys) {
 
-        String[] splitted = header.split(",");
+        String[] split = header.split(",");
         Integer[] indexes = new Integer[keys.length];
 
         List<String> keyList = Arrays.asList(keys);
-        for (int i = 0; i < splitted.length; i++) {
-            final String s = splitted[i];
+        for (int i = 0; i < split.length; i++) {
+            final String s = split[i];
             int pos = keyList.indexOf(s);
             if (pos >= 0) {
                 indexes[pos] = i;
