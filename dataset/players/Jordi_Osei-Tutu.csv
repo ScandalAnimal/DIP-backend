@@ -1,5 +1,5 @@
-kickoff_time,total_points,bps,creativity,threat,influence,ict_index,minutes,value,goals_scored,assists,yellow_cards,red_cards,goals_conceded,saves
-2018-04-29T15:30:00Z,0,0,0.0,0.0,0.0,0.0,0,40,0,0,0,0,0,0
-2018-05-06T15:30:00Z,0,0,0.0,0.0,0.0,0.0,0,40,0,0,0,0,0,0
-2018-05-09T18:45:00Z,0,0,0.0,0.0,0.0,0.0,0,40,0,0,0,0,0,0
-2018-05-13T14:00:00Z,0,0,0.0,0.0,0.0,0.0,0,40,0,0,0,0,0,0
+gw_index,total_points,bps,creativity,threat,influence,ict_index,minutes,value,goals_scored,assists,yellow_cards,red_cards,goals_conceded,saves,was_home,opponent_team
+1,0,0,0.0,0.0,0.0,0.0,0,40,0,0,0,0,0,0,False,12
+2,0,0,0.0,0.0,0.0,0.0,0,40,0,0,0,0,0,0,True,4
+3,0,0,0.0,0.0,0.0,0.0,0,40,0,0,0,0,0,0,False,9
+4,0,0,0.0,0.0,0.0,0.0,0,40,0,0,0,0,0,0,False,8

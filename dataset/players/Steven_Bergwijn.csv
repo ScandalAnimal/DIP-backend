@@ -1,6 +1,6 @@
-kickoff_time,total_points,bps,creativity,threat,influence,ict_index,minutes,value,goals_scored,assists,yellow_cards,red_cards,goals_conceded,saves
-2020-02-02T16:30:00Z,10,29,1.7,23.0,37.6,6.2,69,75,1,0,0,0,0,0
-2020-02-16T14:00:00Z,2,12,42.3,65.0,17.4,12.5,90,75,0,0,0,0,2,0
-2020-02-22T12:30:00Z,2,5,24.8,0.0,3.4,2.8,77,75,0,0,0,0,2,0
-2020-03-01T14:00:00Z,7,22,13.4,25.0,35.6,7.4,90,75,1,0,0,0,3,0
-2020-03-07T17:30:00Z,1,6,14.7,3.0,1.6,1.9,90,75,0,0,1,0,1,0
+gw_index,total_points,bps,creativity,threat,influence,ict_index,minutes,value,goals_scored,assists,yellow_cards,red_cards,goals_conceded,saves,was_home,opponent_team
+1,10,29,1.7,23.0,37.6,6.2,69,75,1,0,0,0,0,0,True,11
+2,2,12,42.3,65.0,17.4,12.5,90,75,0,0,0,0,2,0,False,2
+3,2,5,24.8,0.0,3.4,2.8,77,75,0,0,0,0,2,0,False,6
+4,7,22,13.4,25.0,35.6,7.4,90,75,1,0,0,0,3,0,True,20
+5,1,6,14.7,3.0,1.6,1.9,90,75,0,0,1,0,1,0,False,5

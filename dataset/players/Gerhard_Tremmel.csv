@@ -1,2 +1,2 @@
-kickoff_time,total_points,bps,creativity,threat,influence,ict_index,minutes,value,goals_scored,assists,yellow_cards,red_cards,goals_conceded,saves
-2017-05-21T14:00:00Z,0,0,0.0,0.0,0.0,0.0,0,40,0,0,0,0,0,0
+gw_index,total_points,bps,creativity,threat,influence,ict_index,minutes,value,goals_scored,assists,yellow_cards,red_cards,goals_conceded,saves,was_home,opponent_team
+1,0,0,0.0,0.0,0.0,0.0,0,40,0,0,0,0,0,0,True,19

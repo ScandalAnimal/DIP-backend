@@ -1,5 +1,6 @@
 package cz.vutbr.fit.maros.dip.service;
 
+import cz.vutbr.fit.maros.dip.constants.ApiConstants;
 import cz.vutbr.fit.maros.dip.exception.CustomException;
 import java.io.BufferedReader;
 import java.io.File;
@@ -28,8 +29,8 @@ public class DatasetCreator {
     @Scheduled(fixedRate = 1000000000)
     public void createDataset() {
 
-        String[] keys = {"kickoff_time", "total_points", "bps", "creativity", "threat", "influence", "ict_index", "minutes", "value",
-            "goals_scored", "assists", "yellow_cards", "red_cards", "goals_conceded", "saves" };
+        String[] keys = {"total_points", "bps", "creativity", "threat", "influence", "ict_index", "minutes", "value",
+            "goals_scored", "assists", "yellow_cards", "red_cards", "goals_conceded", "saves", "was_home", "opponent_team" };
 
         String url = "players/";
 
@@ -55,12 +56,29 @@ public class DatasetCreator {
                         br = new BufferedReader(new FileReader(path + directory + "/gw.csv"));
                         String header = br.readLine();
                         Integer[] indexes = getIndexes(header, keys);
-                        String filteredHeader = filterLine(header, indexes);
+                        String filteredHeader = "gw_index," + filterLine(header, indexes);
                         String line;
+
+                        int index;
+                        File existingFile = new File(ApiConstants.DATASET_URL + url + newName + ".csv");
+                        if (existingFile.exists()) {
+                            BufferedReader br2 = new BufferedReader(new FileReader(existingFile));
+                            String lastLine = "";
+                            String currentLine = "";
+                            while ((currentLine = br2.readLine()) != null) {
+                                lastLine = currentLine;
+                            }
+                            String[] split = lastLine.split(",");
+                            index = Integer.parseInt(split[0]);
+                        } else {
+                            index = 1;
+                        }
+
                         while ((line = br.readLine()) != null) {
 
-                            String filteredLine = filterLine(line, indexes);
+                            String filteredLine = index + "," + filterLine(line, indexes);
                             sb.append(filteredLine).append("\n");
+                            index++;
                         }
                         fileService.appendDataToDataset(filteredHeader, sb.toString(), url + newName + ".csv");
 
