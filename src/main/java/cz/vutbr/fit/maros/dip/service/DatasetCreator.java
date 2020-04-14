@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.StringJoiner;
@@ -34,6 +35,8 @@ public class DatasetCreator {
 
         String url = "players/";
 
+        List<String> currentSeasonPlayers = getCurrentSeasonPlayers();
+
         for (int year = 1; year < 5; year++) {
 
             String path = getFilePath(year);
@@ -42,50 +45,45 @@ public class DatasetCreator {
 
             if (directories != null) {
                 for (final String directory : directories) {
-                    String newName = directory;
-                    long occurrences = directory.chars().filter(ch -> ch == '_').count();
-                    if (occurrences > 1) {
-                        int sepPos = directory.lastIndexOf("_");
-                        if (sepPos != -1) {
-                            newName = directory.substring(0, sepPos);
-                        }
-                    }
-                    StringBuilder sb = new StringBuilder();
-                    BufferedReader br;
-                    try {
-                        br = new BufferedReader(new FileReader(path + directory + "/gw.csv"));
-                        String header = br.readLine();
-                        Integer[] indexes = getIndexes(header, keys);
-                        String filteredHeader = "gw_index," + filterLine(header, indexes);
-                        String line;
+                    String newName = getNewName(directory);
+                    if (currentSeasonPlayers.contains(newName)) {
+                        StringBuilder sb = new StringBuilder();
+                        BufferedReader br;
+                        try {
+                            br = new BufferedReader(new FileReader(path + directory + "/gw.csv"));
+                            String header = br.readLine();
+                            Integer[] indexes = getIndexes(header, keys);
+                            String filteredHeader = "gw_index," + filterLine(header, indexes);
+                            String line;
 
-                        int index;
-                        File existingFile = new File(ApiConstants.DATASET_URL + url + newName + ".csv");
-                        if (existingFile.exists()) {
-                            BufferedReader br2 = new BufferedReader(new FileReader(existingFile));
-                            String lastLine = "";
-                            String currentLine = "";
-                            while ((currentLine = br2.readLine()) != null) {
-                                lastLine = currentLine;
+                            int index;
+                            File existingFile = new File(ApiConstants.DATASET_URL + url + newName + ".csv");
+                            if (existingFile.exists()) {
+                                BufferedReader br2 = new BufferedReader(new FileReader(existingFile));
+                                String lastLine = "";
+                                String currentLine = "";
+                                while ((currentLine = br2.readLine()) != null) {
+                                    lastLine = currentLine;
+                                }
+                                String[] split = lastLine.split(",");
+                                index = Integer.parseInt(split[0]);
+                            } else {
+                                index = 1;
                             }
-                            String[] split = lastLine.split(",");
-                            index = Integer.parseInt(split[0]);
-                        } else {
-                            index = 1;
+
+                            while ((line = br.readLine()) != null) {
+
+                                String filteredLine = index + "," + filterLine(line, indexes);
+                                sb.append(filteredLine).append("\n");
+                                index++;
+                            }
+                            fileService.appendDataToDataset(filteredHeader, sb.toString(), url + newName + ".csv");
+
+                        } catch (FileNotFoundException e) {
+                            throw new CustomException("File " + path + directory + " does not exist, please generate gw file first.");
+                        } catch (IOException e) {
+                            throw new CustomException("Cannot read from file " + path + directory + ".");
                         }
-
-                        while ((line = br.readLine()) != null) {
-
-                            String filteredLine = index + "," + filterLine(line, indexes);
-                            sb.append(filteredLine).append("\n");
-                            index++;
-                        }
-                        fileService.appendDataToDataset(filteredHeader, sb.toString(), url + newName + ".csv");
-
-                    } catch (FileNotFoundException e) {
-                        throw new CustomException("File " + path + directory + " does not exist, please generate gw file first.");
-                    } catch (IOException e) {
-                        throw new CustomException("Cannot read from file " + path + directory + ".");
                     }
                 }
             }
@@ -137,6 +135,33 @@ public class DatasetCreator {
             return dir2019;
         }
         return "";
+    }
+
+    private List<String> getCurrentSeasonPlayers() {
+        String path = getFilePath(4);
+        File file = new File(path);
+        String[] directories = file.list((current, name) -> new File(current, name).isDirectory());
+
+        List<String> players = new ArrayList<>();
+        if (directories != null) {
+            for (final String directory : directories) {
+                String newName = getNewName(directory);
+                players.add(newName);
+            }
+        }
+        return players;
+    }
+
+    private String getNewName(String oldName) {
+        String newName = oldName;
+        long occurrences = oldName.chars().filter(ch -> ch == '_').count();
+        if (occurrences > 1) {
+            int sepPos = oldName.lastIndexOf("_");
+            if (sepPos != -1) {
+                newName = oldName.substring(0, sepPos);
+            }
+        }
+        return newName;
     }
 
 }
