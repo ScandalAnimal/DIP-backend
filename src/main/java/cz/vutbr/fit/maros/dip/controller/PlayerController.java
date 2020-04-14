@@ -4,7 +4,7 @@ import cz.vutbr.fit.maros.dip.constants.ApiConstants;
 import cz.vutbr.fit.maros.dip.model.Player;
 import cz.vutbr.fit.maros.dip.model.PlayerId;
 import cz.vutbr.fit.maros.dip.results.ResponseWrapper;
-import cz.vutbr.fit.maros.dip.service.PlayerService;
+import cz.vutbr.fit.maros.dip.service.impl.PlayerServiceImpl;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/player")
 public class PlayerController {
 
-    private final PlayerService playerService;
+    private final PlayerServiceImpl playerService;
 
-    public PlayerController(PlayerService playerService) {
+    public PlayerController(PlayerServiceImpl playerService) {
         this.playerService = playerService;
     }
 

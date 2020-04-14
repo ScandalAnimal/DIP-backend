@@ -1,7 +1,8 @@
-package cz.vutbr.fit.maros.dip.service;
+package cz.vutbr.fit.maros.dip.service.impl;
 
 import cz.vutbr.fit.maros.dip.constants.ApiConstants;
 import cz.vutbr.fit.maros.dip.exception.CustomException;
+import cz.vutbr.fit.maros.dip.service.FileService;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

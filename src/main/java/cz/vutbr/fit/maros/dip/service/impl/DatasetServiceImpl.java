@@ -1,7 +1,9 @@
-package cz.vutbr.fit.maros.dip.service;
+package cz.vutbr.fit.maros.dip.service.impl;
 
 import cz.vutbr.fit.maros.dip.constants.ApiConstants;
 import cz.vutbr.fit.maros.dip.exception.CustomException;
+import cz.vutbr.fit.maros.dip.service.DatasetService;
+import cz.vutbr.fit.maros.dip.service.FileService;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,22 +15,19 @@ import java.util.List;
 import java.util.StringJoiner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
-public class DatasetCreator {
+@Service
+public class DatasetServiceImpl implements DatasetService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DatasetCreator.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DatasetServiceImpl.class);
     private final FileService fileService;
 
-    public DatasetCreator(FileService fileService) {
+    public DatasetServiceImpl(FileService fileService) {
         this.fileService = fileService;
     }
 
-    //    @Scheduled(cron = "0 0 12 * * ?")
-    @Scheduled(fixedRate = 1000000000)
-    public void createDataset() {
+    public int initializeDataset() {
 
         String[] keys = {"total_points", "bps", "creativity", "threat", "influence", "ict_index", "minutes", "value",
             "goals_scored", "assists", "yellow_cards", "red_cards", "goals_conceded", "saves", "was_home", "opponent_team" };
@@ -88,7 +87,7 @@ public class DatasetCreator {
                 }
             }
         }
-
+        return 0;
     }
 
     private String filterLine(String line, Integer[] indexes) {

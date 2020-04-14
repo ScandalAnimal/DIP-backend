@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import cz.vutbr.fit.maros.dip.model.LoginFormData;
 import cz.vutbr.fit.maros.dip.model.UserData;
 import cz.vutbr.fit.maros.dip.results.ResponseWrapper;
-import cz.vutbr.fit.maros.dip.service.LoginService;
+import cz.vutbr.fit.maros.dip.service.impl.LoginServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/login")
 public class LoginController {
 
-    private final LoginService loginService;
+    private final LoginServiceImpl loginService;
 
-    public LoginController(LoginService loginService) {
+    public LoginController(LoginServiceImpl loginService) {
         this.loginService = loginService;
     }
 
