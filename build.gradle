@@ -24,7 +24,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'nz.ac.waikato.cms.weka:weka-dev:3.7.5'
 	implementation 'nz.ac.waikato.cms.weka:LibSVM:1.0.4'
-	implementation files('students-filters-master/filters-0.0.1-SNAPSHOT.jar')
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'

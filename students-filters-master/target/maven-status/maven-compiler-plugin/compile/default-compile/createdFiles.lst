@@ -1,4 +1,0 @@
-filters\LogCosh.class
-filters\FastICA.class
-filters\NegativeEntropyEstimator.class
-weka\filters\unsupervised\attribute\IndependentComponents.class
