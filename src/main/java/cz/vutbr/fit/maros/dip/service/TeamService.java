@@ -6,4 +6,6 @@ import java.util.List;
 public interface TeamService {
 
     List<Team> getAllTeams();
+
+    Integer getTeamByPlayerName(String firstName, String lastName);
 }

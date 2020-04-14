@@ -11,7 +11,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.StringJoiner;
 import lombok.NoArgsConstructor;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
@@ -50,5 +53,58 @@ public class TeamServiceImpl implements TeamService {
             throw new CustomException("Cannot read from file " + fileName + ".");
         }
         return teams;
+    }
+
+    public Integer getTeamByPlayerName(String firstName, String lastName) {
+        String fileName = ApiConstants.BASE_URL + "players_raw.csv";
+
+        String[] keys = {"first_name", "second_name", "team" };
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader(fileName));
+            String header = br.readLine();
+            Integer[] indexes = getIndexes(header, keys);
+            String line;
+            while ((line = br.readLine()) != null) {
+
+                String filteredLine = filterLine(line, indexes);
+                String[] values = filteredLine.split(",");
+                if (Objects.equals(values[0], firstName) && Objects.equals(values[1], lastName)) {
+                    return Integer.parseInt(values[2]);
+                }
+            }
+
+        } catch (IOException e) {
+            throw new CustomException("Cannot read from file " + fileName + ".");
+        }
+        return null;
+    }
+
+    private String filterLine(String line, Integer[] indexes) {
+
+        StringJoiner joiner = new StringJoiner(",");
+
+        String[] split = line.split(",");
+
+        for (final Integer index : indexes) {
+            joiner.add(split[index]);
+        }
+        return joiner.toString();
+    }
+
+    private Integer[] getIndexes(String header, String[] keys) {
+
+        String[] split = header.split(",");
+        Integer[] indexes = new Integer[keys.length];
+
+        List<String> keyList = Arrays.asList(keys);
+        for (int i = 0; i < split.length; i++) {
+            final String s = split[i];
+            int pos = keyList.indexOf(s);
+            if (pos >= 0) {
+                indexes[pos] = i;
+            }
+        }
+        return indexes;
     }
 }

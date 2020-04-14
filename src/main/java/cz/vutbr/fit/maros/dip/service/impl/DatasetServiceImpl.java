@@ -2,8 +2,10 @@ package cz.vutbr.fit.maros.dip.service.impl;
 
 import cz.vutbr.fit.maros.dip.constants.ApiConstants;
 import cz.vutbr.fit.maros.dip.exception.CustomException;
+import cz.vutbr.fit.maros.dip.model.Fixture;
 import cz.vutbr.fit.maros.dip.service.DatasetService;
 import cz.vutbr.fit.maros.dip.service.FileService;
+import cz.vutbr.fit.maros.dip.service.TeamService;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,6 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.StringJoiner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,9 +25,11 @@ public class DatasetServiceImpl implements DatasetService {
 
     private static final Logger LOG = LoggerFactory.getLogger(DatasetServiceImpl.class);
     private final FileService fileService;
+    private final TeamService teamService;
 
-    public DatasetServiceImpl(FileService fileService) {
+    public DatasetServiceImpl(FileService fileService, TeamService teamService) {
         this.fileService = fileService;
+        this.teamService = teamService;
     }
 
     public int initializeDataset() {
@@ -35,6 +40,7 @@ public class DatasetServiceImpl implements DatasetService {
         String url = "players/";
 
         List<String> currentSeasonPlayers = getCurrentSeasonPlayers();
+        List<Fixture> remainingFixtures = getRemainingFixtures();
 
         for (int year = 1; year < 5; year++) {
 
@@ -76,6 +82,35 @@ public class DatasetServiceImpl implements DatasetService {
                                 sb.append(filteredLine).append("\n");
                                 index++;
                             }
+
+                            if (year == 4) {
+                                String[] names = getNewName(directory).split("_");
+                                Integer teamId = teamService.getTeamByPlayerName(names[0], names[1]);
+                                List<Fixture> teamFixtures = filterFixtures(teamId, remainingFixtures);
+                                for (Fixture fixture : teamFixtures) {
+                                    String template = filteredHeader;
+                                    StringBuilder sb2 = new StringBuilder();
+                                    String[] split = template.split(",");
+                                    sb2.append(index).append(",");
+                                    for (final String s : split) {
+                                        if (Objects.equals(s, "opponent_team")) {
+                                            Integer home = fixture.getHomeTeam();
+                                            Integer away = fixture.getAwayTeam();
+
+                                            if (home.equals(teamId)) {
+                                                sb2.append(away).append("\n");
+                                            } else {
+                                                sb2.append(home).append("\n");
+                                            }
+                                        } else {
+                                            sb2.append("?,");
+                                        }
+                                    }
+                                    sb.append(sb2.toString());
+                                    index++;
+                                }
+                            }
+
                             fileService.appendDataToDataset(filteredHeader, sb.toString(), url + newName + ".csv");
 
                         } catch (FileNotFoundException e) {
@@ -151,6 +186,46 @@ public class DatasetServiceImpl implements DatasetService {
         return players;
     }
 
+    private List<Fixture> getRemainingFixtures() {
+        String path = "data/2019-20/fixtures.csv";
+        File file = new File(path);
+
+        List<Fixture> fixtures = new ArrayList<>();
+        BufferedReader br;
+
+        String[] keys = {"event", "finished", "team_h", "team_a", "team_h_difficulty", "team_a_difficulty" };
+
+        try {
+            br = new BufferedReader(new FileReader(file));
+            String header = br.readLine();
+            Integer[] indexes = getIndexes(header, keys);
+            String line;
+
+            while ((line = br.readLine()) != null) {
+
+                String filteredLine = filterLine(line, indexes);
+                String[] split = filteredLine.split(",");
+                if (!Objects.equals(split[0], "") && Objects.equals(split[1], "False")) {
+                    final Fixture fixture = new Fixture(
+                            Double.parseDouble(split[0]),
+                            Boolean.parseBoolean(split[1]),
+                            Integer.parseInt(split[2]),
+                            Integer.parseInt(split[3]),
+                            Integer.parseInt(split[4]),
+                            Integer.parseInt(split[5])
+                    );
+                    fixtures.add(fixture);
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            throw new CustomException("File " + path + " does not exist, please generate fixtures file first.");
+        } catch (IOException e) {
+            throw new CustomException("Cannot read from file " + path + ".");
+        }
+        return fixtures;
+    }
+
     private String getNewName(String oldName) {
         String newName = oldName;
         long occurrences = oldName.chars().filter(ch -> ch == '_').count();
@@ -161,6 +236,17 @@ public class DatasetServiceImpl implements DatasetService {
             }
         }
         return newName;
+    }
+
+    private List<Fixture> filterFixtures(Integer teamId, List<Fixture> remainingFixtures) {
+        List<Fixture> fixtureList = new ArrayList<>();
+
+        for (Fixture fixture : remainingFixtures) {
+            if (fixture.getHomeTeam() == teamId || fixture.getAwayTeam() == teamId) {
+                fixtureList.add(fixture);
+            }
+        }
+        return fixtureList;
     }
 
 }
