@@ -1,0 +1,11 @@
+gw_index,total_points,bps,creativity,threat,influence,ict_index,minutes,value,goals_scored,assists,yellow_cards,red_cards,goals_conceded,saves,was_home,opponent_team
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+
+62,6,16,27.5,28.0,28.6,8.4,82,64,0,1,0,0,0,0,True,13
+63,0,0,0.0,0.0,0.0,0.0,0,64,0,0,0,0,0,0,False,18
+64,8,25,2.3,21.0,42.6,6.6,64,64,1,0,0,0,1,0,True,7
+65,1,9,40.6,2.0,14.2,5.7,30,64,0,0,0,0,0,0,False,1
+66,1,2,1.4,0.0,0.8,0.2,27,64,0,0,0,0,0,0,True,12
+67,1,4,3.2,0.0,4.2,0.7,45,64,0,0,0,0,2,0,False,6
