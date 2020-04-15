@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,6 +21,10 @@ import java.util.StringJoiner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import weka.classifiers.evaluation.NumericPrediction;
+import weka.classifiers.functions.MultilayerPerceptron;
+import weka.classifiers.timeseries.WekaForecaster;
+import weka.core.Instances;
 
 @Service
 public class DatasetServiceImpl implements DatasetService {
@@ -71,7 +77,7 @@ public class DatasetServiceImpl implements DatasetService {
                                     lastLine = currentLine;
                                 }
                                 String[] split = lastLine.split(",");
-                                index = Integer.parseInt(split[0]);
+                                index = Integer.parseInt(split[0]) + 1;
                             } else {
                                 index = 1;
                             }
@@ -102,7 +108,7 @@ public class DatasetServiceImpl implements DatasetService {
                                             } else {
                                                 sb2.append(home).append("\n");
                                             }
-                                        } else {
+                                        } else if (!Objects.equals(s, "gw_index")) {
                                             sb2.append("?,");
                                         }
                                     }
@@ -121,6 +127,125 @@ public class DatasetServiceImpl implements DatasetService {
                     }
                 }
             }
+        }
+        return 0;
+    }
+
+    public int makeAllPredictions() {
+
+        final int MAX_LAG = 6;
+        final int PREDICTIONS = 1;
+        String basePath = "dataset/players/";
+        String playerName = "Alexandre_Lacazette";
+        String filePath = basePath + playerName + ".csv";
+        String trainPath = basePath + "train/" + playerName + ".csv";
+        String primePath = basePath + "prime/" + playerName + ".csv";
+        String futurePath = basePath + "future/" + playerName + ".csv";
+        String trainBasePath = basePath + "train/" + playerName;
+        String primeBasePath = basePath + "prime/" + playerName;
+        String futureBasePath = basePath + "future/" + playerName;
+        try {
+            Files.deleteIfExists(Paths.get(trainPath));
+            Files.deleteIfExists(Paths.get(primePath));
+            Files.deleteIfExists(Paths.get(futurePath));
+        } catch (IOException e) {
+            throw new CustomException("Couldn't delete file for writing data.", e);
+        }
+        List<String> lines = new ArrayList<>();
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader(filePath));
+            String header = br.readLine();
+            String line;
+            while ((line = br.readLine()) != null) {
+                lines.add(line);
+            }
+
+            List<String> trainingSet = new ArrayList<>();
+            List<String> primingSet;
+            List<String> futureSet = new ArrayList<>();
+
+            // fake data to make same arff headers
+            futureSet.add(lines.get(0));
+            futureSet.add(lines.get(1));
+            futureSet.add(lines.get(2));
+
+            lines.forEach(elem -> {
+                String[] split = elem.split(",");
+                if (!Objects.equals(split[1], "?")) {
+                    trainingSet.add(elem);
+                } else {
+                    futureSet.add(elem);
+                }
+            });
+            primingSet = trainingSet.subList(trainingSet.size() - MAX_LAG, trainingSet.size());
+
+            StringBuilder trainingSetSb = new StringBuilder();
+            trainingSet.forEach(item -> {
+                trainingSetSb.append(item).append("\n");
+            });
+            StringBuilder primingSetSb = new StringBuilder();
+            primingSet.forEach(item -> {
+                primingSetSb.append(item).append("\n");
+            });
+            StringBuilder futureSetSb = new StringBuilder();
+            futureSet.forEach(item -> {
+                futureSetSb.append(item).append("\n");
+            });
+
+            fileService.createCsv(header, trainingSetSb.toString(), trainPath);
+            fileService.createCsv(header, primingSetSb.toString(), primePath);
+            fileService.createCsv(header, futureSetSb.toString(), futurePath);
+            fileService.csvToArff(trainBasePath);
+            fileService.csvToArff(primeBasePath);
+            fileService.csvToArff(futureBasePath);
+
+        } catch (IOException e) {
+            throw new CustomException("Cannot read from file " + filePath + ".");
+        }
+
+        try {
+            File trainFile = new File(trainBasePath + ".arff");
+            File primeFile = new File(primeBasePath + ".arff");
+            File futureFile = new File(futureBasePath + ".arff");
+            Instances trainData = new Instances(new BufferedReader(new FileReader(trainFile)));
+            Instances primeData = new Instances(new BufferedReader(new FileReader(primeFile)));
+            Instances futureData = new Instances(new BufferedReader(new FileReader(futureFile)));
+
+            // it's important to iterate from last to first, because when we remove
+            // an instance, the rest shifts by one position.
+            for (int i = futureData.numInstances() - 1; i >= 0; i--) {
+                if (i <= 2) {
+                    futureData.delete(i);
+                }
+            }
+            WekaForecaster forecaster = new WekaForecaster();
+            forecaster.setFieldsToForecast("total_points");
+            forecaster.setBaseForecaster(new MultilayerPerceptron());
+            forecaster.getTSLagMaker().setTimeStampField("gw_index");
+            forecaster.getTSLagMaker().setMinLag(1);
+            forecaster.getTSLagMaker().setMaxLag(MAX_LAG);
+            forecaster.getTSLagMaker().setRemoveLeadingInstancesWithUnknownLagValues(true);
+            forecaster.setOverlayFields("opponent_team");
+
+            forecaster.buildForecaster(trainData, System.out);
+
+            forecaster.primeForecaster(primeData);
+
+            List<List<NumericPrediction>> forecast = forecaster.forecast(PREDICTIONS, futureData, System.out);
+
+            for (int i = 0; i < PREDICTIONS; i++) {
+                List<NumericPrediction> predsAtStep = forecast.get(i);
+                for (NumericPrediction predForTarget : predsAtStep) {
+                    System.out.println("`" + predForTarget.predicted() + "`");
+                    System.out.println("`" + predForTarget + "`");
+                }
+            }
+
+        } catch (IOException e) {
+            throw new CustomException("Cannot read from one of the files: " + trainPath + ", " + primePath + ", " + futurePath + ".");
+        } catch (Exception e) {
+            throw new CustomException("Cannot perform forecast", e);
         }
         return 0;
     }

@@ -4,5 +4,7 @@ public interface DatasetService {
 
     int initializeDataset();
 
+    int makeAllPredictions();
+
 }
 
