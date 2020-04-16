@@ -13,7 +13,7 @@ public interface PlayerService {
 
     List<PlayerId> getAllPlayersIds();
 
-    List<PlayerProjection> getAllPlayersProjections();
+    List<PlayerProjection> getAllPlayersProjections(int id);
 
 }
 

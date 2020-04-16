@@ -46,7 +46,13 @@ public class PlayerController {
 
     @GetMapping(value = "/projected-points")
     public ResponseWrapper<List<PlayerProjection>> getAllPlayerProjections() {
-        return new ResponseWrapper<>(playerService.getAllPlayersProjections(), HttpStatus.OK);
+        return new ResponseWrapper<>(playerService.getAllPlayersProjections(1), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/projected-points/{id}")
+    public ResponseWrapper<List<PlayerProjection>> getAllPlayerProjections(@Valid @Pattern(regexp = ApiConstants.REGEX_FOR_NUMBERS, message = ApiConstants.MESSAGE_FOR_REGEX_NUMBER_MISMATCH) @PathVariable(value = "id")
+            String id) {
+        return new ResponseWrapper<>(playerService.getAllPlayersProjections(Integer.parseInt(id)), HttpStatus.OK);
     }
 
 }

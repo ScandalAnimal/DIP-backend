@@ -109,10 +109,10 @@ public class PlayerServiceImpl implements PlayerService {
         return players;
     }
 
-    public List<PlayerProjection> getAllPlayersProjections() {
+    public List<PlayerProjection> getAllPlayersProjections(int id) {
 
         List<PlayerProjection> players = new ArrayList<>();
-        String fileName = ApiConstants.DATASET_URL + "players/predictions/1gw.csv";
+        String fileName = ApiConstants.DATASET_URL + "players/predictions/" +  id + "gw.csv";
 
         BufferedReader br;
         try {
