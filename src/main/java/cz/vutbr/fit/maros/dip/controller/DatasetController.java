@@ -24,6 +24,11 @@ public class DatasetController {
         return new ResponseWrapper<>(datasetService.initializeDataset(), HttpStatus.OK);
     }
 
+    @GetMapping(value = "/divide")
+    public ResponseWrapper<Object> divideDatasets() {
+        return new ResponseWrapper<>(datasetService.divideDatasets(), HttpStatus.OK);
+    }
+
     @GetMapping(value = "/predict-all")
     public ResponseWrapper<Object> predictAll() {
         return new ResponseWrapper<>(datasetService.makeAllPredictions(), HttpStatus.OK);

@@ -3,6 +3,7 @@ package cz.vutbr.fit.maros.dip.controller;
 import cz.vutbr.fit.maros.dip.constants.ApiConstants;
 import cz.vutbr.fit.maros.dip.model.Player;
 import cz.vutbr.fit.maros.dip.model.PlayerId;
+import cz.vutbr.fit.maros.dip.model.PlayerProjection;
 import cz.vutbr.fit.maros.dip.results.ResponseWrapper;
 import cz.vutbr.fit.maros.dip.service.impl.PlayerServiceImpl;
 import java.util.List;
@@ -41,6 +42,11 @@ public class PlayerController {
     @GetMapping(value = "/ids")
     public ResponseWrapper<List<PlayerId>> getAllPlayerIds() {
         return new ResponseWrapper<>(playerService.getAllPlayersIds(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/projected-points")
+    public ResponseWrapper<List<PlayerProjection>> getAllPlayerProjections() {
+        return new ResponseWrapper<>(playerService.getAllPlayersProjections(), HttpStatus.OK);
     }
 
 }

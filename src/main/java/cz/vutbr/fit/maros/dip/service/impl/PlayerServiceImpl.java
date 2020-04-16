@@ -7,6 +7,7 @@ import cz.vutbr.fit.maros.dip.constants.ApiConstants;
 import cz.vutbr.fit.maros.dip.exception.CustomException;
 import cz.vutbr.fit.maros.dip.model.Player;
 import cz.vutbr.fit.maros.dip.model.PlayerId;
+import cz.vutbr.fit.maros.dip.model.PlayerProjection;
 import cz.vutbr.fit.maros.dip.service.PlayerService;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -105,6 +106,49 @@ public class PlayerServiceImpl implements PlayerService {
         } catch (IOException e) {
             throw new CustomException("Cannot read from file " + fileName + ".");
         }
+        return players;
+    }
+
+    public List<PlayerProjection> getAllPlayersProjections() {
+
+        List<PlayerProjection> players = new ArrayList<>();
+        String fileName = ApiConstants.DATASET_URL + "players/predictions/1gw.csv";
+
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader(fileName));
+            String header = br.readLine();
+            String[] keys = header.split(",");
+            String line;
+            while ((line = br.readLine()) != null) {
+
+                String[] values = line.split(",");
+                JSONObject jsonObject = new JSONObject();
+                for (int i = 0; i < keys.length; i++) {
+                    if (keys[i].equals("predicted_points")) {
+                        int rounded = 0;
+                        if (!values[i].equals("?")) {
+                            rounded = (int) Math.round(Double.parseDouble(values[i]));
+                        }
+
+                        jsonObject.put(keys[i], rounded);
+                    } else {
+                        jsonObject.put(keys[i], values[i]);
+                    }
+                }
+                System.out.println(jsonObject.toJSONString());
+
+                Gson gson = new GsonBuilder()
+                        .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                        .create();
+                PlayerProjection player = gson.fromJson(jsonObject.toString(), PlayerProjection.class);
+                players.add(player);
+            }
+
+        } catch (IOException e) {
+            throw new CustomException("Cannot read from file " + fileName + ".");
+        }
+        System.out.println(players);
         return players;
     }
 }

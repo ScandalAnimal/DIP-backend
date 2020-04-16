@@ -134,16 +134,14 @@ public class DatasetServiceImpl implements DatasetService {
         return 0;
     }
 
-    public int makeAllPredictions() {
+    public int divideDatasets() {
 
         String basePath = "dataset/players/";
         final int MAX_LAG = 6;
-        final int PREDICTIONS = 1;
-        StringBuilder stringBuilder = new StringBuilder();
-        String keys = "player_name,predicted_points";
-        try (Stream<Path> walk = Files.walk(Paths.get(basePath))) {
+        try (Stream<Path> walk = Files.walk(Paths.get(basePath), 1)) {
 
-            List<String> result = walk.filter(Files::isRegularFile)
+            List<String> result = walk
+                    .filter(file -> !Files.isDirectory(file))
                     .map(Path::toString).collect(Collectors.toList());
 
             for (String playerFile : result) {
@@ -214,65 +212,100 @@ public class DatasetServiceImpl implements DatasetService {
                 } catch (IOException e) {
                     throw new CustomException("Cannot read from file " + filePath + ".");
                 }
-
-                try {
-                    File trainFile = new File(trainBasePath + ".arff");
-                    File primeFile = new File(primeBasePath + ".arff");
-                    File futureFile = new File(futureBasePath + ".arff");
-                    Instances trainData = new Instances(new BufferedReader(new FileReader(trainFile)));
-                    Instances primeData = new Instances(new BufferedReader(new FileReader(primeFile)));
-                    Instances futureData = new Instances(new BufferedReader(new FileReader(futureFile)));
-
-                    // it's important to iterate from last to first, because when we remove
-                    // an instance, the rest shifts by one position.
-                    for (int i = futureData.numInstances() - 1; i >= 0; i--) {
-                        if (i <= 1) {
-                            trainData.delete(i);
-                            primeData.delete(i);
-                            futureData.delete(i);
-                        }
-                    }
-
-                    if (trainData.numInstances() <= 6) {
-                        stringBuilder.append(playerName).append(",").append("?").append("\n");
-                    } else {
-                        WekaForecaster forecaster = new WekaForecaster();
-                        forecaster.setFieldsToForecast("total_points");
-                        forecaster.setBaseForecaster(new MultilayerPerceptron());
-                        forecaster.getTSLagMaker().setTimeStampField("gw_index");
-                        forecaster.getTSLagMaker().setMinLag(1);
-                        forecaster.getTSLagMaker().setMaxLag(MAX_LAG);
-                        forecaster.getTSLagMaker().setRemoveLeadingInstancesWithUnknownLagValues(true);
-                        forecaster.setOverlayFields("opponent_team");
-
-                        forecaster.buildForecaster(trainData, System.out);
-
-                        forecaster.primeForecaster(primeData);
-
-                        List<List<NumericPrediction>> forecast = forecaster.forecast(PREDICTIONS, futureData, System.out);
-
-                        for (int i = 0; i < PREDICTIONS; i++) {
-                            List<NumericPrediction> predsAtStep = forecast.get(i);
-                            for (NumericPrediction predForTarget : predsAtStep) {
-                                System.out.println("`" + predForTarget.predicted() + "`");
-                                stringBuilder.append(playerName).append(",").append(Math.floor(predForTarget.predicted() * 100) / 100).append("\n");
-                            }
-                        }
-                    }
-
-
-                } catch (IOException e) {
-                    throw new CustomException("Cannot read from one of the files: " + trainPath + ", " + primePath + ", " + futurePath + ".");
-                } catch (Exception e) {
-                    throw new CustomException("Cannot perform forecast", e);
-                }
             }
-
-            fileService.createCsv(keys, stringBuilder.toString(), basePath + "predictions/1gw.csv");
 
         } catch (IOException e) {
             throw new CustomException("Cannot read files from directory " + basePath + ".");
         }
+
+        return 0;
+    }
+
+    public int makeAllPredictions() {
+
+        String basePath = "dataset/players/";
+        final int MAX_LAG = 6;
+        final int PREDICTIONS = 3;
+        StringBuilder stringBuilder = new StringBuilder();
+        String keys = "player_name,predicted_points";
+
+        List<String> result;
+        try (Stream<Path> walk = Files.walk(Paths.get(basePath), 1)) {
+            result = walk
+                    .filter(file -> !Files.isDirectory(file))
+                    .map(Path::toString)
+                    .collect(Collectors.toList());
+        } catch (IOException e) {
+            throw new CustomException("Cannot read files from directory " + basePath + ".");
+        }
+
+
+        for (String playerFile : result) {
+            Path path = Paths.get(playerFile);
+            String playerName = path.getFileName().toString().substring(0, path.getFileName().toString().lastIndexOf("."));
+            System.out.println(playerName);
+
+            String trainPath = basePath + "train/" + playerName + ".csv";
+            String primePath = basePath + "prime/" + playerName + ".csv";
+            String futurePath = basePath + "future/" + playerName + ".csv";
+            String trainBasePath = basePath + "train/" + playerName;
+            String primeBasePath = basePath + "prime/" + playerName;
+            String futureBasePath = basePath + "future/" + playerName;
+
+            try {
+                File trainFile = new File(trainBasePath + ".arff");
+                File primeFile = new File(primeBasePath + ".arff");
+                File futureFile = new File(futureBasePath + ".arff");
+                Instances trainData = new Instances(new BufferedReader(new FileReader(trainFile)));
+                Instances primeData = new Instances(new BufferedReader(new FileReader(primeFile)));
+                Instances futureData = new Instances(new BufferedReader(new FileReader(futureFile)));
+
+                // it's important to iterate from last to first, because when we remove
+                // an instance, the rest shifts by one position.
+                for (int i = futureData.numInstances() - 1; i >= 0; i--) {
+                    if (i <= 1) {
+                        trainData.delete(i);
+                        primeData.delete(i);
+                        futureData.delete(i);
+                    }
+                }
+
+                if (trainData.numInstances() <= 6) {
+                    stringBuilder.append(playerName).append(",").append("?").append("\n");
+                } else {
+                    WekaForecaster forecaster = new WekaForecaster();
+                    forecaster.setFieldsToForecast("total_points");
+                    forecaster.setBaseForecaster(new MultilayerPerceptron());
+                    forecaster.getTSLagMaker().setTimeStampField("gw_index");
+                    forecaster.getTSLagMaker().setMinLag(1);
+                    forecaster.getTSLagMaker().setMaxLag(MAX_LAG);
+                    forecaster.getTSLagMaker().setRemoveLeadingInstancesWithUnknownLagValues(true);
+                    forecaster.setOverlayFields("opponent_team");
+
+                    forecaster.buildForecaster(trainData, System.out);
+
+                    forecaster.primeForecaster(primeData);
+
+                    List<List<NumericPrediction>> forecast = forecaster.forecast(PREDICTIONS, futureData, System.out);
+
+                    for (int i = 0; i < PREDICTIONS; i++) {
+                        List<NumericPrediction> predsAtStep = forecast.get(i);
+                        for (NumericPrediction predForTarget : predsAtStep) {
+                            System.out.println("`" + predForTarget.predicted() + "`");
+                            stringBuilder.append(playerName).append(",").append(Math.floor(predForTarget.predicted() * 100) / 100).append("\n");
+                        }
+                    }
+                }
+
+
+            } catch (IOException e) {
+                throw new CustomException("Cannot read from one of the files: " + trainPath + ", " + primePath + ", " + futurePath + ".", e);
+            } catch (Exception e) {
+                throw new CustomException("Cannot perform forecast", e);
+            }
+        }
+
+        fileService.createCsv(keys, stringBuilder.toString(), basePath + "predictions/3gw.csv");
 
         return 0;
     }
