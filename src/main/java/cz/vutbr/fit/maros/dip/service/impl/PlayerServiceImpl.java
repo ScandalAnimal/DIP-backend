@@ -157,7 +157,7 @@ public class PlayerServiceImpl implements PlayerService {
         return players;
     }
 
-    public List<PlayerDetailData> getAllPlayerData(String playerName) {
+    public List<PlayerDetailData> getAllPlayerData(String id) {
 
         String[] keys = {"total_points", "bps", "minutes", "own_goals", "goals_scored", "assists",
             "yellow_cards", "red_cards", "goals_conceded", "saves", "clean_sheets", "opponent_team" };
@@ -165,7 +165,13 @@ public class PlayerServiceImpl implements PlayerService {
         List<PlayerDetailData> players = new ArrayList<>();
 
         List<String> currentSeasonPlayers = DatasetUtils.getCurrentSeasonPlayers();
-
+        List<PlayerId> ids = getAllPlayersIds();
+        String playerName = "";
+        for (final PlayerId playerId : ids) {
+            if (playerId.getId().equals(Long.parseLong(id))) {
+                playerName = playerId.getFirstName() + "_" + playerId.getSecondName();
+            }
+        }
 
         for (int year = 1; year < 5; year++) {
             String path = DatasetUtils.getFilePath(year);

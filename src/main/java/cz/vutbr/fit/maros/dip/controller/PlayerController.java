@@ -57,9 +57,9 @@ public class PlayerController {
         return new ResponseWrapper<>(playerService.getAllPlayersProjections(Integer.parseInt(id)), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/detail/{player_name}")
-    public ResponseWrapper<List<PlayerDetailData>> getAllPlayerDetailData(@PathVariable(value = "player_name") String playerName) {
-        return new ResponseWrapper<>(playerService.getAllPlayerData(playerName), HttpStatus.OK);
+    @GetMapping(value = "/detail/{id}")
+    public ResponseWrapper<List<PlayerDetailData>> getAllPlayerDetailData(@PathVariable(value = "id") String id) {
+        return new ResponseWrapper<>(playerService.getAllPlayerData(id), HttpStatus.OK);
     }
 
     @GetMapping(value = "/injuries")
