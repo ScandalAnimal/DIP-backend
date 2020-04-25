@@ -236,7 +236,7 @@ public class PlayerServiceImpl implements PlayerService {
                 JSONObject jsonObject = new JSONObject();
 
                 String[] selectedKeys = { "first_name", "second_name", "chance_of_playing_next_round", "chance_of_playing_this_round",
-                    "news", "news_added", "red_cards", "yellow_cards", "team_code"};
+                    "news", "news_added", "red_cards", "yellow_cards", "team_code", "web_name"};
                 List<String> keyList = Arrays.asList(selectedKeys);
                 List<Object> valueList = new ArrayList<>();
                 List<String> builtKeysList = new ArrayList<>();

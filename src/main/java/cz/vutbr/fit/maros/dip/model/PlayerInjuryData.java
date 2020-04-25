@@ -16,6 +16,15 @@ public class PlayerInjuryData implements Serializable {
     private String secondName;
     private Long yellowCards;
     private Long redCards;
+    private String webName;
+
+    public String getWebName() {
+        return webName;
+    }
+
+    public void setWebName(String webName) {
+        this.webName = webName;
+    }
 
     public String getChanceOfPlayingNextRound() {
         return chanceOfPlayingNextRound;
@@ -89,11 +98,12 @@ public class PlayerInjuryData implements Serializable {
         this.redCards = redCards;
     }
 
+
     @Override
     public String toString() {
         return "PlayerInjuryData{" +
-                "chanceOfPlayingNextRound=" + chanceOfPlayingNextRound +
-                ", chanceOfPlayingThisRound=" + chanceOfPlayingThisRound +
+                "chanceOfPlayingNextRound='" + chanceOfPlayingNextRound + '\'' +
+                ", chanceOfPlayingThisRound='" + chanceOfPlayingThisRound + '\'' +
                 ", teamCode=" + teamCode +
                 ", firstName='" + firstName + '\'' +
                 ", news='" + news + '\'' +
@@ -101,6 +111,7 @@ public class PlayerInjuryData implements Serializable {
                 ", secondName='" + secondName + '\'' +
                 ", yellowCards=" + yellowCards +
                 ", redCards=" + redCards +
+                ", webName=" + webName +
                 '}';
     }
 }
