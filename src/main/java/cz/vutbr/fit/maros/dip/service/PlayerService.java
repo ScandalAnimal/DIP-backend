@@ -1,6 +1,7 @@
 package cz.vutbr.fit.maros.dip.service;
 
 import cz.vutbr.fit.maros.dip.model.Player;
+import cz.vutbr.fit.maros.dip.model.PlayerDetailData;
 import cz.vutbr.fit.maros.dip.model.PlayerId;
 import cz.vutbr.fit.maros.dip.model.PlayerProjection;
 import java.util.List;
@@ -14,6 +15,9 @@ public interface PlayerService {
     List<PlayerId> getAllPlayersIds();
 
     List<PlayerProjection> getAllPlayersProjections(int id);
+
+    List<PlayerDetailData> getAllPlayerData(String year);
+
 
 }
 

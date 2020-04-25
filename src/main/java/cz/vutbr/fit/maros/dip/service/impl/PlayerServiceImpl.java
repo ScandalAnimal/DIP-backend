@@ -6,10 +6,14 @@ import com.google.gson.GsonBuilder;
 import cz.vutbr.fit.maros.dip.constants.ApiConstants;
 import cz.vutbr.fit.maros.dip.exception.CustomException;
 import cz.vutbr.fit.maros.dip.model.Player;
+import cz.vutbr.fit.maros.dip.model.PlayerDetailData;
 import cz.vutbr.fit.maros.dip.model.PlayerId;
 import cz.vutbr.fit.maros.dip.model.PlayerProjection;
 import cz.vutbr.fit.maros.dip.service.PlayerService;
+import cz.vutbr.fit.maros.dip.util.DatasetUtils;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -46,8 +50,8 @@ public class PlayerServiceImpl implements PlayerService {
 
 
                 String[] selectedKeys = { "first_name", "second_name", "goals_scored", "assists", "total_points", "minutes", "goals_conceded",
-                        "creativity", "influence", "threat", "bonus", "bps", "ict_index", "clean_sheets", "red_cards", "yellow_cards",
-                        "selected_by_percent", "now_cost", "team", "team_code", "element_type" };
+                    "creativity", "influence", "threat", "bonus", "bps", "ict_index", "clean_sheets", "red_cards", "yellow_cards",
+                    "selected_by_percent", "now_cost", "team", "team_code", "element_type" };
                 List<String> keyList = Arrays.asList(selectedKeys);
                 List<Object> valueList = new ArrayList<>();
                 List<String> builtKeysList = new ArrayList<>();
@@ -149,6 +153,64 @@ public class PlayerServiceImpl implements PlayerService {
             throw new CustomException("Cannot read from file " + fileName + ".");
         }
         System.out.println(players);
+        return players;
+    }
+
+    public List<PlayerDetailData> getAllPlayerData(String year) {
+
+        String[] keys = {"total_points", "bps", "minutes", "own_goals", "goals_scored", "assists",
+            "yellow_cards", "red_cards", "goals_conceded", "saves", "clean_sheets", "opponent_team" };
+
+        List<PlayerDetailData> players = new ArrayList<>();
+
+        List<String> currentSeasonPlayers = DatasetUtils.getCurrentSeasonPlayers();
+
+        int formattedYear = Integer.parseInt(year);
+
+        String path = DatasetUtils.getFilePath(formattedYear);
+        File file = new File(path);
+        String[] directories = file.list((current, name) -> new File(current, name).isDirectory());
+
+        if (directories != null) {
+            for (final String directory : directories) {
+                int index = 1;
+                String newName = DatasetUtils.getNewName(directory);
+                if (currentSeasonPlayers.contains(newName)) {
+                    BufferedReader br;
+                    try {
+                        br = new BufferedReader(new FileReader(path + directory + "/gw.csv"));
+                        String header = br.readLine();
+                        Integer[] indexes = DatasetUtils.getIndexes(header, keys);
+                        String filteredHeader = "season,gw_index,player_name," + DatasetUtils.filterLine(header, indexes);
+                        String[] filteredKeysArray = filteredHeader.split(",");
+
+                        String line;
+
+                        while ((line = br.readLine()) != null) {
+
+                            String filteredLine = DatasetUtils.getYearLabel(formattedYear) + "," + index + "," + newName + "," + DatasetUtils.filterLine(line, indexes);
+                            index++;
+                            String[] filteredLineArray = filteredLine.split(",");
+
+                            JSONObject jsonObject = new JSONObject();
+                            for (int i = 0; i < filteredKeysArray.length; i++) {
+                                jsonObject.put(filteredKeysArray[i], filteredLineArray[i]);
+                            }
+                            Gson gson = new GsonBuilder()
+                                    .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                                    .create();
+                            PlayerDetailData player = gson.fromJson(jsonObject.toString(), PlayerDetailData.class);
+                            players.add(player);
+                        }
+
+                    } catch (FileNotFoundException e) {
+                        throw new CustomException("File " + path + directory + " does not exist, please generate gw file first.");
+                    } catch (IOException e) {
+                        throw new CustomException("Cannot read from file " + path + directory + ".");
+                    }
+                }
+            }
+        }
         return players;
     }
 }

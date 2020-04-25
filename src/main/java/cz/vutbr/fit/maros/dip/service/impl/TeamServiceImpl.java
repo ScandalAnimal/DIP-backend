@@ -7,14 +7,13 @@ import cz.vutbr.fit.maros.dip.constants.ApiConstants;
 import cz.vutbr.fit.maros.dip.exception.CustomException;
 import cz.vutbr.fit.maros.dip.model.Team;
 import cz.vutbr.fit.maros.dip.service.TeamService;
+import cz.vutbr.fit.maros.dip.util.DatasetUtils;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.StringJoiner;
 import lombok.NoArgsConstructor;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
@@ -63,11 +62,11 @@ public class TeamServiceImpl implements TeamService {
         try {
             br = new BufferedReader(new FileReader(fileName));
             String header = br.readLine();
-            Integer[] indexes = getIndexes(header, keys);
+            Integer[] indexes = DatasetUtils.getIndexes(header, keys);
             String line;
             while ((line = br.readLine()) != null) {
 
-                String filteredLine = filterLine(line, indexes);
+                String filteredLine = DatasetUtils.filterLine(line, indexes);
                 String[] values = filteredLine.split(",");
                 if (Objects.equals(values[0], firstName) && Objects.equals(values[1], lastName)) {
                     return Integer.parseInt(values[2]);
@@ -78,33 +77,5 @@ public class TeamServiceImpl implements TeamService {
             throw new CustomException("Cannot read from file " + fileName + ".");
         }
         return null;
-    }
-
-    private String filterLine(String line, Integer[] indexes) {
-
-        StringJoiner joiner = new StringJoiner(",");
-
-        String[] split = line.split(",");
-
-        for (final Integer index : indexes) {
-            joiner.add(split[index]);
-        }
-        return joiner.toString();
-    }
-
-    private Integer[] getIndexes(String header, String[] keys) {
-
-        String[] split = header.split(",");
-        Integer[] indexes = new Integer[keys.length];
-
-        List<String> keyList = Arrays.asList(keys);
-        for (int i = 0; i < split.length; i++) {
-            final String s = split[i];
-            int pos = keyList.indexOf(s);
-            if (pos >= 0) {
-                indexes[pos] = i;
-            }
-        }
-        return indexes;
     }
 }
