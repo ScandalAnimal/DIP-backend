@@ -8,6 +8,7 @@ import cz.vutbr.fit.maros.dip.exception.CustomException;
 import cz.vutbr.fit.maros.dip.model.Player;
 import cz.vutbr.fit.maros.dip.model.PlayerDetailData;
 import cz.vutbr.fit.maros.dip.model.PlayerId;
+import cz.vutbr.fit.maros.dip.model.PlayerInjuryData;
 import cz.vutbr.fit.maros.dip.model.PlayerProjection;
 import cz.vutbr.fit.maros.dip.service.PlayerService;
 import cz.vutbr.fit.maros.dip.util.DatasetUtils;
@@ -210,6 +211,57 @@ public class PlayerServiceImpl implements PlayerService {
                     }
                 }
             }
+        }
+        return players;
+    }
+
+    public List<PlayerInjuryData> getAllPlayerInjuries() {
+
+        List<PlayerInjuryData> players = new ArrayList<>();
+        String fileName = ApiConstants.BASE_URL + "players_raw.csv";
+
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader(fileName));
+            String header = br.readLine();
+            String[] keys = header.split(",");
+            String line;
+            while ((line = br.readLine()) != null) {
+
+                String[] values = line.split(",");
+                JSONObject jsonObject = new JSONObject();
+
+                String[] selectedKeys = { "first_name", "second_name", "chance_of_playing_next_round", "chance_of_playing_this_round",
+                    "news", "news_added", "red_cards", "yellow_cards", "team_code"};
+                List<String> keyList = Arrays.asList(selectedKeys);
+                List<Object> valueList = new ArrayList<>();
+                List<String> builtKeysList = new ArrayList<>();
+
+                for (int i = 0; i < keys.length; i++) {
+                    if (keyList.contains(keys[i])) {
+                        valueList.add(values[i]);
+                        builtKeysList.add(keys[i]);
+                    }
+                }
+                for (int i = 0; i < builtKeysList.size(); i++) {
+                    if (builtKeysList.get(i).equals("news")) {
+                        if (!valueList.get(i).equals("")) {
+                            for (int j = 0; j < builtKeysList.size(); j++) {
+                                jsonObject.put(builtKeysList.get(j), valueList.get(j));
+                            }
+
+                            Gson gson = new GsonBuilder()
+                                    .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                                    .create();
+                            PlayerInjuryData player = gson.fromJson(jsonObject.toString(), PlayerInjuryData.class);
+                            players.add(player);
+                        }
+                    }
+                }
+            }
+
+        } catch (IOException e) {
+            throw new CustomException("Cannot read from file " + fileName + ".");
         }
         return players;
     }

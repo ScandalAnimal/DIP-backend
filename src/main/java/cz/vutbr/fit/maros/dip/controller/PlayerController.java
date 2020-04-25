@@ -4,6 +4,7 @@ import cz.vutbr.fit.maros.dip.constants.ApiConstants;
 import cz.vutbr.fit.maros.dip.model.Player;
 import cz.vutbr.fit.maros.dip.model.PlayerDetailData;
 import cz.vutbr.fit.maros.dip.model.PlayerId;
+import cz.vutbr.fit.maros.dip.model.PlayerInjuryData;
 import cz.vutbr.fit.maros.dip.model.PlayerProjection;
 import cz.vutbr.fit.maros.dip.results.ResponseWrapper;
 import cz.vutbr.fit.maros.dip.service.impl.PlayerServiceImpl;
@@ -60,6 +61,11 @@ public class PlayerController {
     public ResponseWrapper<List<PlayerDetailData>> getAllPlayerDetailData(@Valid @Pattern(regexp = ApiConstants.REGEX_FOR_NUMBERS, message = ApiConstants.MESSAGE_FOR_REGEX_NUMBER_MISMATCH) @PathVariable(value = "year")
             String year) {
         return new ResponseWrapper<>(playerService.getAllPlayerData(year), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/injuries")
+    public ResponseWrapper<List<PlayerInjuryData>> getAllPlayerInjuries() {
+        return new ResponseWrapper<>(playerService.getAllPlayerInjuries(), HttpStatus.OK);
     }
 
 }
