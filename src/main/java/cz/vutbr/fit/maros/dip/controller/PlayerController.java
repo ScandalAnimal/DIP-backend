@@ -57,10 +57,9 @@ public class PlayerController {
         return new ResponseWrapper<>(playerService.getAllPlayersProjections(Integer.parseInt(id)), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/detail/{year}")
-    public ResponseWrapper<List<PlayerDetailData>> getAllPlayerDetailData(@Valid @Pattern(regexp = ApiConstants.REGEX_FOR_NUMBERS, message = ApiConstants.MESSAGE_FOR_REGEX_NUMBER_MISMATCH) @PathVariable(value = "year")
-            String year) {
-        return new ResponseWrapper<>(playerService.getAllPlayerData(year), HttpStatus.OK);
+    @GetMapping(value = "/detail/{player_name}")
+    public ResponseWrapper<List<PlayerDetailData>> getAllPlayerDetailData(@PathVariable(value = "player_name") String playerName) {
+        return new ResponseWrapper<>(playerService.getAllPlayerData(playerName), HttpStatus.OK);
     }
 
     @GetMapping(value = "/injuries")

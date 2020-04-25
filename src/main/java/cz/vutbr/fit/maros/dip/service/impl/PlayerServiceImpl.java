@@ -157,7 +157,7 @@ public class PlayerServiceImpl implements PlayerService {
         return players;
     }
 
-    public List<PlayerDetailData> getAllPlayerData(String year) {
+    public List<PlayerDetailData> getAllPlayerData(String playerName) {
 
         String[] keys = {"total_points", "bps", "minutes", "own_goals", "goals_scored", "assists",
             "yellow_cards", "red_cards", "goals_conceded", "saves", "clean_sheets", "opponent_team" };
@@ -166,48 +166,52 @@ public class PlayerServiceImpl implements PlayerService {
 
         List<String> currentSeasonPlayers = DatasetUtils.getCurrentSeasonPlayers();
 
-        int formattedYear = Integer.parseInt(year);
 
-        String path = DatasetUtils.getFilePath(formattedYear);
-        File file = new File(path);
-        String[] directories = file.list((current, name) -> new File(current, name).isDirectory());
+        for (int year = 1; year < 5; year++) {
+            String path = DatasetUtils.getFilePath(year);
+            File file = new File(path);
+            String[] directories = file.list((current, name) -> new File(current, name).isDirectory());
 
-        if (directories != null) {
-            for (final String directory : directories) {
-                int index = 1;
-                String newName = DatasetUtils.getNewName(directory);
-                if (currentSeasonPlayers.contains(newName)) {
-                    BufferedReader br;
-                    try {
-                        br = new BufferedReader(new FileReader(path + directory + "/gw.csv"));
-                        String header = br.readLine();
-                        Integer[] indexes = DatasetUtils.getIndexes(header, keys);
-                        String filteredHeader = "season,gw_index,player_name," + DatasetUtils.filterLine(header, indexes);
-                        String[] filteredKeysArray = filteredHeader.split(",");
+            if (directories != null) {
+                for (final String directory : directories) {
+                    int index = 1;
+                    String newName = DatasetUtils.getNewName(directory);
+                    if (playerName.equals(newName)) {
+                        if (currentSeasonPlayers.contains(newName)) {
+                            BufferedReader br;
+                            try {
+                                br = new BufferedReader(new FileReader(path + directory + "/gw.csv"));
+                                String header = br.readLine();
+                                Integer[] indexes = DatasetUtils.getIndexes(header, keys);
+                                String filteredHeader = "season,gw_index,player_name," + DatasetUtils.filterLine(header, indexes);
+                                String[] filteredKeysArray = filteredHeader.split(",");
 
-                        String line;
+                                String line;
 
-                        while ((line = br.readLine()) != null) {
+                                while ((line = br.readLine()) != null) {
 
-                            String filteredLine = DatasetUtils.getYearLabel(formattedYear) + "," + index + "," + newName + "," + DatasetUtils.filterLine(line, indexes);
-                            index++;
-                            String[] filteredLineArray = filteredLine.split(",");
+                                    String filteredLine = DatasetUtils.getYearLabel(year) + "," + index + "," + newName + "," + DatasetUtils
+                                            .filterLine(line, indexes);
+                                    index++;
+                                    String[] filteredLineArray = filteredLine.split(",");
 
-                            JSONObject jsonObject = new JSONObject();
-                            for (int i = 0; i < filteredKeysArray.length; i++) {
-                                jsonObject.put(filteredKeysArray[i], filteredLineArray[i]);
+                                    JSONObject jsonObject = new JSONObject();
+                                    for (int i = 0; i < filteredKeysArray.length; i++) {
+                                        jsonObject.put(filteredKeysArray[i], filteredLineArray[i]);
+                                    }
+                                    Gson gson = new GsonBuilder()
+                                            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                                            .create();
+                                    PlayerDetailData player = gson.fromJson(jsonObject.toString(), PlayerDetailData.class);
+                                    players.add(player);
+                                }
+
+                            } catch (FileNotFoundException e) {
+                                throw new CustomException("File " + path + directory + " does not exist, please generate gw file first.");
+                            } catch (IOException e) {
+                                throw new CustomException("Cannot read from file " + path + directory + ".");
                             }
-                            Gson gson = new GsonBuilder()
-                                    .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-                                    .create();
-                            PlayerDetailData player = gson.fromJson(jsonObject.toString(), PlayerDetailData.class);
-                            players.add(player);
                         }
-
-                    } catch (FileNotFoundException e) {
-                        throw new CustomException("File " + path + directory + " does not exist, please generate gw file first.");
-                    } catch (IOException e) {
-                        throw new CustomException("Cannot read from file " + path + directory + ".");
                     }
                 }
             }

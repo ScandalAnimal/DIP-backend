@@ -17,7 +17,7 @@ public interface PlayerService {
 
     List<PlayerProjection> getAllPlayersProjections(int id);
 
-    List<PlayerDetailData> getAllPlayerData(String year);
+    List<PlayerDetailData> getAllPlayerData(String playerName);
 
     List<PlayerInjuryData> getAllPlayerInjuries();
 
