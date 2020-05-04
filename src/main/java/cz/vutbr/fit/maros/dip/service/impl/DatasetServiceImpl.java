@@ -5,6 +5,7 @@ import cz.vutbr.fit.maros.dip.exception.CustomException;
 import cz.vutbr.fit.maros.dip.model.Fixture;
 import cz.vutbr.fit.maros.dip.service.DatasetService;
 import cz.vutbr.fit.maros.dip.service.FileService;
+import cz.vutbr.fit.maros.dip.service.PlayerService;
 import cz.vutbr.fit.maros.dip.service.TeamService;
 import cz.vutbr.fit.maros.dip.util.DatasetUtils;
 import java.io.BufferedReader;
@@ -34,10 +35,12 @@ public class DatasetServiceImpl implements DatasetService {
     private static final Logger LOG = LoggerFactory.getLogger(DatasetServiceImpl.class);
     private final FileService fileService;
     private final TeamService teamService;
+    private final PlayerService playerService;
 
-    public DatasetServiceImpl(FileService fileService, TeamService teamService) {
+    public DatasetServiceImpl(FileService fileService, TeamService teamService, PlayerService playerService) {
         this.fileService = fileService;
         this.teamService = teamService;
+        this.playerService = playerService;
     }
 
     public int initializeDataset() {
@@ -305,6 +308,172 @@ public class DatasetServiceImpl implements DatasetService {
         }
 
         fileService.createCsv(keys, stringBuilder.toString(), basePath + "predictions/3gw.csv");
+
+        return 0;
+    }
+
+    public int addIndexesToDataset() {
+
+        String basePath = "dataset/players/";
+        String[] keys = {"total_points", "gw_index"};
+
+        List<String> result;
+        try (Stream<Path> walk = Files.walk(Paths.get(basePath), 1)) {
+            result = walk
+                    .filter(file -> !Files.isDirectory(file))
+                    .map(Path::toString)
+                    .collect(Collectors.toList());
+        } catch (IOException e) {
+            throw new CustomException("Cannot read files from directory " + basePath + ".");
+        }
+        double maxPointsPerMatch = Double.MIN_VALUE;
+        double maxPointsPerMatchLast6 = Double.MIN_VALUE;
+        double minPointsPerMatch = Double.MAX_VALUE;
+        double minPointsPerMatchLast6 = Double.MAX_VALUE;
+        double maxCostPerPoint = Double.MIN_VALUE;
+        double maxCostPerPointLast6 = Double.MIN_VALUE;
+        double minCostPerPoint = Double.MAX_VALUE;
+        double minCostPerPointLast6 = Double.MAX_VALUE;
+
+        for (final String playerFile : result) {
+            Path path = Paths.get(playerFile);
+            BufferedReader br;
+            try {
+                br = new BufferedReader(new FileReader(playerFile));
+                String header = br.readLine();
+                Integer[] indexes = DatasetUtils.getIndexes(header, keys);
+                String line;
+                String playerName = path.getFileName().toString().substring(0, path.getFileName().toString().lastIndexOf("."));
+
+                double gws = 0.0;
+                double totalPoints = 0.0;
+                List<Integer> points = new ArrayList<>();
+                while ((line = br.readLine()) != null) {
+                    String filteredLine = DatasetUtils.filterLine(line, indexes);
+                    String[] split = filteredLine.split(",");
+                    if (split[0].equals("?")) {
+                        break;
+                    }
+                    gws = Double.parseDouble(split[1]);
+                    totalPoints += Integer.parseInt(split[0]);
+                    points.add(Integer.parseInt(split[0]));
+                }
+                List<Integer> tail = points.subList(Math.max(points.size() - 6, 0), points.size());
+                double last6 = 0.0;
+                for (final Integer x : tail) {
+                    last6 += x;
+                }
+                int prize = playerService.getPlayerPrize(playerName) / 10;
+                double costPerPoint = totalPoints > 0 ? Math.round(prize / totalPoints * 10000.0) / 10000.0 : 0.0;
+                double costPerPointLast6 = last6 > 0 ? Math.round(prize / last6 * 10000.0) / 10000.0 : 0.0;
+                double pointsPerMatch = gws > 0 ? Math.round(totalPoints / gws * 100.0) / 100.0 : 0.0;
+                double pointsPerMatchLast6 = Math.round(last6 / 6.0 + 100.0) / 100.0;
+                if (costPerPoint < minCostPerPoint) {
+                    minCostPerPoint = costPerPoint;
+                }
+                if (costPerPoint > maxCostPerPoint) {
+                    maxCostPerPoint = costPerPoint;
+                }
+                if (costPerPointLast6 < minCostPerPointLast6) {
+                    minCostPerPointLast6 = costPerPointLast6;
+                }
+                if (costPerPointLast6 > maxCostPerPointLast6) {
+                    maxCostPerPointLast6 = costPerPointLast6;
+                }
+                if (pointsPerMatch < minPointsPerMatch) {
+                    minPointsPerMatch = pointsPerMatch;
+                }
+                if (pointsPerMatch > maxPointsPerMatch) {
+                    maxPointsPerMatch = pointsPerMatch;
+                }
+                if (pointsPerMatchLast6 < minPointsPerMatchLast6) {
+                    minPointsPerMatchLast6 = pointsPerMatchLast6;
+                }
+                if (pointsPerMatchLast6 > maxPointsPerMatchLast6) {
+                    maxPointsPerMatchLast6 = pointsPerMatchLast6;
+                }
+
+            } catch (FileNotFoundException e) {
+                throw new CustomException("File " + playerFile + " does not exist, please generate file first.");
+            } catch (IOException e) {
+                throw new CustomException("Cannot read from file " + playerFile + ".");
+            }
+        }
+
+        String filePath = "players/stats/stats.csv";
+        try {
+            Files.deleteIfExists(Paths.get("dataset/" + filePath));
+        } catch (IOException e) {
+            throw new CustomException("Couldn't delete file for writing data.", e);
+        }
+
+        for (final String playerFile : result) {
+            Path path = Paths.get(playerFile);
+            StringBuilder sb = new StringBuilder();
+            BufferedReader br;
+            try {
+                br = new BufferedReader(new FileReader(playerFile));
+                String header = br.readLine();
+                Integer[] indexes = DatasetUtils.getIndexes(header, keys);
+                String line;
+                String playerName = path.getFileName().toString().substring(0, path.getFileName().toString().lastIndexOf("."));
+
+                double gws = 0.0;
+                double totalPoints = 0.0;
+                String newHeader = "player_name,total_points,gws,cost,position,points_per_match,points_last_6,points_per_match_last_6,cost_per_point,cost_per_point_last_6,cost_point_index,cost_point_index_last_6";
+                List<Integer> points = new ArrayList<>();
+                System.out.println(playerName);
+                while ((line = br.readLine()) != null) {
+                    String filteredLine = DatasetUtils.filterLine(line, indexes);
+                    String[] split = filteredLine.split(",");
+                    if (split[0].equals("?")) {
+                        break;
+                    }
+                    gws = Double.parseDouble(split[1]);
+                    totalPoints += Integer.parseInt(split[0]);
+                    points.add(Integer.parseInt(split[0]));
+                }
+                List<Integer> tail = points.subList(Math.max(points.size() - 6, 0), points.size());
+                double last6 = 0.0;
+                for (final Integer x : tail) {
+                    last6 += x;
+                }
+                int prize = playerService.getPlayerPrize(playerName) / 10;
+                int position = playerService.getPlayerPosition(playerName);
+                if (gws == 0) {
+                    sb.append(0).append(",").append(0).append(",").append(prize).append(",").append(position).append(",");
+                    sb.append(0).append(",").append(0).append(",").append(0).append(",");
+                    sb.append(0).append(",").append(0).append(",").append(0).append(",").append(0);
+                } else {
+                    double costPerPoint = totalPoints > 0 ? Math.round(prize / totalPoints * 10000.0) / 10000.0 : 0.0;
+                    double costPerPointLast6 = last6 > 0 ? Math.round(prize / last6 * 10000.0) / 10000.0 : 0.0;
+                    double pointsPerMatch = Math.round(totalPoints / gws * 100.0) / 100.0;
+                    double pointsPerMatchLast6 = Math.round(last6 / 6.0 + 100.0) / 100.0;
+                    double normalizedCostPerPoint = (costPerPoint - minCostPerPoint) / (maxCostPerPoint - minCostPerPoint);
+                    double normalizedCostPerPointLast6 = (costPerPointLast6 - minCostPerPointLast6) / (maxCostPerPointLast6 - minCostPerPointLast6);
+                    double normalizedPointsPerMatch = (pointsPerMatch - minPointsPerMatch) / (maxPointsPerMatch - minPointsPerMatch);
+                    double normalizedPointsPerMatchLast6 = (pointsPerMatchLast6 - minPointsPerMatchLast6) / (maxPointsPerMatchLast6 - minPointsPerMatchLast6);
+                    Double cpi = Math.round(normalizedCostPerPoint + normalizedPointsPerMatch * 10000.0) / 10000.0;
+                    Double cpiLast6 = Math.round(normalizedCostPerPointLast6 + normalizedPointsPerMatchLast6 * 10000.0) / 10000.0;
+
+                    sb.append(playerName).append(",");
+                    sb.append(totalPoints).append(",");
+                    sb.append(gws).append(",");
+                    sb.append(prize).append(",");
+                    sb.append(position).append(",");
+                    sb.append(pointsPerMatch).append(",").append(last6).append(",").append(pointsPerMatchLast6).append(",");
+                    sb.append(costPerPoint).append(",").append(costPerPointLast6).append(",");
+                    sb.append(cpi).append(",").append(cpiLast6);
+                }
+                sb.append("\n");
+                fileService.appendDataToDataset(newHeader, sb.toString(), filePath);
+
+            } catch (FileNotFoundException e) {
+                throw new CustomException("File " + playerFile + " does not exist, please generate file first.");
+            } catch (IOException e) {
+                throw new CustomException("Cannot read from file " + playerFile + ".");
+            }
+        }
 
         return 0;
     }
