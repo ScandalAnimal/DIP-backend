@@ -61,9 +61,6 @@ public class PlayerServiceImpl implements PlayerService {
 
                 String[] values = line.split(",");
                 JSONObject jsonObject = new JSONObject();
-
-
-
                 String[] selectedKeys = { "first_name", "second_name", "team" };
                 List<String> keyList = Arrays.asList(selectedKeys);
                 List<Object> valueList = new ArrayList<>();
@@ -75,7 +72,6 @@ public class PlayerServiceImpl implements PlayerService {
                         builtKeysList.add(keys[i]);
                     }
                 }
-
 
                 for (int i = 0; i < builtKeysList.size(); i++) {
                     jsonObject.put(builtKeysList.get(i), valueList.get(i));
@@ -109,9 +105,6 @@ public class PlayerServiceImpl implements PlayerService {
 
                 String[] values = line.split(",");
                 JSONObject jsonObject = new JSONObject();
-
-
-
                 String[] selectedKeys = { "first_name", "second_name", "goals_scored", "assists", "total_points", "minutes", "goals_conceded",
                     "creativity", "influence", "threat", "bonus", "bps", "ict_index", "clean_sheets", "red_cards", "yellow_cards",
                     "selected_by_percent", "now_cost", "team", "team_code", "element_type" };
@@ -125,7 +118,6 @@ public class PlayerServiceImpl implements PlayerService {
                         builtKeysList.add(keys[i]);
                     }
                 }
-
 
                 for (int i = 0; i < builtKeysList.size(); i++) {
                     jsonObject.put(builtKeysList.get(i), valueList.get(i));
@@ -203,7 +195,6 @@ public class PlayerServiceImpl implements PlayerService {
                         jsonObject.put(keys[i], values[i]);
                     }
                 }
-                System.out.println(jsonObject.toJSONString());
 
                 Gson gson = new GsonBuilder()
                         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
@@ -215,7 +206,6 @@ public class PlayerServiceImpl implements PlayerService {
         } catch (IOException e) {
             throw new CustomException("Cannot read from file " + fileName + ".");
         }
-        System.out.println(players);
         return players;
     }
 
@@ -396,41 +386,21 @@ public class PlayerServiceImpl implements PlayerService {
         Long gameWeeks = optimizeRequest.getGameWeeks();
         Long transfers = optimizeRequest.getTransfers();
 
-
-        transfers = 1L;
-//        transfers = 2L;
-//        transfers = 3L;
-//        transfers = 4L;
-//        transfers = 0L;
-
-        System.out.println(optimizeRequest.getTechnique());
-        // always need to be: 2 GK, 5 DEF, 5 MIDS, 3 FWDS
-        // always max 100M
-        // always max 3 players from team
-        // based on params choose next step
-        // number of transfers
-        // selection technique
-            // if max predicted points
-                // sort players based on CPI and predicted points
-                // ...
-            // if total points so far
-                // sort players based on CPI
-                // ...
-            // if form
-                // sort players based on CPI-last 6
-                // ...
-
-        System.out.println("team:");
-        System.out.println(Arrays.toString(optimizeRequest.getTeam()));
-
         List<PlayerStats> playerStats = getPlayerStats(gameWeeks);
+        List<PlayerStats> currentTeam = getCurrentTeam(optimizeRequest, playerStats);
 
+        if (transfers.equals(0L)) {
+            List<OptimizedSquad> squads = new ArrayList<>();
+            List<PlayerStats> sorted = currentTeam.stream().sorted(Comparator.comparing(a -> getValueByTechnique(a, optimizeRequest.getTechnique()))).collect(
+                    Collectors.toList());
+            squads.add(createSquadFromArray(sorted));
+            optimizedSquads.setSquads(squads);
+            return optimizedSquads;
+        }
         List<PlayerStats> allGK = filterBasedOnPosition(playerStats, 1);
         List<PlayerStats> allDF = filterBasedOnPosition(playerStats, 2);
         List<PlayerStats> allMD = filterBasedOnPosition(playerStats, 3);
         List<PlayerStats> allFW = filterBasedOnPosition(playerStats, 4);
-
-        List<PlayerStats> currentTeam = getCurrentTeam(optimizeRequest, playerStats);
 
         List<PlayerStats> currentGK = filterBasedOnPosition(currentTeam, 1);
         List<PlayerStats> currentDF = filterBasedOnPosition(currentTeam, 2);
@@ -444,25 +414,42 @@ public class PlayerServiceImpl implements PlayerService {
         List<PlayerStats> sortedMD = sortByTechnique(currentMD, optimizeRequest.getTechnique());
         List<PlayerStats> sortedFW = sortByTechnique(currentFW, optimizeRequest.getTechnique());
 
-        System.out.println(sortedGK);
-        System.out.println(sortedDF);
-        System.out.println(sortedMD);
-        System.out.println(sortedFW);
-
         List<BetterPlayers> options = new ArrayList<>();
 
         if (transfers.equals(1L)) {
-            options.addAll(findBetterPlayers(sortedGK, allGK, optimizeRequest, originalBudget));
-            options.addAll(findBetterPlayers(sortedDF, allDF, optimizeRequest, originalBudget));
-            options.addAll(findBetterPlayers(sortedMD, allMD, optimizeRequest, originalBudget));
-            options.addAll(findBetterPlayers(sortedFW, allFW, optimizeRequest, originalBudget));
+            options.addAll(findBetterPlayersOneTransfer(sortedGK, allGK, optimizeRequest, originalBudget));
+            options.addAll(findBetterPlayersOneTransfer(sortedDF, allDF, optimizeRequest, originalBudget));
+            options.addAll(findBetterPlayersOneTransfer(sortedMD, allMD, optimizeRequest, originalBudget));
+            options.addAll(findBetterPlayersOneTransfer(sortedFW, allFW, optimizeRequest, originalBudget));
+
+            List<BetterPlayers> bestOptions = findBestOptions(options, optimizeRequest.getTechnique(), currentTeam);
+            optimizedSquads.setSquads(createSquadsFromList(bestOptions, currentTeam, optimizeRequest.getTechnique()));
+
+            return optimizedSquads;
         }
-        System.out.println(options);
 
-        List<BetterPlayers> bestOptions = findBestOptions(options, optimizeRequest.getTechnique(), currentTeam);
+        if (transfers.equals(2L)) {
+            options.addAll(findBetterPlayersTwoTransfers(sortedGK, sortedGK, allGK, allGK, optimizeRequest, originalBudget, true));
+            options.addAll(findBetterPlayersTwoTransfers(sortedDF, sortedDF, allDF, allDF, optimizeRequest, originalBudget, true));
+            options.addAll(findBetterPlayersTwoTransfers(sortedMD, sortedMD, allMD, allMD, optimizeRequest, originalBudget, true));
+            options.addAll(findBetterPlayersTwoTransfers(sortedFW, sortedFW, allFW, allFW, optimizeRequest, originalBudget, true));
+            options.addAll(findBetterPlayersTwoTransfers(sortedGK, sortedDF, allGK, allDF, optimizeRequest, originalBudget, false));
+            options.addAll(findBetterPlayersTwoTransfers(sortedGK, sortedMD, allGK, allMD, optimizeRequest, originalBudget, false));
+            options.addAll(findBetterPlayersTwoTransfers(sortedGK, sortedFW, allGK, allFW, optimizeRequest, originalBudget, false));
+            options.addAll(findBetterPlayersTwoTransfers(sortedDF, sortedMD, allDF, allMD, optimizeRequest, originalBudget, false));
+            options.addAll(findBetterPlayersTwoTransfers(sortedDF, sortedFW, allDF, allFW, optimizeRequest, originalBudget, false));
+            options.addAll(findBetterPlayersTwoTransfers(sortedMD, sortedFW, allMD, allFW, optimizeRequest, originalBudget, false));
 
-        System.out.println("sorted:");
+            List<BetterPlayers> bestOptions = findBestOptions(options, optimizeRequest.getTechnique(), currentTeam);
+            optimizedSquads.setSquads(createSquadsFromList(bestOptions, currentTeam, optimizeRequest.getTechnique()));
 
+            return optimizedSquads;
+        }
+
+        return null;
+    }
+
+    private List<OptimizedSquad> createSquadsFromList(List<BetterPlayers> bestOptions, List<PlayerStats> currentTeam, String technique) {
         List<OptimizedSquad> squads = new ArrayList<>();
         for (final BetterPlayers bestOption : bestOptions) {
             List<PlayerStats> builtTeam = new ArrayList<>();
@@ -472,23 +459,24 @@ public class PlayerServiceImpl implements PlayerService {
                 }
             }
             builtTeam.addAll(bestOption.getToAdd());
-            List<PlayerStats> sorted = builtTeam.stream().sorted(Comparator.comparing(a -> getValueByTechnique(a, optimizeRequest.getTechnique()))).collect(
+            List<PlayerStats> sorted = builtTeam.stream().sorted(Comparator.comparing(a -> getValueByTechnique(a, technique))).collect(
                     Collectors.toList());
-            System.out.println(sorted);
-            String captainName = sorted.get(sorted.size() - 1).getPlayerName();
-            String viceCaptainName = sorted.get(sorted.size() - 2).getPlayerName();
-            Long captain = getPlayerIdByName(captainName);
-            Long viceCaptain = getPlayerIdByName(viceCaptainName);
-            OptimizedSquad squad = new OptimizedSquad();
-            List<Long> teamIds = createTeam(sorted);
-            squad.setTeam(teamIds);
-            squad.setCaptain(captain);
-            squad.setViceCaptain(viceCaptain);
-            squads.add(squad);
-            optimizedSquads.setSquads(squads);
+            squads.add(createSquadFromArray(sorted));
         }
+        return squads;
+    }
 
-        return optimizedSquads;
+    private OptimizedSquad createSquadFromArray(List<PlayerStats> list) {
+        String captainName = list.get(list.size() - 1).getPlayerName();
+        String viceCaptainName = list.get(list.size() - 2).getPlayerName();
+        Long captain = getPlayerIdByName(captainName);
+        Long viceCaptain = getPlayerIdByName(viceCaptainName);
+        OptimizedSquad squad = new OptimizedSquad();
+        List<Long> teamIds = createTeam(list);
+        squad.setTeam(teamIds);
+        squad.setCaptain(captain);
+        squad.setViceCaptain(viceCaptain);
+        return squad;
     }
 
     private List<Long> createTeam(List<PlayerStats> team) {
@@ -524,20 +512,16 @@ public class PlayerServiceImpl implements PlayerService {
                 createdTeam.addAll(team);
             }
         }
-        System.out.println("^^^^^^^^^^^^^^^^^^^^^^^");
-        System.out.println(createdTeam);
-
         return createdTeam.stream().map(player -> getPlayerIdByName(player.getPlayerName())).collect(Collectors.toList());
     }
 
     private Long getPlayerIdByName(String name) {
         List<PlayerId> playerIds = getAllPlayersIds();
 
-        Long id = playerIds.stream().filter(player -> {
+        return playerIds.stream().filter(player -> {
             String playerName = player.getFirstName() + "_" + player.getSecondName();
             return playerName.equals(name);
         }).map(PlayerId::getId).findFirst().orElse(null);
-        return id != null ? id : null;
     }
 
     private List<BetterPlayers> findBestOptions(List<BetterPlayers> options, String technique, List<PlayerStats> currentTeam) {
@@ -576,35 +560,20 @@ public class PlayerServiceImpl implements PlayerService {
             workingOptions.remove(bestDiffIndex);
         }
 
-        System.out.println("BEST OPTIONS: ");
-        System.out.println(bestOptions);
         return bestOptions;
     }
 
     private boolean isCorrectNumberOfPlayersFromTeams(List<PlayerStats> currentTeam, BetterPlayers options) {
 
         List<PlayerTeam> playerTeams = getAllPlayersTeams();
-        System.out.println("9999999999999999999999999999999999");
         List<PlayerStats> builtTeam = new ArrayList<>();
         for (final PlayerStats playerStats : currentTeam) {
-            if (options.getToRemove().contains(playerStats)) {
-                System.out.println("toRemove");
-            } else {
+            if (!options.getToRemove().contains(playerStats)) {
                 builtTeam.add(playerStats);
             }
-            System.out.println(playerStats.getPlayerName());
-            System.out.println(findTeam(playerTeams, playerStats.getPlayerName()));
         }
-        System.out.println("////////////////");
-        for (final PlayerStats playerStats : options.getToRemove()) {
-            System.out.println(playerStats.getPlayerName());
-            System.out.println(findTeam(playerTeams, playerStats.getPlayerName()));
-        }
-        System.out.println("////////////////////");
         for (final PlayerStats playerStats : options.getToAdd()) {
             builtTeam.add(playerStats);
-            System.out.println(playerStats.getPlayerName());
-            System.out.println(findTeam(playerTeams, playerStats.getPlayerName()));
         }
 
         Map<String, Integer> countMap = new HashMap<>();
@@ -633,7 +602,79 @@ public class PlayerServiceImpl implements PlayerService {
         }).map(PlayerTeam::getTeam).findFirst().orElse("");
     }
 
-    private List<BetterPlayers> findBetterPlayers(List<PlayerStats> currentTeam, List<PlayerStats> otherPlayers, OptimizeRequest optimizeRequest, Double originalBudget) {
+    private List<BetterPlayers> findBetterPlayersTwoTransfers(
+            List<PlayerStats> currentTeamPos1, List<PlayerStats> currentTeamPos2, List<PlayerStats> otherPlayersPos1, List<PlayerStats> otherPlayersPos2,
+            OptimizeRequest optimizeRequest, Double originalBudget, boolean same) {
+
+        List<PlayerStats> toRemove = new ArrayList<>();
+        toRemove.add(currentTeamPos1.get(0));
+        if (same) {
+            toRemove.add(currentTeamPos1.get(1));
+        } else {
+            toRemove.add(currentTeamPos2.get(0));
+        }
+        double selectedPlayersSellingPrice = 0.0;
+        double selectedPlayersValue = 0.0;
+        for (final PlayerStats s : toRemove) {
+            String selectedPlayerName = s.getPlayerName();
+            for (final TeamPlayer teamPlayer : optimizeRequest.getTeam()) {
+                if (teamPlayer.getPlayerName().equals(selectedPlayerName)) {
+                    selectedPlayersSellingPrice += teamPlayer.getSellingPrice() / 10.0;
+                }
+            }
+            selectedPlayersValue += getValueByTechnique(s, optimizeRequest.getTechnique());
+        }
+
+        double recalculatedBudget = Math.round((originalBudget + selectedPlayersSellingPrice) * 10.0) / 10.0;
+
+        List<List<PlayerStats>> betterPlayers = new ArrayList<>();
+        // TODO make into methods
+        for (final PlayerStats level1player : otherPlayersPos1) {
+            Double level1value = getValueByTechnique(level1player, optimizeRequest.getTechnique());
+            if (level1value > 0.0) {
+                Double level1cost = level1player.getCost();
+                for (final PlayerStats level2player : otherPlayersPos2) {
+                    boolean duplicity = false;
+                    for (final List<PlayerStats> betterPlayer : betterPlayers) {
+                        if (betterPlayer.contains(level1player) && betterPlayer.contains(level2player)) {
+                            duplicity = true;
+                            break;
+                        }
+                    }
+                    if (!duplicity) {
+                        if (!level1player.equals(level2player)) {
+                            Double level2value = getValueByTechnique(level2player, optimizeRequest.getTechnique());
+                            if (level2value > 0.0) {
+                                Double level2cost = level2player.getCost();
+                                if (recalculatedBudget >= (level1cost + level2cost)) {
+                                    if (level1value + level2value > selectedPlayersValue) {
+                                        List<PlayerStats> list = new ArrayList<>();
+                                        list.add(level1player);
+                                        list.add(level2player);
+                                        betterPlayers.add(list);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        List<List<PlayerStats>> sortedBetterPlayers = sortListByTechnique(betterPlayers, optimizeRequest.getTechnique());
+
+        List<BetterPlayers> options = new ArrayList<>();
+        List<List<PlayerStats>> best3 = sortedBetterPlayers.subList(Math.max(sortedBetterPlayers.size() - 3, 0), sortedBetterPlayers.size());
+
+        for (int i = 0; i < 3; i++) {
+            List<PlayerStats> list = new ArrayList<>(best3.get(i));
+            options.add(new BetterPlayers(toRemove, list));
+        }
+        return options;
+
+    }
+
+    private List<BetterPlayers> findBetterPlayersOneTransfer(List<PlayerStats> currentTeam, List<PlayerStats> otherPlayers, OptimizeRequest optimizeRequest, Double originalBudget) {
         PlayerStats selected = currentTeam.get(0);
         List<PlayerStats> toRemove = new ArrayList<>();
         toRemove.add(selected);
@@ -648,10 +689,6 @@ public class PlayerServiceImpl implements PlayerService {
         Double selectedPlayerValue = getValueByTechnique(selected, optimizeRequest.getTechnique());
         double recalculatedBudget = Math.round((originalBudget + selectedPlayerSellingPrice) * 10.0) / 10.0;
 
-        System.out.println(otherPlayers);
-        System.out.println("original budget: " + originalBudget);
-        System.out.println("selling: " + selectedPlayerSellingPrice);
-        System.out.println("budget: " + recalculatedBudget);
         List<PlayerStats> betterPlayers = otherPlayers.stream()
                 .filter(player -> {
                     Double value = getValueByTechnique(player, optimizeRequest.getTechnique());
@@ -664,9 +701,6 @@ public class PlayerServiceImpl implements PlayerService {
                 })
                 .collect(Collectors.toList());
         List<PlayerStats> sortedBetterPlayers = sortByTechnique(betterPlayers, optimizeRequest.getTechnique());
-        System.out.println("////////////////////////");
-        System.out.println(selected);
-        System.out.println(sortedBetterPlayers);
 
         List<BetterPlayers> options = new ArrayList<>();
         List<PlayerStats> best3 = sortedBetterPlayers.subList(Math.max(sortedBetterPlayers.size() - 3, 0), sortedBetterPlayers.size());
@@ -693,7 +727,6 @@ public class PlayerServiceImpl implements PlayerService {
     private Double countOriginalBudget(TeamPlayer[] team) {
         double cost = 0.0;
         for (final TeamPlayer teamPlayer : team) {
-            System.out.println(teamPlayer.getPurchasePrice());
             cost += teamPlayer.getPurchasePrice() / 10.0;
         }
         return Math.round((100.0 - cost) * 10.0) / 10.0;
@@ -707,6 +740,51 @@ public class PlayerServiceImpl implements PlayerService {
             tmpList.sort(Comparator.comparing(PlayerStats::getCostPointIndex));
         } else if (Technique.FORM.label.equals(technique)) {
             tmpList.sort(Comparator.comparing(PlayerStats::getCostPointIndexLast6));
+        }
+        return tmpList;
+    }
+
+    private List<List<PlayerStats>> sortListByTechnique(List<List<PlayerStats>> list, String technique) {
+        List<List<PlayerStats>> tmpList = new ArrayList<>(list);
+        if (Technique.MAX.label.equals(technique)) {
+            tmpList = tmpList.stream().sorted((o1,o2) -> {
+                double o1value = 0.0;
+                for (final PlayerStats playerStats : o1) {
+                    o1value += playerStats.getPredictedPoints();
+                }
+                double o2value = 0.0;
+                for (final PlayerStats playerStats : o2) {
+                    o2value += playerStats.getPredictedPoints();
+                }
+
+                return Double.compare(o1value, o2value);
+            }).collect(Collectors.toList());
+        } else if (Technique.TOTAL.label.equals(technique)) {
+            tmpList = tmpList.stream().sorted((o1,o2) -> {
+                double o1value = 0.0;
+                for (final PlayerStats playerStats : o1) {
+                    o1value += playerStats.getCostPointIndex();
+                }
+                double o2value = 0.0;
+                for (final PlayerStats playerStats : o2) {
+                    o2value += playerStats.getCostPointIndex();
+                }
+
+                return Double.compare(o1value, o2value);
+            }).collect(Collectors.toList());
+        } else if (Technique.FORM.label.equals(technique)) {
+            tmpList = tmpList.stream().sorted((o1,o2) -> {
+                double o1value = 0.0;
+                for (final PlayerStats playerStats : o1) {
+                    o1value += playerStats.getCostPointIndexLast6();
+                }
+                double o2value = 0.0;
+                for (final PlayerStats playerStats : o2) {
+                    o2value += playerStats.getCostPointIndexLast6();
+                }
+
+                return Double.compare(o1value, o2value);
+            }).collect(Collectors.toList());
         }
         return tmpList;
     }

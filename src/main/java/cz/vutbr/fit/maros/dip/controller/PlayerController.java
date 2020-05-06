@@ -92,7 +92,6 @@ public class PlayerController {
 
     @PostMapping(value = "/optimize")
     public ResponseWrapper<OptimizedSquads> optimize(@RequestBody String json) {
-        System.out.println(json);
         Gson gson = new Gson();
         OptimizeRequest optimizeRequest = gson.fromJson(json, OptimizeRequest.class);
         OptimizedSquads optimizedSquads = playerService.getOptimizedSquads(optimizeRequest);
