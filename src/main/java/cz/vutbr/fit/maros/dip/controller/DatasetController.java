@@ -34,4 +34,9 @@ public class DatasetController {
         return new ResponseWrapper<>(datasetService.makeAllPredictions(), HttpStatus.OK);
     }
 
+    @GetMapping(value = "/stats")
+    public ResponseWrapper<Object> addIndexes() {
+        return new ResponseWrapper<>(datasetService.addIndexesToDataset(), HttpStatus.OK);
+    }
+
 }

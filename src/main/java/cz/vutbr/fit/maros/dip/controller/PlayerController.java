@@ -81,8 +81,6 @@ public class PlayerController {
         Gson gson = new Gson();
 
         OptimizeRequest optimizeRequest = gson.fromJson(json, OptimizeRequest.class);
-//        datasetService.addIndexesToDataset();
-
         OptimizedSquads optimizedSquads = playerService.getOptimizedSquads(optimizeRequest);
         if (optimizedSquads == null) {
             return new ResponseWrapper<>(null, HttpStatus.BAD_REQUEST);

@@ -8,5 +8,6 @@ public interface DatasetService {
 
     int makeAllPredictions();
 
+    int addIndexesToDataset();
 }
 
