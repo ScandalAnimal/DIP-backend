@@ -36,18 +36,19 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.NoArgsConstructor;
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 @NoArgsConstructor
 public class PlayerServiceImpl implements PlayerService {
 
-    public Player getById(Integer id) {
-        return null;
-    }
+    private static final Logger LOG = LoggerFactory.getLogger(PlayerServiceImpl.class);
 
     public List<PlayerTeam> getAllPlayersTeams() {
 
+        LOG.info("Started fetching all players with teams.");
         List<PlayerTeam> players = new ArrayList<>();
         String fileName = ApiConstants.BASE_URL + "players_raw.csv";
 
@@ -87,11 +88,13 @@ public class PlayerServiceImpl implements PlayerService {
         } catch (IOException e) {
             throw new CustomException("Cannot read from file " + fileName + ".");
         }
+        LOG.info("Finished fetching all players with teams.");
         return players;
     }
 
     public List<Player> getAllPlayers() {
 
+        LOG.info("Started getting all players.");
         List<Player> players = new ArrayList<>();
         String fileName = ApiConstants.BASE_URL + "players_raw.csv";
 
@@ -133,11 +136,13 @@ public class PlayerServiceImpl implements PlayerService {
         } catch (IOException e) {
             throw new CustomException("Cannot read from file " + fileName + ".");
         }
+        LOG.info("Finished getting all players.");
         return players;
     }
 
     public List<PlayerId> getAllPlayersIds() {
 
+        LOG.info("Started getting all player ids.");
         List<PlayerId> players = new ArrayList<>();
         String fileName = ApiConstants.BASE_URL + "player_idlist.csv";
 
@@ -165,6 +170,7 @@ public class PlayerServiceImpl implements PlayerService {
         } catch (IOException e) {
             throw new CustomException("Cannot read from file " + fileName + ".");
         }
+        LOG.info("Finished getting all players ids.");
         return players;
     }
 
@@ -173,6 +179,7 @@ public class PlayerServiceImpl implements PlayerService {
         List<PlayerProjection> players = new ArrayList<>();
         String fileName = ApiConstants.DATASET_URL + "players/predictions/" +  id + "gw.csv";
 
+        LOG.info("Started getting all players predictions.");
         BufferedReader br;
         try {
             br = new BufferedReader(new FileReader(fileName));
@@ -206,11 +213,13 @@ public class PlayerServiceImpl implements PlayerService {
         } catch (IOException e) {
             throw new CustomException("Cannot read from file " + fileName + ".");
         }
+        LOG.info("Finished geting all players predictions.");
         return players;
     }
 
     public List<PlayerDetailData> getAllPlayerData(String id) {
 
+        LOG.info("Started getting player data for id: " + id);
         String[] keys = {"total_points", "bps", "minutes", "own_goals", "goals_scored", "assists",
             "yellow_cards", "red_cards", "goals_conceded", "saves", "clean_sheets", "opponent_team" };
 
@@ -274,11 +283,13 @@ public class PlayerServiceImpl implements PlayerService {
                 }
             }
         }
+        LOG.info("Finished getting all player data for id: " + id);
         return players;
     }
 
     public List<PlayerInjuryData> getAllPlayerInjuries() {
 
+        LOG.info("Started getting all player injuries.");
         List<PlayerInjuryData> players = new ArrayList<>();
         String fileName = ApiConstants.BASE_URL + "players_raw.csv";
 
@@ -325,11 +336,13 @@ public class PlayerServiceImpl implements PlayerService {
         } catch (IOException e) {
             throw new CustomException("Cannot read from file " + fileName + ".");
         }
+        LOG.info("Finished getting all players injuries.");
         return players;
     }
 
     public Integer getPlayerPrize(String playerName) {
 
+        LOG.info("Started getting prize for player: " + playerName);
         String fileName = ApiConstants.BASE_URL + "cleaned_players.csv";
         String[] keys = {"first_name", "second_name", "now_cost"};
         BufferedReader br;
@@ -344,6 +357,7 @@ public class PlayerServiceImpl implements PlayerService {
                 String[] split = filteredLine.split(",");
                 String newName = split[0] + "_" + split[1];
                 if (newName.equals(playerName)) {
+                    LOG.info("Finished getting prize for player: " + playerName);
                     return Integer.parseInt(split[2]);
                 }
             }
@@ -351,11 +365,13 @@ public class PlayerServiceImpl implements PlayerService {
         } catch (IOException e) {
             throw new CustomException("Cannot read from file " + fileName + ".");
         }
+        LOG.info("Finished getting prize for player: " + playerName);
         return 0;
     }
 
     public Integer getPlayerPosition(String playerName) {
 
+        LOG.info("Started getting position for player: " + playerName);
         String fileName = ApiConstants.BASE_URL + "players_raw.csv";
         String[] keys = {"first_name", "second_name", "element_type"};
         BufferedReader br;
@@ -370,6 +386,7 @@ public class PlayerServiceImpl implements PlayerService {
                 String[] split = filteredLine.split(",");
                 String newName = split[0] + "_" + split[1];
                 if (newName.equals(playerName)) {
+                    LOG.info("Finished getting position for player: " + playerName);
                     return Integer.parseInt(split[2]);
                 }
             }
@@ -377,10 +394,12 @@ public class PlayerServiceImpl implements PlayerService {
         } catch (IOException e) {
             throw new CustomException("Cannot read from file " + fileName + ".");
         }
+        LOG.info("Finished getting position for player: " + playerName);
         return 0;
     }
 
     public OptimizedSquads getOptimizedSquads(OptimizeRequest optimizeRequest) {
+        LOG.info("Started getting optimized squads");
         OptimizedSquads optimizedSquads = new OptimizedSquads();
 
         Long gameWeeks = optimizeRequest.getGameWeeks();
@@ -395,6 +414,7 @@ public class PlayerServiceImpl implements PlayerService {
                     Collectors.toList());
             squads.add(createSquadFromArray(sorted));
             optimizedSquads.setSquads(squads);
+            LOG.info("Finished getting optimized squads");
             return optimizedSquads;
         }
         List<PlayerStats> allGK = filterBasedOnPosition(playerStats, 1);
@@ -425,6 +445,7 @@ public class PlayerServiceImpl implements PlayerService {
             List<BetterPlayers> bestOptions = findBestOptions(options, optimizeRequest.getTechnique(), currentTeam, tips);
             optimizedSquads.setSquads(createSquadsFromList(bestOptions, currentTeam, optimizeRequest.getTechnique()));
 
+            LOG.info("Finished getting optimized squads");
             return optimizedSquads;
         }
 
@@ -443,8 +464,11 @@ public class PlayerServiceImpl implements PlayerService {
             List<BetterPlayers> bestOptions = findBestOptions(options, optimizeRequest.getTechnique(), currentTeam, tips);
             optimizedSquads.setSquads(createSquadsFromList(bestOptions, currentTeam, optimizeRequest.getTechnique()));
 
+            LOG.info("Finished getting optimized squads");
             return optimizedSquads;
         }
+
+        LOG.info("Finished getting optimized squads");
 
         return null;
     }

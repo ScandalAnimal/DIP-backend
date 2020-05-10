@@ -53,8 +53,9 @@ public class DatasetServiceImpl implements DatasetService {
         List<String> currentSeasonPlayers = DatasetUtils.getCurrentSeasonPlayers();
         List<Fixture> remainingFixtures = getRemainingFixtures();
 
+        LOG.info("Start of initializing dataset.");
         for (int year = 1; year < 5; year++) {
-
+            LOG.info("Initializing dataset: year " + year + ".");
             String path = DatasetUtils.getFilePath(year);
             File file = new File(path);
             String[] directories = file.list((current, name) -> new File(current, name).isDirectory());
@@ -99,9 +100,8 @@ public class DatasetServiceImpl implements DatasetService {
                                 Integer teamId = teamService.getTeamByPlayerName(names[0], names[1]);
                                 List<Fixture> teamFixtures = filterFixtures(teamId, remainingFixtures);
                                 for (Fixture fixture : teamFixtures) {
-                                    String template = filteredHeader;
                                     StringBuilder sb2 = new StringBuilder();
-                                    String[] split = template.split(",");
+                                    String[] split = filteredHeader.split(",");
                                     sb2.append(index).append(",");
                                     for (final String s : split) {
                                         if (Objects.equals(s, "opponent_team")) {
@@ -133,6 +133,7 @@ public class DatasetServiceImpl implements DatasetService {
                 }
             }
         }
+        LOG.info("Finished initializing dataset.");
         return 0;
     }
 
@@ -140,6 +141,7 @@ public class DatasetServiceImpl implements DatasetService {
 
         String basePath = "dataset/players/";
         final int MAX_LAG = 6;
+        LOG.info("Start of dividing dataset.");
         try (Stream<Path> walk = Files.walk(Paths.get(basePath), 1)) {
 
             List<String> result = walk
@@ -164,6 +166,7 @@ public class DatasetServiceImpl implements DatasetService {
                 } catch (IOException e) {
                     throw new CustomException("Couldn't delete file for writing data.", e);
                 }
+                LOG.info("Deleted previous datasets.");
 
                 List<String> lines = new ArrayList<>();
                 BufferedReader br;
@@ -219,7 +222,7 @@ public class DatasetServiceImpl implements DatasetService {
         } catch (IOException e) {
             throw new CustomException("Cannot read files from directory " + basePath + ".");
         }
-
+        LOG.info("Finished dividing dataset.");
         return 0;
     }
 
@@ -241,11 +244,10 @@ public class DatasetServiceImpl implements DatasetService {
             throw new CustomException("Cannot read files from directory " + basePath + ".");
         }
 
-
+        LOG.info("Started making predictions.");
         for (String playerFile : result) {
             Path path = Paths.get(playerFile);
             String playerName = path.getFileName().toString().substring(0, path.getFileName().toString().lastIndexOf("."));
-            System.out.println(playerName);
 
             String trainPath = basePath + "train/" + playerName + ".csv";
             String primePath = basePath + "prime/" + playerName + ".csv";
@@ -293,7 +295,6 @@ public class DatasetServiceImpl implements DatasetService {
                     for (int i = 0; i < PREDICTIONS; i++) {
                         List<NumericPrediction> predsAtStep = forecast.get(i);
                         for (NumericPrediction predForTarget : predsAtStep) {
-                            System.out.println("`" + predForTarget.predicted() + "`");
                             stringBuilder.append(playerName).append(",").append(Math.floor(predForTarget.predicted() * 100) / 100).append("\n");
                         }
                     }
@@ -307,8 +308,8 @@ public class DatasetServiceImpl implements DatasetService {
             }
         }
 
+        LOG.info("Finished making predictions.");
         fileService.createCsv(keys, stringBuilder.toString(), basePath + "predictions/3gw.csv");
-
         return 0;
     }
 
@@ -317,6 +318,8 @@ public class DatasetServiceImpl implements DatasetService {
         String basePath = "dataset/players/";
         String[] keys = {"total_points", "gw_index"};
 
+        LOG.info("Started adding indexes to dataset.");
+        LOG.info("Started counting indexes.");
         List<String> result;
         try (Stream<Path> walk = Files.walk(Paths.get(basePath), 1)) {
             result = walk
@@ -400,6 +403,7 @@ public class DatasetServiceImpl implements DatasetService {
             }
         }
 
+        LOG.info("Finished counting indexes.");
         String filePath = "players/stats/stats.csv";
         try {
             Files.deleteIfExists(Paths.get("dataset/" + filePath));
@@ -422,7 +426,6 @@ public class DatasetServiceImpl implements DatasetService {
                 double totalPoints = 0.0;
                 String newHeader = "player_name,total_points,gws,cost,position,points_per_match,points_last_6,points_per_match_last_6,cost_per_point,cost_per_point_last_6,cost_point_index,cost_point_index_last_6";
                 List<Integer> points = new ArrayList<>();
-                System.out.println(playerName);
                 while ((line = br.readLine()) != null) {
                     String filteredLine = DatasetUtils.filterLine(line, indexes);
                     String[] split = filteredLine.split(",");
@@ -475,6 +478,7 @@ public class DatasetServiceImpl implements DatasetService {
             }
         }
 
+        LOG.info("Finished writing indexes.");
         return 0;
     }
 

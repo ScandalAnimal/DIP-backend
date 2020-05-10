@@ -1,5 +1,6 @@
 package cz.vutbr.fit.maros.dip.service.impl;
 
+import cz.vutbr.fit.maros.dip.exception.CustomException;
 import cz.vutbr.fit.maros.dip.model.LoginFormData;
 import cz.vutbr.fit.maros.dip.model.MyTeam;
 import cz.vutbr.fit.maros.dip.model.UserData;
@@ -9,7 +10,6 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.NoArgsConstructor;
-import net.dongliu.requests.Cookie;
 import net.dongliu.requests.Requests;
 import net.dongliu.requests.Session;
 import org.json.simple.JSONObject;
@@ -33,11 +33,7 @@ public class LoginServiceImpl implements LoginService {
             params.put("password", loginFormData.getPassword());
             params.put("app", "plfpl-web");
             params.put("redirect_uri", "https://fantasy.premierleague.com/a/login");
-            String resp1 = session.post(url).body(params).send().readToText();
-
-            for (final Cookie currentCookie : session.currentCookies()) {
-                System.out.println(currentCookie);
-            }
+            session.post(url).body(params).send().readToText();
 
             url = new URL("https://fantasy.premierleague.com/api/me/");
             String resp2 = session.get(url).send().readToText();
@@ -46,9 +42,7 @@ public class LoginServiceImpl implements LoginService {
             JSONObject json = (JSONObject) parser.parse(resp2);
 
             JSONObject player = (JSONObject) json.get("player");
-            if (player.isEmpty()) {
-                // TODO exception
-            }
+            player.isEmpty();
             Long teamId = (Long) ((JSONObject) json.get("player")).get("entry");
 
             url = new URL("https://fantasy.premierleague.com/api/my-team/" + teamId.toString());
@@ -61,8 +55,7 @@ public class LoginServiceImpl implements LoginService {
             return userData;
 
         } catch (MalformedURLException | ParseException e) {
-            e.printStackTrace();
+            throw new CustomException("Couldn't login user " + loginFormData.getLogin() + ".");
         }
-        return null;
     }
 }

@@ -11,6 +11,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import lombok.NoArgsConstructor;
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import weka.core.Instances;
 import weka.core.converters.ArffSaver;
@@ -20,6 +22,7 @@ import weka.core.converters.CSVLoader;
 @NoArgsConstructor
 public class FileServiceImpl implements FileService {
 
+    private static final Logger LOG = LoggerFactory.getLogger(FileServiceImpl.class);
 
     public void writeRawObjectToFile(JSONObject data) {
         String filePath = ApiConstants.BASE_URL + "raw.json";
@@ -37,7 +40,7 @@ public class FileServiceImpl implements FileService {
             writer.write(data.toJSONString());
             writer.flush();
             writer.close();
-            System.out.println("Finished writing to raw.json.");
+            LOG.info("Finished writing to raw.json.");
         } catch (IOException e) {
             throw new CustomException("Couldn't create file for writing data.");
         }
@@ -63,7 +66,7 @@ public class FileServiceImpl implements FileService {
             writer.write(values);
             writer.flush();
             writer.close();
-            System.out.println("Finished writing to " + filePath);
+            LOG.info("Finished writing to " + filePath);
         } catch (IOException e) {
             throw new CustomException("Couldn't create file for writing data.");
         }
@@ -75,7 +78,7 @@ public class FileServiceImpl implements FileService {
 
         File file = new File(filePath);
         file.getParentFile().mkdirs();
-        Path path = Paths.get(filePath);
+        Paths.get(filePath);
 
         try {
             FileWriter writer = new FileWriter(filePath, true);
@@ -85,7 +88,7 @@ public class FileServiceImpl implements FileService {
             writer.write(values);
             writer.flush();
             writer.close();
-            System.out.println("Finished writing to " + filePath);
+            LOG.info("Finished writing to " + filePath);
         } catch (IOException e) {
             throw new CustomException("Couldn't create file for writing data.");
         }
@@ -97,7 +100,7 @@ public class FileServiceImpl implements FileService {
 
         File file = new File(filePath);
         file.getParentFile().mkdirs();
-        Path path = Paths.get(filePath);
+        Paths.get(filePath);
 
         try {
             FileWriter writer = new FileWriter(filePath, true);
@@ -107,7 +110,7 @@ public class FileServiceImpl implements FileService {
             writer.write(values);
             writer.flush();
             writer.close();
-            System.out.println("Finished writing to " + filePath);
+            LOG.info("Finished writing to " + filePath);
         } catch (IOException e) {
             throw new CustomException("Couldn't create file for writing data.");
         }
@@ -132,7 +135,7 @@ public class FileServiceImpl implements FileService {
             writer.write(values);
             writer.flush();
             writer.close();
-            System.out.println("Finished writing to " + filename);
+            LOG.info("Finished writing to " + filename);
         } catch (IOException e) {
             throw new CustomException("Couldn't create file for writing data.");
         }

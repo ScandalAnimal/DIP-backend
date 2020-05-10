@@ -12,8 +12,6 @@ import java.util.List;
 
 public interface PlayerService {
 
-    Player getById(Integer id);
-
     List<Player> getAllPlayers();
 
     List<PlayerId> getAllPlayersIds();

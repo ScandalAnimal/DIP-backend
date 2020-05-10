@@ -16,14 +16,19 @@ import java.util.List;
 import java.util.Objects;
 import lombok.NoArgsConstructor;
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 @NoArgsConstructor
 public class TeamServiceImpl implements TeamService {
 
+    private static final Logger LOG = LoggerFactory.getLogger(TeamServiceImpl.class);
+
     public List<Team> getAllTeams() {
 
+        LOG.info("Started getting all teams.");
         List<Team> teams = new ArrayList<>();
         String fileName = ApiConstants.BASE_URL + "teams.csv";
 
@@ -51,10 +56,12 @@ public class TeamServiceImpl implements TeamService {
         } catch (IOException e) {
             throw new CustomException("Cannot read from file " + fileName + ".");
         }
+        LOG.info("Finished getting all teams.");
         return teams;
     }
 
     public Integer getTeamByPlayerName(String firstName, String lastName) {
+
         String fileName = ApiConstants.BASE_URL + "players_raw.csv";
 
         String[] keys = {"first_name", "second_name", "team" };

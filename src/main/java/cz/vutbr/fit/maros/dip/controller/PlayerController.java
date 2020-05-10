@@ -10,7 +10,6 @@ import cz.vutbr.fit.maros.dip.model.PlayerId;
 import cz.vutbr.fit.maros.dip.model.PlayerInjuryData;
 import cz.vutbr.fit.maros.dip.model.PlayerProjection;
 import cz.vutbr.fit.maros.dip.results.ResponseWrapper;
-import cz.vutbr.fit.maros.dip.service.impl.DatasetServiceImpl;
 import cz.vutbr.fit.maros.dip.service.impl.PlayerServiceImpl;
 import java.util.List;
 import javax.validation.Valid;
@@ -30,18 +29,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class PlayerController {
 
     private final PlayerServiceImpl playerService;
-    private final DatasetServiceImpl datasetService;
 
-    public PlayerController(PlayerServiceImpl playerService, DatasetServiceImpl datasetService) {
+    public PlayerController(PlayerServiceImpl playerService) {
         this.playerService = playerService;
-        this.datasetService = datasetService;
-    }
-
-    @GetMapping(value = "/{id}")
-    public ResponseWrapper<Player> getPlayerById(
-            @Valid @Pattern(regexp = ApiConstants.REGEX_FOR_NUMBERS, message = ApiConstants.MESSAGE_FOR_REGEX_NUMBER_MISMATCH) @PathVariable(value = "id")
-                    String id) {
-        return new ResponseWrapper<>(playerService.getById(Integer.parseInt(id)), HttpStatus.OK);
     }
 
     @GetMapping()
