@@ -17,6 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -62,6 +63,8 @@ public class DatasetServiceImpl implements DatasetService {
 
             if (directories != null) {
                 for (final String directory : directories) {
+                    int[] minutes = new int[38];
+                    int lastYearIndex = 0;
                     String newName = DatasetUtils.getNewName(directory);
                     if (currentSeasonPlayers.contains(newName)) {
                         StringBuilder sb = new StringBuilder();
@@ -92,7 +95,9 @@ public class DatasetServiceImpl implements DatasetService {
 
                                 String filteredLine = index + "," + DatasetUtils.filterLine(line, indexes);
                                 sb.append(filteredLine).append("\n");
+                                minutes[lastYearIndex] = Integer.parseInt(filteredLine.split(",")[7]);
                                 index++;
+                                lastYearIndex++;
                             }
 
                             if (year == 4) {
@@ -113,6 +118,12 @@ public class DatasetServiceImpl implements DatasetService {
                                             } else {
                                                 sb2.append(home).append("\n");
                                             }
+                                        } else if (Objects.equals(s, "minutes")) {
+                                            int minCount = countMinutes(minutes, lastYearIndex);
+                                            minutes[lastYearIndex] = minCount;
+                                            lastYearIndex++;
+                                            String min = minCount + ",";
+                                            sb2.append(min);
                                         } else if (!Objects.equals(s, "gw_index")) {
                                             sb2.append("?,");
                                         }
@@ -135,6 +146,17 @@ public class DatasetServiceImpl implements DatasetService {
         }
         LOG.info("Finished initializing dataset.");
         return 0;
+    }
+
+    private int countMinutes(int[] minutes, int index) {
+        int count;
+        if (index <= 6) {
+            count = Arrays.stream(minutes).sum();
+            return count / index;
+        } else {
+            count = minutes[index - 1] + minutes[index - 2] + minutes[index - 3] + minutes[index - 4] + minutes[index - 5] + minutes[index - 6];
+            return count / 6;
+        }
     }
 
     public int divideDatasets() {
