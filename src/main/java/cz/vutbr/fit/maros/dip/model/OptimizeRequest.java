@@ -12,6 +12,7 @@ public class OptimizeRequest implements Serializable {
     private Long transfers;
     private String technique;
     private Long gameWeeks;
+    private Long tips;
 
     public TeamPlayer[] getTeam() {
         return team;
@@ -45,13 +46,22 @@ public class OptimizeRequest implements Serializable {
         this.gameWeeks = gameWeeks;
     }
 
+    public Long getTips() {
+        return tips;
+    }
+
+    public void setTips(Long tips) {
+        this.tips = tips;
+    }
+
     @Override
     public String toString() {
         return "OptimizeRequest{" +
                 "team=" + Arrays.toString(team) +
                 ", transfers=" + transfers +
-                ", technique=" + technique +
+                ", technique='" + technique + '\'' +
                 ", gameWeeks=" + gameWeeks +
+                ", tips=" + tips +
                 '}';
     }
 }

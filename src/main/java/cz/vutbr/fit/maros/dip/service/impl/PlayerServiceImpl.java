@@ -385,7 +385,7 @@ public class PlayerServiceImpl implements PlayerService {
 
         Long gameWeeks = optimizeRequest.getGameWeeks();
         Long transfers = optimizeRequest.getTransfers();
-
+        Long tips = optimizeRequest.getTips();
         List<PlayerStats> playerStats = getPlayerStats(gameWeeks);
         List<PlayerStats> currentTeam = getCurrentTeam(optimizeRequest, playerStats);
 
@@ -422,7 +422,7 @@ public class PlayerServiceImpl implements PlayerService {
             options.addAll(findBetterPlayersOneTransfer(sortedMD, allMD, optimizeRequest, originalBudget));
             options.addAll(findBetterPlayersOneTransfer(sortedFW, allFW, optimizeRequest, originalBudget));
 
-            List<BetterPlayers> bestOptions = findBestOptions(options, optimizeRequest.getTechnique(), currentTeam);
+            List<BetterPlayers> bestOptions = findBestOptions(options, optimizeRequest.getTechnique(), currentTeam, tips);
             optimizedSquads.setSquads(createSquadsFromList(bestOptions, currentTeam, optimizeRequest.getTechnique()));
 
             return optimizedSquads;
@@ -440,7 +440,7 @@ public class PlayerServiceImpl implements PlayerService {
             options.addAll(findBetterPlayersTwoTransfers(sortedDF, sortedFW, allDF, allFW, optimizeRequest, originalBudget, false));
             options.addAll(findBetterPlayersTwoTransfers(sortedMD, sortedFW, allMD, allFW, optimizeRequest, originalBudget, false));
 
-            List<BetterPlayers> bestOptions = findBestOptions(options, optimizeRequest.getTechnique(), currentTeam);
+            List<BetterPlayers> bestOptions = findBestOptions(options, optimizeRequest.getTechnique(), currentTeam, tips);
             optimizedSquads.setSquads(createSquadsFromList(bestOptions, currentTeam, optimizeRequest.getTechnique()));
 
             return optimizedSquads;
@@ -524,12 +524,11 @@ public class PlayerServiceImpl implements PlayerService {
         }).map(PlayerId::getId).findFirst().orElse(null);
     }
 
-    private List<BetterPlayers> findBestOptions(List<BetterPlayers> options, String technique, List<PlayerStats> currentTeam) {
+    private List<BetterPlayers> findBestOptions(List<BetterPlayers> options, String technique, List<PlayerStats> currentTeam, Long tips) {
         List<BetterPlayers> workingOptions = new ArrayList<>(options);
         List<BetterPlayers> bestOptions = new ArrayList<>();
-        int count = 3;
 
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < tips; i++) {
 
             double bestDiff = 0.0;
             int bestDiffIndex = 0;
@@ -572,9 +571,7 @@ public class PlayerServiceImpl implements PlayerService {
                 builtTeam.add(playerStats);
             }
         }
-        for (final PlayerStats playerStats : options.getToAdd()) {
-            builtTeam.add(playerStats);
-        }
+        builtTeam.addAll(options.getToAdd());
 
         Map<String, Integer> countMap = new HashMap<>();
         for (PlayerStats item: builtTeam) {
@@ -606,6 +603,7 @@ public class PlayerServiceImpl implements PlayerService {
             List<PlayerStats> currentTeamPos1, List<PlayerStats> currentTeamPos2, List<PlayerStats> otherPlayersPos1, List<PlayerStats> otherPlayersPos2,
             OptimizeRequest optimizeRequest, Double originalBudget, boolean same) {
 
+        Long tips = optimizeRequest.getTips();
         List<PlayerStats> toRemove = new ArrayList<>();
         toRemove.add(currentTeamPos1.get(0));
         if (same) {
@@ -664,10 +662,10 @@ public class PlayerServiceImpl implements PlayerService {
         List<List<PlayerStats>> sortedBetterPlayers = sortListByTechnique(betterPlayers, optimizeRequest.getTechnique());
 
         List<BetterPlayers> options = new ArrayList<>();
-        List<List<PlayerStats>> best3 = sortedBetterPlayers.subList(Math.max(sortedBetterPlayers.size() - 3, 0), sortedBetterPlayers.size());
+        List<List<PlayerStats>> best = sortedBetterPlayers.subList(Math.max(sortedBetterPlayers.size() - Integer.parseInt(String.valueOf(tips)), 0), sortedBetterPlayers.size());
 
-        for (int i = 0; i < 3; i++) {
-            List<PlayerStats> list = new ArrayList<>(best3.get(i));
+        for (int i = 0; i < tips; i++) {
+            List<PlayerStats> list = new ArrayList<>(best.get(i));
             options.add(new BetterPlayers(toRemove, list));
         }
         return options;
@@ -675,6 +673,7 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     private List<BetterPlayers> findBetterPlayersOneTransfer(List<PlayerStats> currentTeam, List<PlayerStats> otherPlayers, OptimizeRequest optimizeRequest, Double originalBudget) {
+        Long tips = optimizeRequest.getTips();
         PlayerStats selected = currentTeam.get(0);
         List<PlayerStats> toRemove = new ArrayList<>();
         toRemove.add(selected);
@@ -703,11 +702,11 @@ public class PlayerServiceImpl implements PlayerService {
         List<PlayerStats> sortedBetterPlayers = sortByTechnique(betterPlayers, optimizeRequest.getTechnique());
 
         List<BetterPlayers> options = new ArrayList<>();
-        List<PlayerStats> best3 = sortedBetterPlayers.subList(Math.max(sortedBetterPlayers.size() - 3, 0), sortedBetterPlayers.size());
+        List<PlayerStats> best = sortedBetterPlayers.subList(Math.max(sortedBetterPlayers.size() - Integer.parseInt(String.valueOf(tips)), 0), sortedBetterPlayers.size());
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < tips; i++) {
             List<PlayerStats> list = new ArrayList<>();
-            list.add(best3.get(i));
+            list.add(best.get(i));
             options.add(new BetterPlayers(toRemove, list));
         }
         return options;
