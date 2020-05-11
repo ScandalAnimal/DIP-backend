@@ -18,6 +18,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -54,6 +55,15 @@ public class DatasetServiceImpl implements DatasetService {
         List<String> currentSeasonPlayers = DatasetUtils.getCurrentSeasonPlayers();
         List<Fixture> remainingFixtures = getRemainingFixtures();
 
+        try {
+            Path path = Paths.get(ApiConstants.DATASET_URL);
+            Files.walk(path)
+                    .sorted(Comparator.reverseOrder())
+                    .map(Path::toFile)
+                    .forEach(File::delete);
+        } catch (IOException e) {
+            throw new CustomException("Couldn't delete file for writing data.", e);
+        }
         LOG.info("Start of initializing dataset.");
         for (int year = 1; year < 5; year++) {
             LOG.info("Initializing dataset: year " + year + ".");
@@ -162,7 +172,7 @@ public class DatasetServiceImpl implements DatasetService {
     public int divideDatasets() {
 
         String basePath = "dataset/players/";
-        final int MAX_LAG = 6;
+        final int MAX_LAG = 8;
         LOG.info("Start of dividing dataset.");
         try (Stream<Path> walk = Files.walk(Paths.get(basePath), 1)) {
 
@@ -251,9 +261,11 @@ public class DatasetServiceImpl implements DatasetService {
     public int makeAllPredictions() {
 
         String basePath = "dataset/players/";
-        final int MAX_LAG = 6;
         final int PREDICTIONS = 3;
-        StringBuilder stringBuilder = new StringBuilder();
+        final int MAX_LAG = 8;
+        StringBuilder stringBuilder1 = new StringBuilder();
+        StringBuilder stringBuilder2 = new StringBuilder();
+        StringBuilder stringBuilder3 = new StringBuilder();
         String keys = "player_name,predicted_points";
 
         List<String> result;
@@ -270,6 +282,7 @@ public class DatasetServiceImpl implements DatasetService {
         for (String playerFile : result) {
             Path path = Paths.get(playerFile);
             String playerName = path.getFileName().toString().substring(0, path.getFileName().toString().lastIndexOf("."));
+            LOG.info("Making predictions for player: " + playerName);
 
             String trainPath = basePath + "train/" + playerName + ".csv";
             String primePath = basePath + "prime/" + playerName + ".csv";
@@ -296,28 +309,44 @@ public class DatasetServiceImpl implements DatasetService {
                     }
                 }
 
-                if (trainData.numInstances() <= 6) {
-                    stringBuilder.append(playerName).append(",").append("?").append("\n");
+                if (trainData.numInstances() <= MAX_LAG) {
+                    stringBuilder1.append(playerName).append(",").append("?").append("\n");
+                    stringBuilder2.append(playerName).append(",").append("?").append("\n");
+                    stringBuilder3.append(playerName).append(",").append("?").append("\n");
                 } else {
-                    WekaForecaster forecaster = new WekaForecaster();
-                    forecaster.setFieldsToForecast("total_points");
-                    forecaster.setBaseForecaster(new MultilayerPerceptron());
-                    forecaster.getTSLagMaker().setTimeStampField("gw_index");
-                    forecaster.getTSLagMaker().setMinLag(1);
-                    forecaster.getTSLagMaker().setMaxLag(MAX_LAG);
-                    forecaster.getTSLagMaker().setRemoveLeadingInstancesWithUnknownLagValues(true);
-                    forecaster.setOverlayFields("opponent_team");
+                    for (int i = 1; i <= PREDICTIONS; i++) {
+                        WekaForecaster forecaster = new WekaForecaster();
+                        forecaster.setFieldsToForecast("total_points");
+                        forecaster.setBaseForecaster(new MultilayerPerceptron());
+                        forecaster.getTSLagMaker().setTimeStampField("gw_index");
+                        forecaster.getTSLagMaker().setMinLag(1);
+                        forecaster.getTSLagMaker().setMaxLag(MAX_LAG);
+                        forecaster.getTSLagMaker().setAdjustForTrends(true);
+                        forecaster.getTSLagMaker().setRemoveLeadingInstancesWithUnknownLagValues(true);
+                        forecaster.setOverlayFields("opponent_team");
+                        forecaster.setOverlayFields("minutes");
 
-                    forecaster.buildForecaster(trainData, System.out);
+                        forecaster.buildForecaster(trainData, System.out);
 
-                    forecaster.primeForecaster(primeData);
-
-                    List<List<NumericPrediction>> forecast = forecaster.forecast(PREDICTIONS, futureData, System.out);
-
-                    for (int i = 0; i < PREDICTIONS; i++) {
-                        List<NumericPrediction> predsAtStep = forecast.get(i);
-                        for (NumericPrediction predForTarget : predsAtStep) {
-                            stringBuilder.append(playerName).append(",").append(Math.floor(predForTarget.predicted() * 100) / 100).append("\n");
+                        forecaster.primeForecaster(primeData);
+                        List<List<NumericPrediction>> forecast = forecaster.forecast(i, futureData, System.out);
+                        for (int j = 0; j < i; j++) {
+                            List<NumericPrediction> predsAtStep = forecast.get(j);
+                            for (NumericPrediction predForTarget : predsAtStep) {
+                                switch (i) {
+                                    case 1:
+                                        stringBuilder1.append(playerName).append(",").append(Math.floor(predForTarget.predicted() * 100) / 100).append("\n");
+                                        break;
+                                    case 2:
+                                        stringBuilder2.append(playerName).append(",").append(Math.floor(predForTarget.predicted() * 100) / 100).append("\n");
+                                        break;
+                                    case 3:
+                                        stringBuilder3.append(playerName).append(",").append(Math.floor(predForTarget.predicted() * 100) / 100).append("\n");
+                                        break;
+                                    default:
+                                        throw new IllegalStateException("Unexpected value: " + i);
+                                }
+                            }
                         }
                     }
                 }
@@ -331,7 +360,9 @@ public class DatasetServiceImpl implements DatasetService {
         }
 
         LOG.info("Finished making predictions.");
-        fileService.createCsv(keys, stringBuilder.toString(), basePath + "predictions/3gw.csv");
+        fileService.createCsv(keys, stringBuilder1.toString(), basePath + "predictions/1gw.csv");
+        fileService.createCsv(keys, stringBuilder2.toString(), basePath + "predictions/2gw.csv");
+        fileService.createCsv(keys, stringBuilder3.toString(), basePath + "predictions/3gw.csv");
         return 0;
     }
 
