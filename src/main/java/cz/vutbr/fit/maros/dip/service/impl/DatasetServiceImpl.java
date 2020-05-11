@@ -333,15 +333,16 @@ public class DatasetServiceImpl implements DatasetService {
                         for (int j = 0; j < i; j++) {
                             List<NumericPrediction> predsAtStep = forecast.get(j);
                             for (NumericPrediction predForTarget : predsAtStep) {
+                                double scaledPrediction = scalePrediction(predForTarget.predicted());
                                 switch (i) {
                                     case 1:
-                                        stringBuilder1.append(playerName).append(",").append(Math.floor(predForTarget.predicted() * 100) / 100).append("\n");
+                                        stringBuilder1.append(playerName).append(",").append(Math.floor(scaledPrediction * 100) / 100).append("\n");
                                         break;
                                     case 2:
-                                        stringBuilder2.append(playerName).append(",").append(Math.floor(predForTarget.predicted() * 100) / 100).append("\n");
+                                        stringBuilder2.append(playerName).append(",").append(Math.floor(scaledPrediction * 100) / 100).append("\n");
                                         break;
                                     case 3:
-                                        stringBuilder3.append(playerName).append(",").append(Math.floor(predForTarget.predicted() * 100) / 100).append("\n");
+                                        stringBuilder3.append(playerName).append(",").append(Math.floor(scaledPrediction * 100) / 100).append("\n");
                                         break;
                                     default:
                                         throw new IllegalStateException("Unexpected value: " + i);
@@ -364,6 +365,19 @@ public class DatasetServiceImpl implements DatasetService {
         fileService.createCsv(keys, stringBuilder2.toString(), basePath + "predictions/2gw.csv");
         fileService.createCsv(keys, stringBuilder3.toString(), basePath + "predictions/3gw.csv");
         return 0;
+    }
+
+    private double scalePrediction(double pred) {
+        double result = Math.abs(pred);
+        if (result <= 10) {
+            result *= 0.95;
+        } else if (result <= 20) {
+            result *= 0.9;
+        } else if (result <= 30) {
+            result *= 0.85;
+        }
+        result *= 0.8;
+        return result;
     }
 
     public int addIndexesToDataset() {
