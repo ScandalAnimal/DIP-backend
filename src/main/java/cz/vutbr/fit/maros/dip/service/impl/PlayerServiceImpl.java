@@ -48,7 +48,6 @@ public class PlayerServiceImpl implements PlayerService {
 
     public List<PlayerTeam> getAllPlayersTeams() {
 
-        LOG.info("Started fetching all players with teams.");
         List<PlayerTeam> players = new ArrayList<>();
         String fileName = ApiConstants.BASE_URL + "players_raw.csv";
 
@@ -88,7 +87,6 @@ public class PlayerServiceImpl implements PlayerService {
         } catch (IOException e) {
             throw new CustomException("Cannot read from file " + fileName + ".");
         }
-        LOG.info("Finished fetching all players with teams.");
         return players;
     }
 
@@ -142,7 +140,6 @@ public class PlayerServiceImpl implements PlayerService {
 
     public List<PlayerId> getAllPlayersIds() {
 
-        LOG.info("Started getting all player ids.");
         List<PlayerId> players = new ArrayList<>();
         String fileName = ApiConstants.BASE_URL + "player_idlist.csv";
 
@@ -170,7 +167,6 @@ public class PlayerServiceImpl implements PlayerService {
         } catch (IOException e) {
             throw new CustomException("Cannot read from file " + fileName + ".");
         }
-        LOG.info("Finished getting all players ids.");
         return players;
     }
 
@@ -641,7 +637,8 @@ public class PlayerServiceImpl implements PlayerService {
             String selectedPlayerName = s.getPlayerName();
             for (final TeamPlayer teamPlayer : optimizeRequest.getTeam()) {
                 if (teamPlayer.getPlayerName().equals(selectedPlayerName)) {
-                    selectedPlayersSellingPrice += teamPlayer.getSellingPrice() / 10.0;
+                    Long price = teamPlayer.getSellingPrice() == null ? teamPlayer.getNowCost() : teamPlayer.getSellingPrice();
+                    selectedPlayersSellingPrice += price / 10.0;
                 }
             }
             selectedPlayersValue += getValueByTechnique(s, optimizeRequest.getTechnique());
@@ -671,7 +668,7 @@ public class PlayerServiceImpl implements PlayerService {
                                     if (level2value > 0.0) {
                                         Double level2cost = level2player.getCost();
                                         if (recalculatedBudget >= (level1cost + level2cost)) {
-                                            if (level1value + level2value > selectedPlayersValue) {
+                                            if (compareValuesByTechnique(level1value + level2value, selectedPlayersValue, optimizeRequest.getTechnique())) {
                                                 List<PlayerStats> list = new ArrayList<>();
                                                 list.add(level1player);
                                                 list.add(level2player);
@@ -690,11 +687,14 @@ public class PlayerServiceImpl implements PlayerService {
         List<List<PlayerStats>> sortedBetterPlayers = sortListByTechnique(betterPlayers, optimizeRequest.getTechnique());
 
         List<BetterPlayers> options = new ArrayList<>();
-        List<List<PlayerStats>> best = sortedBetterPlayers.subList(Math.max(sortedBetterPlayers.size() - Integer.parseInt(String.valueOf(tips)), 0), sortedBetterPlayers.size());
+        if (sortedBetterPlayers.size() > 0) {
+            List<List<PlayerStats>> best = sortedBetterPlayers
+                    .subList(Math.max(sortedBetterPlayers.size() - Integer.parseInt(String.valueOf(tips)), 0), sortedBetterPlayers.size());
 
-        for (int i = 0; i < tips; i++) {
-            List<PlayerStats> list = new ArrayList<>(best.get(i));
-            options.add(new BetterPlayers(toRemove, list));
+            for (int i = 0; i < tips; i++) {
+                List<PlayerStats> list = new ArrayList<>(best.get(i));
+                options.add(new BetterPlayers(toRemove, list));
+            }
         }
         return options;
 
@@ -710,7 +710,8 @@ public class PlayerServiceImpl implements PlayerService {
         double selectedPlayerSellingPrice = 0.0;
         for (final TeamPlayer teamPlayer : optimizeRequest.getTeam()) {
             if (teamPlayer.getPlayerName().equals(selectedPlayerName)) {
-                selectedPlayerSellingPrice = teamPlayer.getSellingPrice() / 10.0;
+                Long price = teamPlayer.getSellingPrice() == null ? teamPlayer.getNowCost() : teamPlayer.getSellingPrice();
+                selectedPlayerSellingPrice = price / 10.0;
             }
         }
         Double selectedPlayerValue = getValueByTechnique(selected, optimizeRequest.getTechnique());
@@ -725,20 +726,34 @@ public class PlayerServiceImpl implements PlayerService {
                 .filter(player -> recalculatedBudget >= player.getCost())
                 .filter(player -> {
                     Double value = getValueByTechnique(player, optimizeRequest.getTechnique());
-                    return value > selectedPlayerValue;
+                    return compareValuesByTechnique(value, selectedPlayerValue, optimizeRequest.getTechnique());
                 })
                 .collect(Collectors.toList());
         List<PlayerStats> sortedBetterPlayers = sortByTechnique(betterPlayers, optimizeRequest.getTechnique());
 
         List<BetterPlayers> options = new ArrayList<>();
-        List<PlayerStats> best = sortedBetterPlayers.subList(Math.max(sortedBetterPlayers.size() - Integer.parseInt(String.valueOf(tips)), 0), sortedBetterPlayers.size());
+        if (sortedBetterPlayers.size() > 0) {
+            List<PlayerStats> best = sortedBetterPlayers
+                    .subList(Math.max(sortedBetterPlayers.size() - Integer.parseInt(String.valueOf(tips)), 0), sortedBetterPlayers.size());
 
-        for (int i = 0; i < tips; i++) {
-            List<PlayerStats> list = new ArrayList<>();
-            list.add(best.get(i));
-            options.add(new BetterPlayers(toRemove, list));
+            for (int i = 0; i < tips; i++) {
+                List<PlayerStats> list = new ArrayList<>();
+                list.add(best.get(i));
+                options.add(new BetterPlayers(toRemove, list));
+            }
         }
         return options;
+    }
+
+    private boolean compareValuesByTechnique(Double value, Double selectedPlayerValue, String technique) {
+        if (Technique.MAX.label.equals(technique)) {
+            return value > selectedPlayerValue;
+        } else if (Technique.TOTAL.label.equals(technique)) {
+            return value < selectedPlayerValue;
+        } else if (Technique.FORM.label.equals(technique)) {
+            return value < selectedPlayerValue;
+        }
+        return false;
     }
 
     private Double getValueByTechnique(PlayerStats player, String technique) {

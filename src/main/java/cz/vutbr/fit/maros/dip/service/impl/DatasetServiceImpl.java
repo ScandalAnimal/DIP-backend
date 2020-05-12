@@ -370,13 +370,13 @@ public class DatasetServiceImpl implements DatasetService {
     private double scalePrediction(double pred) {
         double result = Math.abs(pred);
         if (result <= 10) {
-            result *= 0.95;
+            result *= 1.0;
         } else if (result <= 20) {
             result *= 0.9;
         } else if (result <= 30) {
-            result *= 0.85;
+            result *= 0.8;
         }
-        result *= 0.8;
+        result *= 0.7;
         return result;
     }
 
