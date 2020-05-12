@@ -652,28 +652,32 @@ public class PlayerServiceImpl implements PlayerService {
         List<List<PlayerStats>> betterPlayers = new ArrayList<>();
         // TODO make into methods
         for (final PlayerStats level1player : otherPlayersPos1) {
-            Double level1value = getValueByTechnique(level1player, optimizeRequest.getTechnique());
-            if (level1value > 0.0) {
-                Double level1cost = level1player.getCost();
-                for (final PlayerStats level2player : otherPlayersPos2) {
-                    boolean duplicity = false;
-                    for (final List<PlayerStats> betterPlayer : betterPlayers) {
-                        if (betterPlayer.contains(level1player) && betterPlayer.contains(level2player)) {
-                            duplicity = true;
-                            break;
-                        }
-                    }
-                    if (!duplicity) {
-                        if (!level1player.equals(level2player)) {
-                            Double level2value = getValueByTechnique(level2player, optimizeRequest.getTechnique());
-                            if (level2value > 0.0) {
-                                Double level2cost = level2player.getCost();
-                                if (recalculatedBudget >= (level1cost + level2cost)) {
-                                    if (level1value + level2value > selectedPlayersValue) {
-                                        List<PlayerStats> list = new ArrayList<>();
-                                        list.add(level1player);
-                                        list.add(level2player);
-                                        betterPlayers.add(list);
+            if (!currentTeamPos1.contains(level1player)) {
+                Double level1value = getValueByTechnique(level1player, optimizeRequest.getTechnique());
+                if (level1value > 0.0) {
+                    Double level1cost = level1player.getCost();
+                    for (final PlayerStats level2player : otherPlayersPos2) {
+                        if (!currentTeamPos2.contains(level2player)) {
+                            boolean duplicity = false;
+                            for (final List<PlayerStats> betterPlayer : betterPlayers) {
+                                if (betterPlayer.contains(level1player) && betterPlayer.contains(level2player)) {
+                                    duplicity = true;
+                                    break;
+                                }
+                            }
+                            if (!duplicity) {
+                                if (!level1player.equals(level2player)) {
+                                    Double level2value = getValueByTechnique(level2player, optimizeRequest.getTechnique());
+                                    if (level2value > 0.0) {
+                                        Double level2cost = level2player.getCost();
+                                        if (recalculatedBudget >= (level1cost + level2cost)) {
+                                            if (level1value + level2value > selectedPlayersValue) {
+                                                List<PlayerStats> list = new ArrayList<>();
+                                                list.add(level1player);
+                                                list.add(level2player);
+                                                betterPlayers.add(list);
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -713,6 +717,7 @@ public class PlayerServiceImpl implements PlayerService {
         double recalculatedBudget = Math.round((originalBudget + selectedPlayerSellingPrice) * 10.0) / 10.0;
 
         List<PlayerStats> betterPlayers = otherPlayers.stream()
+                .filter(player -> !currentTeam.contains(player))
                 .filter(player -> {
                     Double value = getValueByTechnique(player, optimizeRequest.getTechnique());
                     return value > 0.0;
@@ -750,7 +755,8 @@ public class PlayerServiceImpl implements PlayerService {
     private Double countOriginalBudget(TeamPlayer[] team) {
         double cost = 0.0;
         for (final TeamPlayer teamPlayer : team) {
-            cost += teamPlayer.getPurchasePrice() / 10.0;
+            Long price = teamPlayer.getPurchasePrice() == null ? teamPlayer.getNowCost() : teamPlayer.getPurchasePrice();
+            cost += price / 10.0;
         }
         return Math.round((100.0 - cost) * 10.0) / 10.0;
     }
