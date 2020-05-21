@@ -8,4 +8,5 @@ public class ApiConstants {
     public static final String DATE_FORMAT = "dd-MM-yyyy hh:mm:ss";
     public static final String BASE_URL = "data/2019-20/";
     public static final String DATASET_URL = "dataset/";
+    public static final String COMPARE_DATASET_URL = "compare-dataset/";
 }

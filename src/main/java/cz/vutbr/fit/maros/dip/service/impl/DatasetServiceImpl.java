@@ -549,7 +549,7 @@ public class DatasetServiceImpl implements DatasetService {
         return 0;
     }
 
-    private List<Fixture> getRemainingFixtures() {
+    public List<Fixture> getRemainingFixtures() {
         String path = "data/2019-20/fixtures.csv";
         File file = new File(path);
 

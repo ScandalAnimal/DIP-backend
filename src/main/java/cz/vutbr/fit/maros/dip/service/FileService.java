@@ -12,6 +12,8 @@ public interface FileService {
 
     void appendDataToDataset(String keys, String values, String fileName);
 
+    void appendDataToCompareDataset(String keys, String values, String fileName);
+
     void createCsv(String keys, String values, String fileName);
 
     void csvToArff(String path);

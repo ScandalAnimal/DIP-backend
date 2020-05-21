@@ -117,6 +117,27 @@ public class FileServiceImpl implements FileService {
 
     }
 
+    public void appendDataToCompareDataset(String keys, String values, String filename) {
+        String filePath = ApiConstants.COMPARE_DATASET_URL + filename;
+
+        File file = new File(filePath);
+        file.getParentFile().mkdirs();
+        Paths.get(filePath);
+
+        try {
+            FileWriter writer = new FileWriter(filePath, true);
+            if (file.length() == 0) {
+                writer.write(keys + '\n');
+            }
+            writer.write(values);
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            throw new CustomException("Couldn't create file for writing data.");
+        }
+
+    }
+
     public void createCsv(String keys, String values, String filename) {
 
         File file = new File(filename);

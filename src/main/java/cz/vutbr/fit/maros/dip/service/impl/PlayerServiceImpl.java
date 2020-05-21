@@ -338,7 +338,6 @@ public class PlayerServiceImpl implements PlayerService {
 
     public Integer getPlayerPrize(String playerName) {
 
-        LOG.info("Started getting prize for player: " + playerName);
         String fileName = ApiConstants.BASE_URL + "cleaned_players.csv";
         String[] keys = {"first_name", "second_name", "now_cost"};
         BufferedReader br;
@@ -353,7 +352,6 @@ public class PlayerServiceImpl implements PlayerService {
                 String[] split = filteredLine.split(",");
                 String newName = split[0] + "_" + split[1];
                 if (newName.equals(playerName)) {
-                    LOG.info("Finished getting prize for player: " + playerName);
                     return Integer.parseInt(split[2]);
                 }
             }
@@ -361,7 +359,6 @@ public class PlayerServiceImpl implements PlayerService {
         } catch (IOException e) {
             throw new CustomException("Cannot read from file " + fileName + ".");
         }
-        LOG.info("Finished getting prize for player: " + playerName);
         return 0;
     }
 

@@ -89,7 +89,7 @@ public class DatasetUtils {
 
         StringJoiner joiner = new StringJoiner(",");
 
-        String[] split = line.split(",");
+        String[] split = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
 
         for (final Integer index : indexes) {
             joiner.add(split[index]);
