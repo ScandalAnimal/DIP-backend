@@ -1,0 +1,31 @@
+@relation Granit_Xhaka
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+118,1,2,37.1,9,10.6,5.7,90,54,0,0,1,0,2,0,True,17
+119,2,20,2,3,22.4,2.7,90,53,0,0,0,0,2,0,False,18
+120,1,7,16.5,4,7.2,2.8,71,53,0,0,1,0,2,0,True,2
+121,1,8,2.7,4,5.2,1.2,90,53,0,0,1,0,1,0,False,12
+122,3,11,2.3,4,15.6,2.2,90,53,0,0,0,0,0,0,True,3
+123,2,9,4,13,13.6,3.1,68,53,0,0,0,0,1,0,False,15
+124,5,17,13.1,4,22,3.9,60,53,0,1,0,0,2,0,True,7
+125,0,0,0,0,0,0,0,53,0,0,0,0,0,0,True,20

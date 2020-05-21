@@ -1,0 +1,31 @@
+@relation Alexandre_Lacazette
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+85,1,0,11.1,2,2.2,1.5,21,93,0,0,0,0,0,0,False,15
+86,5,8,16.2,68,4.8,8.9,90,93,0,1,0,0,2,0,True,7
+87,4,18,36.9,27,26.4,9,59,93,0,1,0,0,0,0,True,20
+88,2,3,2.3,51,4.6,5.8,90,93,0,0,0,0,2,0,False,9
+89,12,52,25.4,60,80.2,16.6,90,93,2,0,1,0,2,0,True,16
+90,2,1,17.1,47,2.6,6.7,90,93,0,0,0,0,2,0,False,14
+91,7,29,22.8,27,38.2,8.8,76,93,1,0,0,0,1,0,True,4
+92,0,0,0,0,0,0,0,93,0,0,0,0,0,0,False,19

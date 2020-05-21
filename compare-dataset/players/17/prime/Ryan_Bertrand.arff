@@ -1,0 +1,31 @@
+@relation Ryan_Bertrand
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+123,1,9,25.8,6,9,4.1,90,49,0,0,1,0,1,0,False,20
+124,-6,-8,0,0,0,0,11,48,0,0,0,1,9,0,True,9
+125,0,0,0,0,0,0,0,48,0,0,0,0,0,0,False,11
+126,0,0,0,0,0,0,0,48,0,0,0,0,0,0,True,8
+127,3,22,22.2,4,33,5.9,90,48,0,1,1,0,2,0,False,1
+128,2,9,8.8,4,10.4,2.3,90,48,0,0,0,0,1,0,True,18
+129,8,22,6.4,37,36.6,8,90,48,1,0,0,0,1,0,True,14
+130,1,6,5.9,33,13.4,5.2,90,48,0,0,0,0,2,0,False,13

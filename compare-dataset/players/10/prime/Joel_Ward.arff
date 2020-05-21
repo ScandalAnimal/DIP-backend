@@ -1,0 +1,31 @@
+@relation Joel_Ward
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+116,2,15,3.9,0,43.6,4.8,90,45,0,0,0,0,1,0,False,15
+117,2,6,0.8,0,16.2,1.7,90,45,0,0,0,0,1,0,False,12
+118,8,28,16.9,2,18.8,3.8,90,45,0,0,0,0,0,0,True,2
+119,-1,12,14.8,18,13,4.6,90,45,0,0,1,0,4,0,False,17
+120,6,22,7.3,1,17,2.5,90,45,0,1,0,0,1,0,True,20
+121,8,27,2.8,0,21,2.4,90,45,0,0,0,0,0,0,True,14
+122,1,10,6.3,2,12.6,2.1,90,46,0,0,1,0,1,0,False,19
+123,1,9,1.5,0,12.6,1.4,90,46,0,0,0,0,2,0,True,11

@@ -1,0 +1,31 @@
+@relation Andros_Townsend
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+125,0,0,0,0,0,0,0,56,0,0,0,0,0,0,True,9
+126,2,7,4.8,2,8.6,1.5,90,56,0,0,0,0,2,0,False,6
+127,5,20,41.1,23,33.4,9.8,90,56,0,1,0,0,2,0,True,10
+128,3,12,17.2,4,10.6,3.2,68,56,0,0,0,0,0,0,False,5
+129,1,0,1.7,2,3.6,0.7,45,56,0,0,0,0,0,0,True,3
+130,3,5,1.8,0,1.8,0.4,72,56,0,0,0,0,0,0,False,18
+131,0,0,0,0,0,0,0,56,0,0,0,0,0,0,True,4
+132,0,0,0,0,0,0,0,56,0,0,0,0,0,0,False,13

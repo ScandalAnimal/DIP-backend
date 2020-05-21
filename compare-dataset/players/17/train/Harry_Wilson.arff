@@ -1,0 +1,50 @@
+@relation Harry_Wilson
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+1,0,0,0,0,0,0,0,45,0,0,0,0,0,0,True,3
+2,0,0,0,0,0,0,0,45,0,0,0,0,0,0,False,10
+3,0,0,0,0,0,0,0,45,0,0,0,0,0,0,True,6
+4,0,0,0,0,0,0,0,45,0,0,0,0,0,0,True,2
+5,0,0,0,0,0,0,0,45,0,0,0,0,0,0,False,14
+6,0,0,0,0,0,0,0,45,0,0,0,0,0,0,False,19
+7,0,0,0,0,0,0,0,45,0,0,0,0,0,0,True,5
+8,0,0,0,0,0,0,0,45,0,0,0,0,0,0,False,18
+9,0,0,0,0,0,0,0,45,0,0,0,0,0,0,True,13
+10,0,0,0,0,0,0,0,45,0,0,0,0,0,0,False,20
+11,0,0,0,0,0,0,0,45,0,0,0,0,0,0,True,12
+12,0,0,0,0,0,0,0,60,0,0,0,0,0,0,True,15
+13,8,26,4.3,40,33.4,7.8,75,60,1,0,0,0,1,0,False,2
+14,6,28,27.7,25,41.4,9.4,53,60,1,0,0,0,2,0,True,11
+15,2,5,13.5,18,2,3.4,63,60,0,0,0,0,2,0,False,9
+16,1,2,2.3,15,2.2,2,56,60,0,0,0,0,1,0,True,8
+17,6,23,0.8,17,31,4.9,62,60,1,0,1,0,1,0,False,16
+18,2,8,20.5,0,11,3.2,77,61,0,0,0,0,2,0,True,19
+19,2,8,14.8,2,6.6,2.3,78,61,0,0,0,0,1,0,False,1
+20,3,7,6.4,12,11.4,3,68,61,0,0,0,0,0,0,True,14
+21,1,5,24.2,21,3.8,4.9,29,61,0,0,0,0,0,0,False,18
+22,3,4,3.3,65,9.2,7.8,85,60,0,0,0,0,0,0,True,12
+23,10,26,1.4,35,34.6,7.1,65,60,1,0,0,0,2,0,False,13
+24,1,2,1,10,0,1,45,60,0,0,0,0,2,0,True,20
+25,12,38,0.6,58,66.2,12.5,27,60,2,0,0,0,1,0,False,17
+26,2,8,15.1,6,16.8,3.8,90,60,0,0,0,0,1,0,False,7
+27,0,0,0,0,0,0,0,60,0,0,0,0,0,0,True,10

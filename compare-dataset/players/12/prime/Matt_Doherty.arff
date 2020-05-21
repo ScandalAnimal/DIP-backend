@@ -1,0 +1,31 @@
+@relation Matt_Doherty
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+42,0,0,0,0,0,0,0,60,0,0,0,0,0,0,False,8
+43,4,12,1.7,36,7.8,4.6,34,60,0,1,0,0,1,0,True,6
+44,1,1,2.1,33,6.8,4.2,56,60,0,0,0,0,1,0,False,7
+45,15,36,12.8,33,46.2,9.2,90,60,1,0,0,0,0,0,True,18
+46,1,4,0.3,0,11.6,1.2,22,60,0,0,0,0,0,0,False,11
+47,4,13,1.4,4,3.6,0.9,45,60,0,1,0,0,1,0,True,16
+48,2,11,14,35,10,5.9,90,60,0,0,0,0,1,0,False,13
+49,2,11,16.3,39,12.8,6.8,70,60,0,0,0,0,1,0,False,1

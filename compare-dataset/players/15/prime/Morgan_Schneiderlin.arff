@@ -1,0 +1,31 @@
+@relation Morgan_Schneiderlin
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+121,1,7,2.8,0,6,0.9,80,45,0,0,1,0,2,0,True,11
+122,2,8,13.4,0,0.2,1.4,83,45,0,0,0,0,1,0,False,5
+123,0,0,0,0,0,0,0,45,0,0,0,0,0,0,True,19
+124,0,0,0,0,0,0,0,45,0,0,0,0,0,0,False,4
+125,0,0,0,0,0,0,0,44,0,0,0,0,0,0,True,17
+126,2,13,12.4,1,10,2.3,90,44,0,0,0,0,1,0,False,16
+127,0,2,4.9,20,10.6,3.6,55,44,0,0,1,0,1,0,True,14
+128,1,4,0.1,0,2.2,0.2,12,44,0,0,0,0,1,0,False,9

@@ -1,0 +1,31 @@
+@relation Heung-Min_Son
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+121,5,12,34.8,37,30.6,10.2,63,97,0,1,0,0,1,0,True,16
+122,2,12,2.4,8,8.8,1.9,72,98,0,0,0,0,3,0,False,4
+123,1,-2,4.7,14,1.2,2,45,98,0,0,0,0,0,0,True,18
+124,5,11,2.5,57,13,7.3,90,97,0,1,0,0,2,0,False,10
+125,2,4,12.8,12,12.6,3.7,78,96,0,1,0,1,1,0,False,8
+126,8,22,29.5,74,43.2,14.7,90,96,1,0,0,0,1,0,True,15
+127,13,42,37,34,63.4,13.4,90,96,1,1,0,0,2,0,False,19
+128,10,47,51.2,27,48,12.6,87,97,0,2,0,0,1,0,True,3

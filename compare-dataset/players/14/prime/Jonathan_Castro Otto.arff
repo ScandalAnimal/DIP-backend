@@ -1,0 +1,31 @@
+@relation 'Jonathan_Castro Otto'
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+44,2,15,16.7,12,37,6.6,90,54,0,0,0,0,1,0,False,7
+45,6,25,3.3,7,12.4,2.3,90,54,0,0,0,0,0,0,True,18
+46,1,2,0,0,0.2,0,16,54,0,0,0,0,0,0,False,11
+47,2,15,2.9,2,13.2,1.8,90,54,0,0,0,0,1,0,True,16
+48,8,16,22.9,25,42,9,83,54,1,0,0,0,1,0,False,13
+49,2,16,35.9,37,26.4,9.9,90,54,0,0,0,0,1,0,False,1
+50,1,2,2.1,4,4,1,90,54,0,0,1,0,1,0,True,2
+51,2,11,24.4,5,9.4,3.9,90,54,0,0,0,0,1,0,False,3

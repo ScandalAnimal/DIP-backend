@@ -1,0 +1,31 @@
+@relation Diogo_Jota
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+40,2,-2,13.3,12,3,2.8,85,65,0,0,0,0,1,0,True,12
+41,2,10,14.5,60,8.4,8.3,90,65,0,0,0,0,1,0,True,5
+42,1,2,0.8,0,0.6,0.1,22,64,0,0,0,0,1,0,False,8
+43,2,7,4.8,24,7.4,3.6,90,63,0,0,0,0,5,0,True,6
+44,9,25,18,74,45.2,13.7,90,62,1,0,0,0,1,0,False,7
+45,0,0,0,0,0,0,0,62,0,0,0,0,0,0,True,18
+46,0,0,0,0,0,0,0,62,0,0,0,0,0,0,False,11
+47,1,4,11.2,8,4.4,2.4,28,61,0,0,0,0,0,0,True,16

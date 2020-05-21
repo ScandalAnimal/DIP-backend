@@ -1,0 +1,31 @@
+@relation Sofiane_Boufal
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+116,6,18,28.9,22,31.4,8.2,84,55,0,1,0,0,0,0,False,15
+117,2,14,14.9,59,19.4,9.3,90,55,0,0,0,0,3,0,True,3
+118,2,-2,24.8,13,6.2,4.4,87,55,0,0,0,0,2,0,False,17
+119,1,1,0.3,0,1,0.1,9,55,0,0,0,0,1,0,True,6
+120,1,5,0.7,0,3.2,0.4,14,55,0,0,0,0,0,0,False,20
+121,0,0,0,0,0,0,0,55,0,0,0,0,0,0,True,9
+122,0,0,0,0,0,0,0,55,0,0,0,0,0,0,False,11
+123,3,4,1.1,11,8.8,2.1,45,55,0,1,1,0,1,0,True,8

@@ -1,0 +1,31 @@
+@relation Fabián_Balbuena
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+48,1,11,0.6,4,10.8,1.5,90,43,0,0,1,0,1,0,True,15
+49,7,20,2,81,48.2,13.1,90,43,1,0,0,0,3,0,True,13
+50,1,8,0.3,2,15.4,1.8,90,43,0,0,0,0,3,0,False,5
+51,0,0,0,0,0,0,0,43,0,0,0,0,0,0,True,17
+52,7,30,10.2,19,20.4,5,90,43,0,0,0,0,0,0,False,6
+53,1,13,3.3,2,20.8,2.6,90,43,0,0,0,0,2,0,False,20
+54,1,10,0.6,2,21.4,2.4,90,43,0,0,0,0,3,0,True,1
+55,8,25,0,0,27,2.7,90,43,0,0,0,0,0,0,False,16

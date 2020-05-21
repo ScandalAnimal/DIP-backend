@@ -1,0 +1,31 @@
+@relation Calum_Chambers
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+117,0,0,0,0,0,0,0,45,0,0,0,0,0,0,False,10
+118,0,0,0,0,0,0,0,45,0,0,0,0,0,0,True,17
+119,0,0,0,0,0,0,0,45,0,0,0,0,0,0,False,18
+120,7,17,11,31,44.8,8.7,45,44,1,0,0,0,1,0,True,2
+121,1,9,12.8,4,8,2.5,90,44,0,0,1,0,1,0,False,12
+122,8,27,13,45,15.4,7.3,90,44,0,0,0,0,0,0,True,3
+123,1,9,30.9,28,20.2,7.9,90,44,0,0,1,0,1,0,False,15
+124,0,2,6.6,6,6.6,1.9,90,44,0,0,1,0,2,0,True,7

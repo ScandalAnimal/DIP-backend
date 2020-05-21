@@ -1,0 +1,31 @@
+@relation Jay_Rodriguez
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+80,1,0,0.5,17,4,2.2,17,58,0,0,0,0,1,0,True,10
+81,1,1,0,0,0,0,24,58,0,0,0,0,0,0,False,4
+82,1,2,0.8,0,1,0.2,11,57,0,0,0,0,0,0,True,14
+83,4,24,10.3,19,35,6.4,45,57,1,0,1,0,1,0,False,2
+84,1,7,0.6,17,7,2.5,17,57,0,0,0,0,0,0,True,8
+85,2,3,1.8,5,0.2,0.7,82,57,0,0,0,0,2,0,False,9
+86,6,26,5.3,42,39.4,8.7,90,57,1,0,0,0,4,0,True,6
+87,2,-1,1.6,10,0,0.7,77,57,0,0,0,0,3,0,False,15

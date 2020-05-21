@@ -1,0 +1,31 @@
+@relation Bamidele_Alli
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+125,9,29,17.4,17,41.2,7.6,90,84,1,0,0,0,1,0,False,8
+126,3,11,26.3,0,18.8,4.5,71,84,0,0,0,0,0,0,True,15
+127,5,20,24.3,4,23.8,5.2,78,84,0,1,0,0,1,0,False,19
+128,15,50,15.9,69,80.6,16.6,90,84,2,0,0,0,1,0,True,3
+129,9,29,23.6,56,44.2,12.4,90,85,1,0,0,0,2,0,False,12
+130,9,28,24.1,15,40.6,8,84,86,0,2,0,0,0,0,True,5
+131,2,10,14.8,22,13.6,5,90,87,0,0,0,0,1,0,False,20
+132,1,8,3.1,0,5.8,0.9,90,88,0,0,1,0,2,0,True,6

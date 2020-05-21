@@ -1,0 +1,31 @@
+@relation Ben_Mee
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+119,2,11,0.1,0,11.2,1.1,90,50,0,0,0,0,1,0,False,4
+120,6,22,0.3,0,17.2,1.8,90,50,0,0,0,0,0,0,True,14
+121,1,9,0,7,19.8,2.7,90,50,0,0,0,0,2,0,False,2
+122,6,24,10.3,6,28.2,4.5,90,50,0,0,0,0,0,0,True,8
+123,1,9,0.4,19,19.2,3.9,90,50,0,0,0,0,2,0,False,9
+124,0,19,10.5,2,22.8,3.5,90,50,0,0,0,0,4,0,True,6
+125,1,13,1.1,2,12,1.5,90,50,0,0,0,0,3,0,False,15
+126,5,24,10.5,38,25.4,7.4,90,50,0,0,1,0,0,0,True,19

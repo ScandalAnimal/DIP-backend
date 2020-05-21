@@ -1,0 +1,31 @@
+@relation 'N\'Golo_Kanté'
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+122,7,22,2.3,7,40.8,5,90,50,1,0,0,0,1,0,False,16
+123,0,0,0,0,0,0,0,50,0,0,0,0,0,0,True,13
+124,0,0,0,0,0,0,0,50,0,0,0,0,0,0,False,5
+125,0,0,0,0,0,0,0,50,0,0,0,0,0,0,False,18
+126,3,13,36.5,3,16.4,5.6,90,50,0,0,0,0,0,0,True,7
+127,8,32,30.2,37,50,11.7,90,50,1,0,0,0,2,0,False,11
+128,1,7,23.8,2,9,3.5,27,50,0,0,0,0,0,0,True,19
+129,2,16,57.3,13,23.4,9.4,90,50,0,0,0,0,1,0,True,2

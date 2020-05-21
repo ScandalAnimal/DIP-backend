@@ -1,0 +1,31 @@
+@relation Cheikhou_Kouyaté
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+123,2,10,12.1,5,8.6,2.6,90,49,0,0,0,0,2,0,True,11
+124,2,6,13.2,4,2.8,2,90,49,0,0,0,0,2,0,False,1
+125,2,5,2.2,2,2.4,0.7,73,49,0,0,0,0,1,0,True,9
+126,2,13,1.9,8,12.2,2.2,81,49,0,0,0,0,2,0,False,6
+127,2,18,32.4,4,18,5.4,71,49,0,0,0,0,1,0,True,10
+128,3,-2,2.3,10,2.8,1.5,90,49,0,0,0,0,0,0,False,5
+129,3,11,1.6,8,19.6,2.9,90,49,0,0,0,0,0,0,True,3
+130,3,7,1,0,18.6,2,82,49,0,0,0,0,0,0,False,18

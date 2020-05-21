@@ -1,0 +1,31 @@
+@relation Matthew_Lowton
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+121,4,22,15.3,2,32.8,5,90,45,0,1,0,0,2,0,False,2
+122,6,23,4.9,2,15,2.2,90,45,0,0,0,0,0,0,True,8
+123,0,15,17.3,2,16,3.5,90,45,0,0,1,0,2,0,False,9
+124,0,16,13,2,25.4,4,90,45,0,0,0,0,4,0,True,6
+125,1,10,3.8,0,14,1.8,90,45,0,0,0,0,3,0,False,15
+126,0,0,0,0,0,0,0,45,0,0,0,0,0,0,True,19
+127,0,0,0,0,0,0,0,45,0,0,0,0,0,0,False,18
+128,0,0,0,0,0,0,0,45,0,0,0,0,0,0,True,7

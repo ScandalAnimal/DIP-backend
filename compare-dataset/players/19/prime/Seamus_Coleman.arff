@@ -1,0 +1,31 @@
+@relation Seamus_Coleman
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+125,0,0,0,0,0,0,0,54,0,0,0,0,0,0,True,17
+126,0,0,0,0,0,0,0,54,0,0,0,0,0,0,False,16
+127,0,4,21.8,10,7.2,3.9,24,53,0,0,1,0,1,0,True,14
+128,0,0,0,0,0,0,0,53,0,0,0,0,0,0,False,9
+129,0,0,0,0,0,0,0,53,0,0,0,0,0,0,False,10
+130,0,0,0,0,0,0,0,53,0,0,0,0,0,0,True,6
+131,2,10,0.4,0,20.4,2.1,90,53,0,0,0,0,1,0,False,12
+132,0,0,0,0,0,0,0,53,0,0,0,0,0,0,True,1

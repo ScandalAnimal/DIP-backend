@@ -1,0 +1,31 @@
+@relation Rodrigo_Hernandez
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+2,2,16,24.2,7,23.4,5.5,77,55,0,0,0,0,2,0,True,17
+3,1,6,2,18,3,2.3,32,55,0,0,0,0,0,0,False,3
+4,3,20,18.7,4,23.4,4.6,90,55,0,0,0,0,0,0,True,4
+5,8,38,27.7,26,57.6,11.1,90,55,1,0,0,0,3,0,False,14
+6,3,19,14.3,8,17.2,4,90,55,0,0,0,0,0,0,True,18
+7,1,16,24.9,0,16.2,4.1,90,55,0,0,1,0,1,0,False,8
+8,1,14,50.2,4,18.4,7.3,90,55,0,0,1,0,2,0,True,20
+9,3,17,14.8,2,26.6,4.3,90,55,0,0,0,0,0,0,False,7

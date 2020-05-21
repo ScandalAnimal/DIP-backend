@@ -1,0 +1,31 @@
+@relation Kenny_McLean
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+10,2,9,3.6,0,20.4,2.4,90,49,0,0,0,0,3,0,True,12
+11,2,10,3.3,0,15.6,1.9,90,49,0,0,0,0,2,0,False,4
+12,2,16,26.4,28,19,7.3,90,49,0,0,0,0,2,0,True,18
+13,2,13,73.9,4,14.8,9.3,87,49,0,0,1,0,0,0,False,8
+14,4,12,18.2,45,28.2,9.1,90,49,0,1,1,0,2,0,True,1
+15,2,13,7,1,6,1.4,90,49,0,0,0,0,2,0,False,16
+16,2,10,22.2,10,9.2,4.1,90,49,0,0,0,0,2,0,True,15
+17,2,13,5.7,0,15.8,2.2,90,49,0,0,0,0,1,0,False,9

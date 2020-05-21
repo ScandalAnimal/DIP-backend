@@ -1,0 +1,31 @@
+@relation Nicolas_Pépé
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+6,8,30,61.8,70,47,17.9,90,94,1,0,1,0,2,0,True,2
+7,2,5,6,23,2.8,3.2,73,94,0,0,0,0,1,0,False,12
+8,6,16,19.6,8,18.2,4.6,62,93,0,1,0,0,0,0,True,3
+9,2,9,35.8,19,18.8,7.4,77,93,0,0,0,0,1,0,False,15
+10,2,14,67,13,22.6,10.3,90,93,0,0,0,0,2,0,True,7
+11,0,0,0,0,0,0,0,93,0,0,0,0,0,0,True,20
+12,1,5,1.1,0,4,0.5,13,93,0,0,0,0,0,0,False,9
+13,0,-3,1.7,6,4.2,1.2,45,92,0,0,1,0,1,0,True,16

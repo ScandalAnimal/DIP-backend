@@ -1,0 +1,31 @@
+@relation Benjamin_Mendy
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+87,0,0,0,0,0,0,0,60,0,0,0,0,0,0,True,16
+88,0,0,0,0,0,0,0,60,0,0,0,0,0,0,False,10
+89,2,12,6.5,0,12.2,1.9,90,58,0,0,0,0,1,0,True,6
+90,1,17,28.3,8,16.6,5.3,90,57,0,0,0,0,2,0,False,13
+91,0,0,0,0,0,0,0,57,0,0,0,0,0,0,False,5
+92,0,0,0,0,0,0,0,56,0,0,0,0,0,0,True,12
+93,5,21,20.8,0,9.6,3,84,55,0,0,1,0,0,0,False,1
+94,5,29,55.3,0,36.2,9.2,90,55,0,1,0,0,1,0,True,9

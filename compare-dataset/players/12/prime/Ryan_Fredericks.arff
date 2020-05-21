@@ -1,0 +1,31 @@
+@relation Ryan_Fredericks
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+42,5,20,12,10,6,2.8,90,45,0,0,1,0,0,0,True,14
+43,8,28,22.4,4,14.8,4.1,90,45,0,0,0,0,0,0,False,2
+44,6,24,3.8,6,9.8,2,79,45,0,0,0,0,0,0,True,12
+45,1,23,13.3,14,31.4,5.9,90,45,0,0,0,0,2,0,False,3
+46,3,22,57.3,2,40.6,10,90,45,0,1,1,0,2,0,True,7
+47,1,5,1.4,0,13.4,1.5,90,45,0,0,0,0,2,0,False,8
+48,0,0,0,0,0,0,0,45,0,0,0,0,0,0,True,15
+49,1,2,2.1,0,1.6,0.4,18,45,0,0,0,0,0,0,True,13

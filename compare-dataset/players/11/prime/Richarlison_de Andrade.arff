@@ -1,0 +1,31 @@
+@relation 'Richarlison_de Andrade'
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+79,2,13,3,18,10.8,3.2,77,80,0,0,0,0,1,0,False,2
+80,15,57,13.3,53,88,15.4,90,79,2,0,0,0,2,0,True,20
+81,4,18,40.9,19,28.4,8.8,80,79,0,1,1,0,3,0,False,3
+82,2,2,17.3,39,6.2,6.3,90,80,0,0,0,0,2,0,True,15
+83,2,4,1.6,27,15.2,4.4,90,80,0,0,0,0,3,0,True,11
+84,2,14,11.4,43,16.8,7.1,90,79,0,0,0,0,1,0,False,5
+85,6,12,18.3,20,22.6,6.1,90,79,0,1,0,0,0,0,True,19
+86,5,19,23.8,32,4.2,6,90,79,0,1,0,0,3,0,False,4

@@ -1,0 +1,31 @@
+@relation Toby_Alderweireld
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+116,1,16,0.1,0,31,3.1,90,55,0,0,0,0,2,0,False,11
+117,2,14,5.8,0,16.2,2.2,90,55,0,0,0,0,1,0,True,13
+118,1,13,0.1,2,18.4,2.1,90,55,0,0,0,0,2,0,False,1
+119,10,38,12.8,0,39.6,5.2,90,55,0,1,0,0,0,0,True,7
+120,1,11,0.3,2,22,2.4,90,55,0,0,0,0,2,0,False,9
+121,2,13,0.3,0,23.6,2.4,90,55,0,0,0,0,1,0,True,16
+122,1,16,2,2,29.8,3.4,90,55,0,0,0,0,3,0,False,4
+123,2,19,30.8,0,31.8,6.3,90,55,0,0,0,0,1,0,True,18

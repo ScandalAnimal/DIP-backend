@@ -1,0 +1,31 @@
+@relation Adrian_Mariappa
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+122,1,5,0.4,4,8.2,1.3,70,43,0,0,1,0,1,0,True,6
+123,1,5,0,0,7.2,0.7,20,42,0,0,0,0,0,0,False,14
+124,1,12,0.9,18,16,3.5,90,42,0,0,0,0,3,0,True,5
+125,1,11,0,2,13.4,1.5,90,42,0,0,0,0,2,0,False,16
+126,1,11,0,2,13.2,1.5,90,42,0,0,0,0,2,0,False,9
+127,0,0,0,0,0,0,0,42,0,0,0,0,0,0,True,7
+128,1,8,0.3,0,10,1,90,42,0,0,0,0,2,0,False,10
+129,6,26,18.9,2,19,4,90,42,0,0,0,0,0,0,True,12

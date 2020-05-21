@@ -1,0 +1,31 @@
+@relation Nathan_Aké
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+122,2,19,10.3,0,23.8,3.4,90,49,0,0,0,0,1,0,False,1
+123,8,26,0.3,6,8.6,1.5,90,49,0,0,0,0,0,0,True,14
+124,8,30,0.7,0,16,1.7,90,49,0,0,0,0,0,0,False,18
+125,6,24,0,0,11.4,1.1,90,50,0,0,0,0,0,0,True,12
+126,1,22,11.2,0,27.6,3.9,90,50,0,0,0,0,2,0,False,13
+127,1,10,0.3,21,13,3.4,90,51,0,0,0,0,2,0,True,20
+128,1,14,3.5,20,23.2,4.7,90,51,0,0,0,0,3,0,False,17
+129,2,12,3.3,8,19.4,3.1,90,51,0,0,0,0,1,0,False,7

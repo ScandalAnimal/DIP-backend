@@ -1,0 +1,31 @@
+@relation Eric_Dier
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+118,0,0,0,0,0,0,0,50,0,0,0,0,0,0,False,1
+119,0,0,0,0,0,0,0,49,0,0,0,0,0,0,True,7
+120,0,0,0,0,0,0,0,49,0,0,0,0,0,0,False,9
+121,1,0,0.2,17,3.2,2,12,49,0,0,0,0,0,0,True,16
+122,1,7,11,0,15.8,2.7,90,49,0,0,1,0,3,0,False,4
+123,0,0,0,0,0,0,0,49,0,0,0,0,0,0,True,18
+124,0,0,0,0,0,0,0,49,0,0,0,0,0,0,False,10
+125,0,0,0,0,0,0,0,49,0,0,0,0,0,0,False,8

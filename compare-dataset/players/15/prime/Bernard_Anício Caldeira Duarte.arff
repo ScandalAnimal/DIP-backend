@@ -1,0 +1,31 @@
+@relation 'Bernard_Anício Caldeira Duarte'
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+45,0,0,0,0,0,0,0,65,0,0,0,0,0,0,True,11
+46,0,0,0,0,0,0,0,65,0,0,0,0,0,0,False,5
+47,10,30,12.8,41,47.2,10.1,90,65,1,0,0,0,0,0,True,19
+48,1,1,0.7,2,0,0.2,29,65,0,0,0,0,1,0,False,4
+49,0,0,0,0,0,0,0,65,0,0,0,0,0,0,True,17
+50,0,0,0,0,0,0,0,65,0,0,0,0,0,0,False,16
+51,0,0,0,0,0,0,0,64,0,0,0,0,0,0,True,14
+52,0,0,0,0,0,0,0,64,0,0,0,0,0,0,False,9

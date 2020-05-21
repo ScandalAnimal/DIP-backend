@@ -1,0 +1,31 @@
+@relation Dwight_McNeil
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+38,5,18,26.8,29,7.6,6.3,90,60,0,1,0,0,2,0,False,1
+39,6,17,30.4,20,21.2,7.2,85,60,0,1,0,0,0,0,False,20
+40,2,10,19.3,13,4.8,3.7,90,60,0,0,0,0,3,0,True,10
+41,2,4,6.3,4,7.6,1.8,90,60,0,0,0,0,1,0,False,4
+42,6,26,35,6,25.2,6.6,78,60,0,1,0,0,0,0,True,14
+43,2,6,30.2,8,11.2,4.9,90,60,0,0,0,0,2,0,False,2
+44,3,15,2.3,4,12.6,1.9,90,60,0,0,0,0,0,0,True,8
+45,5,18,17.2,26,25,6.8,90,60,0,1,0,0,2,0,False,9

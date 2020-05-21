@@ -1,0 +1,31 @@
+@relation 'Alexandre Nascimento_Costa Silva'
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+30,0,0,0,0,0,0,0,44,0,0,0,0,0,0,True,7
+31,0,0,0,0,0,0,0,44,0,0,0,0,0,0,False,8
+32,0,0,0,0,0,0,0,44,0,0,0,0,0,0,True,15
+33,0,0,0,0,0,0,0,44,0,0,0,0,0,0,True,13
+34,0,0,0,0,0,0,0,44,0,0,0,0,0,0,False,5
+35,0,0,0,0,0,0,0,44,0,0,0,0,0,0,True,17
+36,0,0,0,0,0,0,0,44,0,0,0,0,0,0,False,6
+37,0,0,0,0,0,0,0,44,0,0,0,0,0,0,False,20

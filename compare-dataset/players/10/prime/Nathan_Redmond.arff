@@ -1,0 +1,31 @@
+@relation Nathan_Redmond
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+116,2,6,22.9,11,4.6,3.9,90,65,0,0,0,0,2,0,True,10
+117,10,31,23.5,41,46.2,11.1,90,64,1,0,0,0,0,0,False,4
+118,0,0,0,0,0,0,0,64,0,0,0,0,0,0,True,12
+119,0,0,0,0,0,0,0,63,0,0,0,0,0,0,False,15
+120,2,9,40.4,36,14.4,9.1,87,63,0,0,0,0,2,0,True,3
+121,2,6,18.8,51,1.2,7.1,90,63,0,0,0,0,2,0,False,17
+122,2,6,2.3,9,0.4,1.2,80,63,0,0,0,0,3,0,True,6
+123,2,11,5,28,4.6,3.8,90,63,0,0,0,0,1,0,False,20

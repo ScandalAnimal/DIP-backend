@@ -1,0 +1,31 @@
+@relation Andrew_Robertson
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+117,2,21,49.8,37,25,11.2,90,70,0,0,0,0,1,0,True,1
+118,6,26,5,2,9,1.6,90,69,0,0,0,0,0,0,False,5
+119,5,26,33.7,37,40.8,11.2,90,69,0,1,0,0,1,0,True,13
+120,8,30,16.7,2,37.6,5.6,90,69,0,1,0,0,1,0,False,6
+121,6,26,17,3,18,3.8,90,69,0,0,0,0,0,0,False,15
+122,2,20,16.9,21,19,5.7,90,69,0,0,0,0,1,0,True,9
+123,8,32,33.2,2,40.2,7.5,90,69,0,1,0,0,1,0,False,12
+124,2,25,32,16,21.8,7,90,69,0,0,0,0,1,0,True,17

@@ -1,0 +1,31 @@
+@relation Davy_Pröpper
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+81,2,11,12.9,30,14.2,5.7,90,50,0,0,0,0,1,0,True,5
+82,3,12,44.8,6,17.4,6.8,90,50,0,0,0,0,0,0,False,13
+83,0,0,0,0,0,0,0,50,0,0,0,0,0,0,False,6
+84,0,0,0,0,0,0,0,50,0,0,0,0,0,0,True,17
+85,2,18,29.6,4,22.8,5.6,90,50,0,0,0,0,2,0,False,2
+86,1,12,16.9,2,13.8,3.3,90,50,0,0,1,0,2,0,True,8
+87,3,21,29,16,23.4,6.8,90,50,0,0,0,0,0,0,True,14
+88,-1,5,2.6,0,11,1.4,90,50,0,0,1,0,3,0,False,12

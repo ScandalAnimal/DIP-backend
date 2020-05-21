@@ -1,0 +1,31 @@
+@relation Ilkay_Gündogan
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+116,2,16,40.3,16,9.8,6.6,90,55,0,0,0,0,2,0,True,17
+117,1,18,13.4,2,16,3.1,57,54,0,0,0,0,1,0,False,3
+118,1,-1,2.3,3,4.6,1,21,54,0,0,0,0,0,0,True,4
+119,1,10,23.3,0,3,2.6,56,53,0,0,0,0,3,0,False,14
+120,0,0,0,0,0,0,0,53,0,0,0,0,0,0,True,18
+121,2,9,14.8,34,11,6,90,52,0,0,0,0,1,0,False,8
+122,1,14,41.2,3,10,5.4,90,52,0,0,1,0,2,0,True,20
+123,3,22,42.3,19,22,8.3,90,52,0,0,0,0,0,0,False,7

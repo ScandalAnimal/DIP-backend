@@ -1,0 +1,31 @@
+@relation Ayoze_Pérez
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+87,3,6,5.8,12,15,3.3,73,61,0,0,0,0,0,0,False,7
+88,1,2,7.3,11,0.8,1.9,59,61,0,0,0,0,0,0,True,1
+89,8,23,21.6,55,35.4,11.2,69,62,1,0,0,0,0,0,False,4
+90,2,2,4.2,29,0.2,3.3,61,62,0,0,0,0,1,0,True,8
+91,1,1,14.2,12,0,2.6,45,62,0,0,0,0,0,0,True,18
+92,0,0,0,0,0,0,0,62,0,0,0,0,0,0,False,2
+93,0,0,0,0,0,0,0,62,0,0,0,0,0,0,True,14
+94,2,6,11.7,3,7.4,2.2,67,61,0,0,0,0,2,0,False,11

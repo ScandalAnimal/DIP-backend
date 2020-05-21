@@ -1,0 +1,31 @@
+@relation James_Tarkowski
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+124,0,25,10.8,4,25.8,4.1,90,50,0,0,0,0,4,0,True,6
+125,0,11,0.3,0,20.4,2.1,90,50,0,0,1,0,3,0,False,15
+126,12,33,10.3,4,30.8,4.5,90,50,0,1,0,0,0,0,True,19
+127,17,34,0.3,90,57.8,14.8,90,50,1,1,1,0,0,0,False,18
+128,1,13,0.3,11,7,1.8,90,51,0,0,0,0,2,0,True,7
+129,0,10,0.3,4,21.4,2.6,90,51,0,0,0,0,4,0,True,11
+130,0,20,10.2,4,23.6,3.8,90,51,0,0,0,0,5,0,False,17
+131,6,24,0.1,7,25.8,3.3,90,51,0,0,0,0,0,0,True,13

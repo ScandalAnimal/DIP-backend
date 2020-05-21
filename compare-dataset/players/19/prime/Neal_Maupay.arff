@@ -1,0 +1,31 @@
+@relation Neal_Maupay
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+11,2,-2,4.1,93,0,9.4,90,60,0,0,0,0,0,0,True,14
+12,2,5,2.8,8,3.2,1.4,90,61,0,0,0,0,3,0,False,12
+13,2,3,12.1,26,0.2,3.8,90,60,0,0,0,0,2,0,True,9
+14,1,1,0.8,0,0.2,0.1,14,59,0,0,0,0,0,0,False,10
+15,9,30,13.4,83,42,13.8,90,58,1,0,0,0,1,0,False,1
+16,8,28,2.3,77,39.4,11.9,90,58,1,0,0,0,2,0,True,20
+17,6,23,4.1,60,37.4,10.2,90,58,1,0,0,0,1,0,False,7
+18,2,5,1.6,14,0.2,1.6,90,58,0,0,0,0,1,0,True,15

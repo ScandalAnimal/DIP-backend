@@ -1,0 +1,31 @@
+@relation 'Rúben Diogo_da Silva Neves'
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+48,1,12,5,3,12,2,90,54,0,0,1,0,1,0,False,13
+49,2,10,13.1,17,6.4,3.7,90,53,0,0,0,0,1,0,False,1
+50,11,33,32.5,15,54.6,10.2,85,53,1,0,0,0,0,0,True,2
+51,2,13,12.5,19,8.6,4,90,53,0,0,0,0,1,0,False,3
+52,2,13,6.8,16,11.4,3.4,90,53,0,0,0,0,1,0,True,15
+53,3,13,3.5,0,6,1,90,53,0,0,0,0,0,0,True,19
+54,2,12,26.7,1,11.4,3.9,90,53,0,0,0,0,2,0,False,4
+55,2,12,25.6,16,14.2,5.6,90,53,0,0,0,0,2,0,True,17

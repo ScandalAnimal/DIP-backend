@@ -1,0 +1,31 @@
+@relation Roberto_Firmino
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+116,8,31,7.2,32,36.4,7.6,90,95,1,0,0,0,1,0,False,16
+117,2,8,5.8,99,10.6,11.5,85,95,0,0,0,0,1,0,True,1
+118,12,43,26.9,72,60,15.9,84,95,1,1,0,0,0,0,False,5
+119,8,33,49.6,29,28.8,10.7,53,95,0,2,0,0,0,0,True,13
+120,9,30,12.6,58,46.2,11.7,90,95,1,0,0,0,1,0,False,6
+121,2,14,14.9,10,3.6,2.9,86,96,0,0,0,0,0,0,False,15
+122,2,10,26.5,41,4.4,7.2,77,96,0,0,0,0,0,0,True,9
+123,2,11,5.8,44,7.2,5.7,90,96,0,0,0,0,1,0,False,12

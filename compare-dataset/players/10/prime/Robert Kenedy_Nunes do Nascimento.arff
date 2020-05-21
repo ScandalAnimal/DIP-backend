@@ -1,0 +1,31 @@
+@relation 'Robert Kenedy_Nunes do Nascimento'
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+116,0,0,0,0,0,0,0,55,0,0,0,0,0,0,True,9
+117,0,0,0,0,0,0,0,54,0,0,0,0,0,0,False,14
+118,0,0,0,0,0,0,0,54,0,0,0,0,0,0,True,15
+119,0,0,0,0,0,0,0,54,0,0,0,0,0,0,False,20
+120,0,0,0,0,0,0,0,53,0,0,0,0,0,0,True,10
+121,0,0,0,0,0,0,0,53,0,0,0,0,0,0,True,4
+122,0,0,0,0,0,0,0,53,0,0,0,0,0,0,False,16
+123,0,0,0,0,0,0,0,53,0,0,0,0,0,0,True,13

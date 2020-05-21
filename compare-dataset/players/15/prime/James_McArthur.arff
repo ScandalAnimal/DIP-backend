@@ -1,0 +1,31 @@
+@relation James_McArthur
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+121,6,19,24.9,42,8.8,7.6,78,53,0,1,0,0,0,0,True,14
+122,2,15,2.1,1,11,1.4,90,53,0,0,0,0,1,0,False,19
+123,2,15,22.5,4,21,4.8,90,53,0,0,0,0,2,0,True,11
+124,7,29,25.8,19,38.4,8.3,90,53,0,1,0,0,2,0,False,1
+125,2,6,3.5,5,1.4,1,77,53,0,0,0,0,1,0,True,9
+126,2,13,0.8,2,13.4,1.6,69,53,0,0,0,0,1,0,False,6
+127,2,10,20.9,4,21,4.6,90,52,0,0,0,0,2,0,True,10
+128,3,10,7.2,22,17.4,4.7,90,52,0,0,0,0,0,0,False,5

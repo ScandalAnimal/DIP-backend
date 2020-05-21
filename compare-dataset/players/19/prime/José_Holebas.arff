@@ -1,0 +1,31 @@
+@relation José_Holebas
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+125,0,0,0,0,0,0,0,47,0,0,0,0,0,0,True,6
+126,6,26,27.6,8,19,5.5,87,47,0,0,0,0,0,0,False,14
+127,1,4,11.2,21,6.2,3.8,90,47,0,0,0,0,3,0,True,5
+128,1,8,33.9,2,14.4,5,90,47,0,0,0,0,2,0,False,16
+129,0,0,0,0,0,0,0,47,0,0,0,0,0,0,False,9
+130,0,0,0,0,0,0,0,47,0,0,0,0,0,0,True,7
+131,0,0,0,0,0,0,0,47,0,0,0,0,0,0,False,10
+132,0,0,0,0,0,0,0,47,0,0,0,0,0,0,True,12

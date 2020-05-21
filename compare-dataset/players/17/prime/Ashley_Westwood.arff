@@ -1,0 +1,31 @@
+@relation Ashley_Westwood
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+100,2,20,31.9,8,31.4,7.1,90,54,0,0,0,0,2,0,False,9
+101,2,12,3.2,20,9.6,3.3,90,54,0,0,0,0,4,0,True,6
+102,2,15,18.8,0,9.8,2.9,90,54,0,0,0,0,3,0,False,15
+103,5,18,16.8,0,6,2.3,90,54,0,1,1,0,0,0,True,19
+104,2,12,9.6,0,14.6,2.4,90,54,0,0,1,0,0,0,False,18
+105,0,0,0,0,0,0,0,54,0,0,0,0,0,0,True,7
+106,0,0,0,0,0,0,0,54,0,0,0,0,0,0,True,11
+107,0,0,0,0,0,0,0,54,0,0,0,0,0,0,False,17

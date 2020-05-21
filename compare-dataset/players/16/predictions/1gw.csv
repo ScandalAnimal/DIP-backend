@@ -1,0 +1,625 @@
+player_name,predicted_points,actual_points
+Aaron_Connolly,0.99,0
+Aaron_Cresswell,1.78,6
+Aaron_Lennon,0.75,0
+Aaron_Mooy,8.0,2
+Aaron_Ramsdale,6.73,10
+Aaron_Wan-Bissaka,2.33,4
+Abd-Al-Ali Morakinyo Olaposi_Koiki,0.0,?
+Abdoulaye_Doucouré,6.08,2
+Adama_Traoré,20.04,10
+Adam_Idah,0.0,1
+Adam_Lallana,5.42,0
+Adam_Masina,8.83,0
+Adam_Smith,1.24,0
+Adam_Webster,6.92,2
+Addji Keaninkin Marc-Israel_Guehi,0.0,0
+Ademola_Lookman,0.11,0
+Adrian_Mariappa,1.52,1
+Adrián_San Miguel del Castillo,0.32,0
+Ahmed_El Mohamady,4.33,0
+Ainsley_Maitland-Niles,0.19,1
+Akin_Famewo,0.0,0
+Albian_Ajeti,1.19,0
+Alexander_Tettey,3.47,1
+Alexandre Nascimento_Costa Silva,0.0,0
+Alexandre_Lacazette,6.38,0
+Alexis_Mac Allister,?,?
+Alexis_Sánchez,3.31,0
+Alex_Iwobi,2.7,2
+Alex_McCarthy,2.65,3
+Alex_Oxlade-Chamberlain,4.88,1
+Alfie_Whiteman,0.0,0
+Alireza_Jahanbakhsh,0.0,0
+Alisson_Ramses Becker,0.74,6
+Allan_Saint-Maximin,1.17,0
+Andreas_Christensen,0.08,0
+Andreas_Pereira,3.99,0
+Andrew_Robertson,9.25,1
+Andrew_Surman,0.64,0
+Andre_Gray,0.46,1
+Andre_Green,0.0,0
+Andriy_Yarmolenko,2.77,1
+Andros_Townsend,0.99,0
+André Filipe_Tavares Gomes,1.68,0
+Andy_Carroll,0.6,1
+Andy_King,0.57,0
+Andy_Lonergan,0.0,0
+Angelo_Ogbonna,0.6,6
+Angel_Gomes,0.0,0
+Angus_Gunn,0.15,0
+Anthony_Driscoll-Glennon,0.0,?
+Anthony_Gordon,0.2,0
+Anthony_Knockaert,1.17,0
+Anthony_Martial,10.41,2
+Antonio_Rüdiger,0.51,2
+Anwar_El Ghazi,1.8,2
+Archie_Mair,0.0,0
+Armando_Broja,?,?
+Arnaut_Danjuma Groeneveld,1.05,0
+Arthur_Masuaku,1.34,0
+Artur_Boruc,0.32,0
+Ashley_Barnes,23.61,2
+Ashley_Westwood,0.76,8
+Ashley_Young,0.29,0
+Asmir_Begovic,0.27,0
+Axel_Tuanzebe,0.16,0
+Aymeric_Laporte,0.69,0
+Ayotomiwa_Dele-Bashiru,0.0,0
+Ayoze_Pérez,9.39,0
+Bailey_Peacock-Farrell,0.0,0
+Bamidele_Alli,3.65,2
+Beni_Baningime,0.0,0
+Benjamin_Chilwell,13.77,2
+Benjamin_Mendy,8.54,5
+Ben_Davies,0.81,0
+Ben_Foster,0.22,2
+Ben_Gibson,0.0,0
+Ben_Godfrey,1.99,2
+Ben_Johnson,0.0,0
+Ben_Mee,5.58,6
+Ben_Osborn,0.0,1
+Beram_Kayal,0.68,0
+Bernardo Mota_Veiga de Carvalho e Silva,5.62,1
+Bernardo_Costa Da Rosa,0.0,?
+Bernardo_Fernandes da Silva Junior,0.16,1
+Bernard_Anício Caldeira Duarte,3.38,3
+Bernard_Ashley-Seal,0.0,0
+Bernd_Leno,3.98,2
+Billy_Gilmour,0.01,0
+Billy_Sharp,0.1,0
+Birkir_Bjarnason,0.0,0
+Bjorn_Engels,0.01,1
+Borja_González Tomás,?,?
+Brandon_Austin,0.0,0
+Brandon_Pierrick,0.0,?
+Brandon_Williams,1.89,2
+Bruno André_Cavaco Jordao,?,?
+Bruno Miguel_Borges Fernandes,?,?
+Bukayo_Saka,0.45,0
+Callum_Hudson-Odoi,11.62,1
+Callum_Robinson,0.42,0
+Callum_Slattery,0.0,0
+Callum_Wilson,12.41,0
+Calum_Chambers,4.77,1
+Caoimhin_Kelleher,0.0,0
+Carlos_Sánchez,0.92,1
+Carl_Jenkinson,0.0,0
+Cenk_Tosun,12.66,0
+Charlie_Austin,0.29,0
+Charlie_Daniels,1.39,0
+Charlie_Taylor,3.01,0
+Cheikhou_Kouyaté,2.58,2
+Che_Adams,0.75,1
+Christian_Atsu,3.43,2
+Christian_Benteke,0.72,1
+Christian_Eriksen,6.38,4
+Christian_Fuchs,3.18,0
+Christian_Kabasele,5.78,1
+Christian_Pulisic,16.75,3
+Christian_Saydee,0.0,?
+Christoph_Zimmermann,2.35,2
+Chris_Basham,4.85,7
+Chris_Mepham,0.35,6
+Chris_Smalling,1.04,0
+Chris_Wood,4.07,9
+Ciaran_Clark,7.17,0
+Claudio_Bravo,0.04,0
+Connor_Wickham,0.29,0
+Conor_Coady,14.34,1
+Conor_Hourihane,9.76,0
+Craig_Cathcart,9.71,1
+Craig_Dawson,7.75,0
+Curtis_Jones,0.0,?
+Cédric_Soares,1.79,2
+César_Azpilicueta,6.54,2
+Dale_Stephens,1.94,0
+Daniel_Amartey,0.05,0
+Daniel_Castelo Podence,?,?
+Daniel_Ceballos Fernández,0.45,0
+Daniel_Drinkwater,0.31,0
+Daniel_James,5.8,5
+Daniel_N'Lundulu,0.0,0
+Danilo Luiz_da Silva,0.46,0
+Danny_Ings,8.12,2
+Danny_Rose,0.0,0
+Danny_Ward,0.07,0
+Danny_Welbeck,0.05,0
+Dan_Burn,1.17,2
+Dan_Gosling,0.64,7
+Darren_Randolph,0.04,?
+Daryl_Janmaat,10.7,0
+Davide_Zappacosta,0.13,0
+David_Brooks,1.09,0
+David_Button,0.01,0
+David_de Gea,1.44,3
+David_Luiz Moreira Marinho,3.01,0
+David_Martin,0.67,0
+David_McGoldrick,4.95,5
+David_Silva,4.45,0
+Davinson_Sánchez,0.51,1
+Davy_Pröpper,2.59,1
+DeAndre_Yedlin,5.27,0
+Dean_Henderson,0.0,6
+Declan_Rice,1.81,3
+Dejan_Lovren,1.34,0
+Demarai_Gray,1.22,1
+Dennis_Praet,0.6,1
+Dennis_Srbeny,1.22,0
+Diego_Rico,2.43,6
+Dimitri_Foulquier,0.14,0
+Diogo_Jota,2.46,2
+Divock_Origi,0.99,4
+Djibril_Sidibé,2.63,0
+Domingos_Quina,0.02,1
+Dominic_Calvert-Lewin,3.75,2
+Dominic_Solanke,0.99,1
+Douglas Luiz_Soares de Paulo,2.28,1
+Dwight_Gayle,3.05,0
+Dwight_McNeil,5.02,3
+Ederson_Santana de Moraes,5.14,6
+Edward_Nketiah,0.04,0
+Eldin_Jakupovic,0.14,0
+Emerson_Palmieri dos Santos,7.66,2
+Emile_Smith Rowe,0.0,?
+Emiliano_Buendía,0.93,5
+Emiliano_Martínez,0.0,0
+Emil_Krafth,0.44,0
+Enda_Stevens,0.97,6
+Eric_Bailly,0.11,0
+Eric_Dier,0.61,4
+Eric_Garcia,3.14,0
+Erik_Lamela,0.67,0
+Erik_Pieters,2.61,8
+Ethan_Ampadu,0.0,0
+Etienne_Capoue,3.21,2
+Ezequiel_Schelotto,2.5,0
+Ezri_Konsa Ngoyo,0.21,0
+Fabian_Delph,0.46,0
+Fabian_Schär,0.9,2
+Fabio Henrique_Tavares,2.85,0
+Fabián_Balbuena,1.8,8
+Faustino_Anjorin,?,?
+Federico_Fernández,7.62,2
+Felipe Anderson_Pereira Gomes,2.72,0
+Fernando_Luiz Rosa,0.02,2
+Fikayo_Tomori,6.05,0
+Filip_Benkovic,0.0,?
+Florian_Lejeune,0.11,0
+Florin_Andone,0.21,0
+Francisco_Femenía Far,3.36,1
+Fraser_Forster,0.55,0
+Frederick_Woodman,0.0,0
+Frederico_Rodrigues de Paula Santos,0.17,2
+Frédéric_Guilbert,0.97,1
+Gabriel Fernando_de Jesus,8.76,5
+Gabriel Teodoro_Martinelli Silva,1.04,2
+Gary_Cahill,0.12,0
+Gavin_Kilkenny,0.0,?
+Gaëtan_Bong,0.2,0
+Gedson_Carvalho Fernandes,?,?
+Georges-Kévin_Nkoudou,0.02,0
+George_Baldock,1.92,6
+Georginio_Wijnaldum,5.6,1
+Gerard_Deulofeu,2.2,2
+Giovani_Lo Celso,1.56,0
+Giovanni_McGregor,?,?
+Glenn_Murray,1.04,0
+Gonçalo Bento_Soares Cardoso,0.0,?
+Grady_Diangana,0.66,0
+Granit_Xhaka,2.31,0
+Grant_Hanley,0.0,0
+Gylfi_Sigurdsson,4.44,0
+Hamza_Choudhury,0.16,0
+Harry_Kane,15.66,1
+Harry_Lewis,0.0,0
+Harry_Maguire,0.52,2
+Harry_Wilson,9.69,0
+Harry_Winks,0.91,1
+Harvey_Barnes,13.82,1
+Harvey_Elliott,0.01,0
+Henrikh_Mkhitaryan,0.92,0
+Henri_Lansbury,0.84,2
+Heung-Min_Son,11.4,2
+Heurelho da Silva_Gomes,0.0,0
+Hugo_Lloris,0.57,0
+Héctor_Bellerín,0.16,0
+Hélder_Costa,0.18,0
+Ibrahim_Amadou,0.34,0
+Idrissa_Gueye,0.0,0
+Ignacio_Pussetto,?,?
+Ilkay_Gündogan,10.02,2
+Indiana_Vassilev,?,?
+Isaac_Hayden,1.2,2
+Isaac_Success Ajayi,0.57,0
+Ismaïla_Sarr,4.23,2
+Issa_Diop,4.63,1
+Ivan_Cavaleiro,0.03,0
+Jack_Colback,0.0,0
+Jack_Cork,0.61,3
+Jack_Grealish,1.07,0
+Jack_O'Connell,6.41,6
+Jack_Robinson,?,?
+Jack_Simpson,0.11,0
+Jack_Stacey,0.81,6
+Jack_Stephens,1.48,2
+Jack_Wilshere,0.05,0
+Jacob_Murphy,0.5,0
+Jairo_Riedewald,1.03,2
+Jake_Eastwood,0.0,0
+Jamaal_Lascelles,13.15,0
+Jamal_Lewis,3.65,0
+James_Chester,0.0,0
+James_Daly,0.0,?
+James_Garner,0.19,0
+James_Justin,1.75,0
+James_Maddison,9.64,2
+James_McArthur,4.27,2
+James_McCarthy,0.64,1
+James_Milner,5.09,2
+James_Tarkowski,9.72,6
+James_Tomkins,20.44,5
+James_Ward-Prowse,12.95,2
+Jamie_Vardy,22.83,5
+Jannik_Vestergaard,0.62,0
+Jan_Bednarek,0.58,2
+Jan_Vertonghen,2.69,10
+Japhet_Tanganga,2.08,?
+Javier_Hernández Balcázar,0.94,0
+Javier_Manquillo,0.89,2
+Jay_Rodriguez,1.43,1
+Jean-Philippe_Gbamin,0.0,0
+Jed_Steer,0.17,0
+Jefferson_Lerma,1.17,8
+Jeffrey_Schlupp,1.32,0
+Jeff_Hendrick,6.32,3
+Jeremy_Ngakia,2.0,?
+Jesse_Lingard,0.26,2
+Jesús_Vallejo Lázaro,0.15,0
+Jetro_Willems,0.25,2
+Joelinton Cássio_Apolinário de Lira,1.46,1
+Joel_Matip,1.61,0
+Joel_Ward,2.3,0
+Joe_Hart,0.29,0
+Johann Berg_Gudmundsson,1.94,0
+John_Egan,3.02,6
+John_Fleck,17.58,15
+John_Lundstram,22.82,11
+John_McGinn,1.34,2
+John_Ruddy,0.0,0
+John_Stones,6.78,0
+Jonas_Lössl,0.88,0
+Jonathan_Castro Otto,4.46,0
+Jonathan_Kodjia,0.35,1
+Jonjo_Shelvey,1.7,0
+Jonny_Evans,14.79,2
+Jordan_Ayew,1.53,2
+Jordan_Henderson,8.86,2
+Jordan_Pickford,3.95,5
+Jordon_Ibe,0.26,0
+Jorge Luiz_Frello Filho,4.45,3
+Jose Luis_Mato Sanmartín,0.12,0
+Joseph_Anang,0.0,?
+Joseph_Gomez,0.64,8
+Joseph_Willock,0.57,1
+Joshua_King,3.25,2
+Josh_Brownhill,?,?
+Josip_Drmic,0.05,0
+José Diogo_Dalot Teixeira,0.13,0
+José Heriberto_Izquierdo Mena,0.05,0
+José Ignacio_Peleteiro Romallo,0.26,0
+José Ángel_Esmorís Tasende,11.61,0
+José_Holebas,7.47,0
+José_Reina,?,?
+João Filipe Iria_Santos Moutinho,0.56,1
+João Manuel_Neves Virgínia,?,?
+João Pedro Cavaco_Cancelo,4.83,0
+João Pedro_Junqueira de Jesus,?,?
+Juan_Foyth,0.72,1
+Juan_Mata,5.88,1
+Junior_Stanislas,0.53,0
+Jürgen_Locadia,0.36,0
+Karl_Darlow,0.05,0
+Kasper_Schmeichel,1.36,2
+Kayne_Ramsay,0.0,0
+Keinan_Davis,0.38,0
+Kelechi_Iheanacho,0.49,1
+Kelland_Watts,0.0,?
+Kenny_McLean,4.73,2
+Ken_Sema,0.15,0
+Kepa_Arrizabalaga,3.5,2
+Kevin_Danso,0.26,0
+Kevin_De Bruyne,13.38,19
+Kevin_Long,0.14,0
+Ki-Jana_Hoever,?,?
+Kieran_Tierney,1.82,0
+Kieran_Trippier,0.93,0
+Kieron_Freeman,0.0,0
+Konstantinos_Mavropanos,0.15,0
+Kortney_Hause,0.0,0
+Kurt_Zouma,4.1,2
+Kyle_Walker-Peters,0.17,0
+Kyle_Walker,20.55,6
+Laurent_Koscielny,0.71,0
+Leander_Dendoncker,0.26,1
+Leandro_Trossard,30.04,2
+Lee_Grant,0.0,0
+Leighton_Baines,0.4,5
+Leon_Balogun,0.11,0
+Leon_Clarke,0.0,0
+Leroy_Sané,2.37,0
+Lewis_Cook,3.56,2
+Lewis_Dunk,17.28,2
+Lewis_Gibson,0.0,0
+Liam_Gibson,?,?
+Lloyd_Kelly,0.0,0
+Lovre_Kalinic,0.0,0
+Lucas_Digne,5.52,1
+Lucas_Rodrigues Moura da Silva,2.85,8
+Lucas_Torreira,6.19,2
+Lukasz_Fabianski,1.86,0
+Lukas_Rupp,?,?
+Luka_Milivojevic,18.6,2
+Luke_Amos,0.0,0
+Luke_Cundle,0.0,?
+Luke_Dreher,0.0,0
+Luke_Freeman,0.34,0
+Luke_Shaw,0.56,2
+Lys_Mousset,17.85,2
+Maarten_Stekelenburg,0.04,0
+Mace_Goodridge,0.0,?
+Mahmoud Ahmed_Ibrahim Hassan,8.5,1
+Mamadou_Sakho,1.44,0
+Manuel_Lanzini,2.55,0
+Marcos_Alonso,5.58,0
+Marcos_Rojo,0.95,0
+Marco_Stiepermann,1.98,1
+Marcus_Rashford,21.12,2
+Marc_Albrighton,1.78,0
+Marc_Navarro,0.0,0
+Mario_Lemina,1.26,0
+Mario_Vrancic,0.0,1
+Marko_Arnautovic,4.3,0
+Mark_Duffy,0.0,0
+Mark_Noble,3.28,3
+Mark_Travers,0.0,0
+Martin_Dubravka,9.75,3
+Martin_Kelly,5.59,2
+Martín_Montoya,1.94,2
+Marvelous_Nakamba,2.7,2
+Mason_Greenwood,0.9,8
+Mason_Holgate,6.61,2
+Mason_Mount,5.42,2
+Matej_Vydra,0.51,0
+Mateo_Kovacic,3.41,0
+Mathew_Ryan,14.1,3
+Matteo_Darmian,0.02,0
+Matteo_Guendouzi,2.74,2
+Matthew_Clarke,0.0,0
+Matthew_Longstaff,2.25,0
+Matthew_Lowton,0.25,0
+Matty_James,0.01,0
+Matt_Doherty,5.37,1
+Matt_Ritchie,2.39,0
+Matt_Targett,4.57,0
+Maximillian_Aarons,6.86,2
+Max_Kilman,0.21,0
+Max_Meyer,0.68,1
+Maya_Yoshida,0.07,0
+Mbwana_Samatta,?,?
+Mesut_Özil,0.93,1
+Michael_Keane,1.99,2
+Michael_McGovern,0.0,0
+Michael_Obafemi,3.03,0
+Michael_Verrips,0.0,0
+Michail_Antonio,3.12,3
+Michel_Vorm,0.0,0
+Michy_Batshuayi,6.25,1
+Miguel_Almirón,1.14,0
+Mihai-Alexandru_Dobre,0.0,?
+Mohamed_Elneny,0.05,0
+Mohamed_Elyounoussi,0.05,0
+Mohamed_Salah,11.01,16
+Moise_Kean,1.03,1
+Morgan_Gibbs-White,0.61,0
+Morgan_Schneiderlin,0.82,0
+Moritz_Leitner,0.4,0
+Moussa_Djenepo,6.22,2
+Moussa_Sissoko,9.23,2
+Muhamed_Bešić,0.27,1
+N'Golo_Kanté,1.66,2
+Naby_Keita,0.82,0
+Nacho_Monreal,2.0,0
+Nampalys_Mendy,0.07,0
+Nathaniel_Chalobah,3.67,0
+Nathaniel_Phillips,0.0,?
+Nathan_Aké,0.09,0
+Nathan_Holland,0.0,?
+Nathan_Redmond,3.79,1
+Neal_Maupay,2.04,6
+Neco_Williams,0.0,?
+Neil_Taylor,0.05,0
+Nemanja_Matic,0.76,0
+Nick_Pope,0.62,6
+Nicolas_Pépé,1.09,2
+Nicolás_Otamendi,9.44,8
+Nya_Kirby,0.0,?
+Oleksandr_Zinchenko,0.01,1
+Oliver_McBurnie,1.34,1
+Oliver_Norwood,3.6,2
+Oliver_Skipp,0.05,0
+Olivier_Giroud,0.38,0
+Ondrej_Duda,?,?
+Onel_Hernández,2.48,1
+Oriol_Romeu Vidal,0.87,1
+Oskar_Buur,0.0,?
+Oumar_Niasse,0.05,?
+Owen_Otasowie,0.0,?
+Pablo_Fornals,3.37,6
+Pablo_Marí,?,?
+Pablo_Zabaleta,3.28,0
+Panagiotis_Retsos,?,?
+Pascal_Groß,5.03,8
+Patrick_Cutrone,6.42,0
+Patrick_Roberts,0.0,0
+Patrick_van Aanholt,7.0,0
+Paulo_Gazzaniga,4.59,3
+Paul_Dummett,6.74,2
+Paul_Pogba,1.76,0
+Pedro_Lomba Neto,0.13,0
+Pedro_Obiang,1.2,0
+Pedro_Rodríguez Ledesma,2.36,0
+Philip_Billing,1.57,3
+Philip_Heise,0.0,0
+Phil_Bardsley,5.47,6
+Phil_Foden,0.74,4
+Phil_Jagielka,1.16,0
+Phil_Jones,2.09,0
+Pierre-Emerick_Aubameyang,4.86,2
+Pierre-Emile_Højbjerg,1.58,1
+Pontus_Dahlberg,0.0,0
+Rachid_Ghezzal,0.02,0
+Rafael_Camacho,0.0,0
+Raheem_Sterling,7.6,10
+Ralf_Fahrmann,0.0,0
+Ravel_Morrison,0.0,0
+Raúl_Jiménez,5.18,5
+Reece_James,10.32,0
+Reiss_Nelson,0.03,0
+Rhian_Brewster,0.0,0
+Rhu-endly_Martina,0.0,?
+Ricardo Domingos_Barbosa Pereira,8.89,2
+Richairo_Zivkovic,?,?
+Richard_Stearman,0.0,0
+Richarlison_de Andrade,5.92,1
+Riyad_Mahrez,1.99,1
+Robbie_Brady,2.14,0
+Robert Kenedy_Nunes do Nascimento,0.35,0
+Roberto_Firmino,16.1,2
+Roberto_Jimenez Gago,0.59,0
+Roberto_Pereyra,2.59,0
+Robert_Elliot,0.0,?
+Robert_Snodgrass,13.43,2
+Rob_Holding,0.21,0
+Rodrigo_Hernandez,0.35,2
+Rolando_Aarons,0.0,0
+Romain_Saïss,0.84,0
+Romelu_Lukaku,1.79,0
+Ross_Barkley,1.15,0
+Ruben_Loftus-Cheek,0.63,0
+Rui Pedro_dos Santos Patrício,3.07,2
+Ryan_Bennett,0.6,0
+Ryan_Bertrand,20.18,2
+Ryan_Fraser,0.44,3
+Ryan_Fredericks,6.68,6
+Ryan_Giles,?,?
+Ryan_Sessegnon,0.02,0
+Rúben Diogo_da Silva Neves,16.08,2
+Rúben Gonçalo_Silva Nascimento Vinagre,1.37,0
+Sadio_Mané,12.59,6
+Sam_Byram,0.48,2
+Sam_Gallagher,0.0,0
+Sam_Surridge,0.01,0
+Sam_Woods,0.0,?
+Sander_Berge,?,?
+Scott_Carson,0.0,0
+Scott_Dann,8.61,2
+Scott_McTominay,6.52,2
+Sead_Kolasinac,2.83,0
+Seamus_Coleman,2.94,2
+Sean_Longstaff,0.54,2
+Sebastian_Prödl,0.28,0
+Serge_Aurier,3.39,2
+Sergio_Agüero,0.38,0
+Sergio_Romero,0.0,0
+Shane_Duffy,0.63,1
+Shane_Long,1.66,2
+Shkodran_Mustafi,1.34,0
+Simon_Francis,13.54,7
+Simon_Mignolet,0.03,0
+Simon_Moore,0.25,0
+Sofiane_Boufal,2.09,0
+Sokratis_Papastathopoulos,0.83,0
+Solomon_March,0.31,0
+Stephen_Henderson,0.0,0
+Steven_Alzate,2.44,2
+Steven_Bergwijn,?,?
+Steven_Defour,0.2,0
+Steve_Cook,15.25,0
+Stuart_Armstrong,2.12,1
+Sung-yueng_Ki,0.0,0
+Sébastien_Haller,1.1,9
+Tahith_Chong,1.02,0
+Takumi_Minamino,0.0,?
+Tammy_Abraham,1.22,2
+Tanguy_Ndombele,1.69,0
+Tariq_Lamptey,0.0,?
+Taylor_Perry,0.0,0
+Teemu_Pukki,8.61,9
+Theo_Walcott,1.78,0
+Thomas_Allan,?,?
+Timm_Klose,0.0,0
+Tim_Krul,5.73,0
+Toby_Alderweireld,5.53,1
+Todd_Cantwell,13.98,1
+Tomas_Soucek,?,?
+Tom_Cleverley,1.48,0
+Tom_Davies,7.34,1
+Tom_Heaton,1.39,1
+Tom_Trybull,1.54,1
+Trent_Alexander-Arnold,2.76,6
+Troy_Deeney,0.44,2
+Troy_Parrott,0.0,0
+Tudor_Baluta,0.0,0
+Tyreece_John-Jules,0.0,?
+Tyreke_Johnson,0.0,0
+Tyrick_Mitchell,0.0,?
+Tyrone_Mings,8.14,0
+Valentino_Lazaro,?,?
+Vicente_Guaita,9.0,8
+Victor_Lindelöf,0.48,-1
+Victor_Wanyama,0.72,0
+Vincent_Janssen,0.19,0
+Virgil_van Dijk,20.0,7
+Víctor_Camarasa,0.43,0
+Wayne_Hennessey,2.24,0
+Wesley_Hoedt,0.19,0
+Wesley_Moraes,2.23,2
+Wes_Morgan,2.83,0
+Wilfred_Ndidi,3.57,4
+Wilfried_Zaha,1.29,8
+William_Smallbone,0.73,?
+Willian_Borges Da Silva,0.61,3
+Willy_Boly,1.24,0
+Willy_Caballero,0.02,0
+Will_Hughes,1.47,1
+Will_Norris,0.0,0
+Winston_Reid,0.06,0
+Xherdan_Shaqiri,5.18,3
+Yan_Valery,0.39,0
+Yerry_Mina,0.16,2
+Yoshinori_Muto,0.76,1
+Youri_Tielemans,2.75,2
+Yves_Bissouma,0.58,2
+Çaglar_Söyüncü,5.59,3
+Ørjan_Nyland,0.42,0

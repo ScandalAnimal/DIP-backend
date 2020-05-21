@@ -1,0 +1,31 @@
+@relation Christian_Eriksen
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+117,1,9,26.6,16,8,5.1,28,89,0,0,0,0,0,0,True,13
+118,8,27,28.7,54,56.2,13.9,90,88,1,0,1,0,2,0,False,1
+119,2,7,29.7,7,9.2,4.6,90,88,0,0,1,0,0,0,True,7
+120,1,1,5.4,0,0,0.5,11,88,0,0,0,0,1,0,False,9
+121,6,28,37.6,3,27.8,6.8,90,88,0,1,0,0,1,0,True,16
+122,2,7,5.3,16,10,3.1,90,88,0,0,0,0,3,0,False,4
+123,0,0,0,0,0,0,0,88,0,0,0,0,0,0,True,18
+124,2,4,6.4,4,0,1,87,87,0,0,0,0,2,0,False,10

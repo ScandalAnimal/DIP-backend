@@ -1,0 +1,31 @@
+@relation Kurt_Zouma
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+116,1,16,1.7,0,14.4,1.6,90,50,0,0,0,0,2,0,False,14
+117,-1,9,0.3,4,10.8,1.5,90,50,0,0,0,0,2,0,True,15
+118,0,2,1.5,4,16.2,2.2,45,49,0,0,0,0,2,0,False,20
+119,1,8,0.3,0,10.2,1.1,48,49,0,0,0,0,0,0,True,10
+120,0,0,0,0,0,0,0,48,0,0,0,0,0,0,True,4
+121,2,15,0.3,4,25.2,3,90,48,0,0,0,0,1,0,False,16
+122,7,25,1.7,17,24.8,4.4,90,47,0,0,0,0,0,0,True,13
+123,1,15,0.7,0,17.6,1.8,90,47,0,0,0,0,2,0,False,5

@@ -1,0 +1,31 @@
+@relation 'Willian_Borges Da Silva'
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+117,1,2,0.3,4,0,0.4,6,70,0,0,0,0,0,0,False,14
+118,1,6,2.8,2,4.2,0.9,30,70,0,0,0,0,1,0,True,15
+119,2,13,6.4,4,9.6,2,90,70,0,0,0,0,2,0,False,20
+120,2,13,9.6,10,7.6,2.7,90,70,0,0,0,0,2,0,True,10
+121,10,30,14.2,73,47.4,13.5,90,70,1,0,0,0,0,0,True,4
+122,8,29,41.8,11,27.2,8,90,70,0,1,0,0,1,0,False,16
+123,3,18,44.8,35,16.2,9.6,90,70,0,0,0,0,0,0,True,13
+124,12,35,35.3,59,60,15.4,71,70,1,1,1,0,0,0,False,5

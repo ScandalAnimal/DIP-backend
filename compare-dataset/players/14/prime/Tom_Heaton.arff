@@ -1,0 +1,31 @@
+@relation Tom_Heaton
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+120,2,14,0,0,21.8,2.2,90,45,0,0,0,0,3,3,False,1
+121,1,9,0,0,6.4,0.6,90,45,0,0,0,0,2,1,True,5
+122,3,16,0,0,28.2,2.8,90,45,0,0,0,0,1,4,False,14
+123,3,16,0,0,30.2,3,90,45,0,0,0,0,1,4,True,4
+124,2,21,0,0,48.4,4.8,90,45,0,0,0,0,3,5,False,11
+125,2,17,0,0,28.6,2.9,90,45,0,0,0,0,2,4,True,10
+126,0,0,0,0,0,0,0,45,0,0,0,0,0,0,False,20
+127,7,32,0,0,34.4,3.4,90,45,0,0,0,0,0,5,True,13

@@ -1,0 +1,31 @@
+@relation Mateo_Kovacic
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+40,1,4,0.4,0,2.8,0.3,19,55,0,0,0,0,0,0,True,9
+41,5,31,26.5,20,37.4,8.4,90,55,0,1,0,0,2,0,False,14
+42,2,15,4.8,8,4.4,1.7,82,55,0,0,0,0,1,0,True,15
+43,2,15,4.3,0,5.8,1,69,55,0,0,0,0,1,0,False,20
+44,1,10,4.3,8,8,2,90,55,0,0,1,0,2,0,True,10
+45,1,11,21.2,0,7.6,2.9,22,55,0,0,0,0,0,0,True,4
+46,1,6,0.6,0,2.6,0.3,10,54,0,0,0,0,0,0,False,16
+47,1,17,3,0,13,1.6,47,54,0,0,0,0,0,0,True,13

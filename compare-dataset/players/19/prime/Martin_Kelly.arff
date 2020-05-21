@@ -1,0 +1,31 @@
+@relation Martin_Kelly
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+125,0,0,0,0,0,0,0,41,0,0,0,0,0,0,True,9
+126,0,3,0.8,0,10.2,1.1,46,41,0,0,0,0,2,0,False,6
+127,1,4,14.1,0,6.4,2.1,20,41,0,0,0,0,1,0,True,10
+128,6,24,0.8,0,17.2,1.8,90,41,0,0,0,0,0,0,False,5
+129,6,24,1.1,0,22.2,2.3,90,41,0,0,0,0,0,0,True,3
+130,8,26,0.8,0,19.6,2,90,42,0,0,0,0,0,0,False,18
+131,2,17,42.3,4,28.6,7.5,90,43,0,0,0,0,1,0,True,4
+132,2,10,2.8,2,10.2,1.5,90,44,0,0,0,0,1,0,False,13

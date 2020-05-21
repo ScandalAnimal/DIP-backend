@@ -1,0 +1,31 @@
+@relation 'Johann Berg_Gudmundsson'
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+116,2,15,63.1,4,20.4,8.8,71,60,0,0,0,0,2,0,False,1
+117,3,8,11.2,20,3.2,3.4,65,60,0,0,0,0,0,0,False,20
+118,0,0,0,0,0,0,0,60,0,0,0,0,0,0,True,10
+119,0,0,0,0,0,0,0,60,0,0,0,0,0,0,False,4
+120,0,0,0,0,0,0,0,60,0,0,0,0,0,0,True,14
+121,0,0,0,0,0,0,0,60,0,0,0,0,0,0,False,2
+122,3,7,6.3,33,6.6,4.6,83,59,0,0,0,0,0,0,True,8
+123,0,0,0,0,0,0,0,59,0,0,0,0,0,0,False,9

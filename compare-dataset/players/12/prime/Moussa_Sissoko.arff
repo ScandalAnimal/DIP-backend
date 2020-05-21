@@ -1,0 +1,31 @@
+@relation Moussa_Sissoko
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+115,2,7,3.8,10,3.8,1.8,90,50,0,0,0,0,2,0,False,1
+116,3,9,5.9,0,0,0.4,90,50,0,0,0,0,0,0,True,7
+117,2,10,1.5,0,1.2,0.3,66,50,0,0,1,0,0,0,False,9
+118,2,10,3.3,0,15,1.8,90,50,0,0,0,0,1,0,True,16
+119,2,12,4.5,4,11,2,90,50,0,0,0,0,3,0,False,4
+120,1,14,18,1,7.8,2.7,90,50,0,0,1,0,1,0,True,18
+121,1,9,4.4,0,6.2,1.1,90,49,0,0,1,0,2,0,False,10
+122,2,14,1.4,0,6,0.7,90,49,0,0,0,0,1,0,False,8

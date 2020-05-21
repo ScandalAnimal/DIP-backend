@@ -1,0 +1,35 @@
+@relation Mark_Travers
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+1,8,31,0,0,32.4,3.2,90,40,0,0,0,0,0,5,True,17
+2,1,15,0,0,35.8,3.6,90,40,0,0,0,0,5,4,False,7
+3,0,0,0,0,0,0,0,45,0,0,0,0,0,0,True,15
+4,0,0,0,0,0,0,0,45,0,0,0,0,0,0,False,2
+5,0,0,0,0,0,0,0,44,0,0,0,0,0,0,True,11
+6,0,0,0,0,0,0,0,44,0,0,0,0,0,0,False,9
+7,0,0,0,0,0,0,0,44,0,0,0,0,0,0,True,8
+8,0,0,0,0,0,0,0,44,0,0,0,0,0,0,False,16
+9,0,0,0,0,0,0,0,44,0,0,0,0,0,0,True,19
+10,0,0,0,0,0,0,0,44,0,0,0,0,0,0,False,1
+11,0,0,0,0,0,0,0,43,0,0,0,0,0,0,True,14
+12,0,0,0,0,0,0,0,43,0,0,0,0,0,0,False,18

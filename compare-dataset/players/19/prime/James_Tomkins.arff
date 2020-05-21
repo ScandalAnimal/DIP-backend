@@ -1,0 +1,31 @@
+@relation James_Tomkins
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+125,0,6,0.1,0,7.6,0.8,90,50,0,0,1,0,2,0,True,9
+126,1,13,0.2,4,23.2,2.7,90,50,0,0,0,0,2,0,False,6
+127,1,18,10.5,4,31,4.6,90,50,0,0,0,0,2,0,True,10
+128,8,29,3,4,30,3.7,90,50,0,0,0,0,0,0,False,5
+129,6,22,0.1,2,14.6,1.7,90,50,0,0,0,0,0,0,True,3
+130,5,20,0,0,7,0.7,90,50,0,0,1,0,0,0,False,18
+131,5,22,10.4,4,46.4,6.1,90,50,0,1,0,0,1,0,True,4
+132,2,11,0.2,0,21.8,2.2,90,50,0,0,0,0,1,0,False,13

@@ -1,0 +1,31 @@
+@relation Diego_Rico
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+47,8,26,39.3,3,15.6,5.8,90,42,0,0,0,0,0,0,True,14
+48,5,19,16.5,23,27.6,6.7,90,42,0,0,1,0,0,0,False,18
+49,6,23,9.9,0,25.6,3.6,90,43,0,0,0,0,0,0,True,12
+50,1,7,1.8,0,8.8,1.1,65,43,0,0,0,0,2,0,False,13
+51,0,10,15.6,0,19.6,3.5,90,43,0,0,1,0,2,0,True,20
+52,0,7,31.3,11,25.4,6.8,90,43,0,0,1,0,3,0,False,17
+53,9,31,27.3,0,13.2,4.1,63,43,0,0,0,0,0,0,False,7
+54,1,12,1,0,27.8,2.9,90,43,0,0,0,0,3,0,True,10

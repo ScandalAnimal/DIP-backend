@@ -1,0 +1,31 @@
+@relation 'David_Luiz Moreira Marinho'
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+115,1,13,1,2,15.2,1.8,90,59,0,0,0,0,2,0,True,17
+116,1,12,3.3,0,15.8,1.9,90,59,0,0,0,0,2,0,False,18
+117,1,15,0.8,13,23.2,3.7,90,59,0,0,0,0,2,0,True,2
+118,2,14,7.1,10,30.6,4.8,90,58,0,0,0,0,1,0,False,12
+119,15,39,3.4,17,41.2,6.2,90,58,1,0,0,0,0,0,True,3
+120,2,13,4.1,0,14.8,1.9,90,58,0,0,0,0,1,0,False,15
+121,7,26,0.5,50,54.4,10.5,90,58,1,0,0,0,2,0,True,7
+122,2,13,7.6,0,24.6,3.2,90,58,0,0,0,0,1,0,True,20

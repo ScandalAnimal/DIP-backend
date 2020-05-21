@@ -1,0 +1,31 @@
+@relation Kepa_Arrizabalaga
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+40,2,18,0,0,23,2.3,90,55,0,0,0,0,1,2,True,9
+41,2,14,0,0,24,2.4,90,55,0,0,0,0,2,3,False,14
+42,1,19,0,0,10.2,1,90,55,0,0,0,0,2,2,True,15
+43,2,18,0,0,27.2,2.7,90,55,0,0,0,0,2,3,False,20
+44,1,10,0,0,11.6,1.2,90,55,0,0,0,0,2,1,True,10
+45,6,23,0,0,18,1.8,90,55,0,0,0,0,0,1,True,4
+46,2,10,0,0,7.6,0.8,90,55,0,0,0,0,1,1,False,16
+47,6,20,0,0,2.8,0.3,90,55,0,0,0,0,0,0,True,13

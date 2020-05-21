@@ -1,0 +1,31 @@
+@relation John_Stones
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+125,2,12,8.3,11,18.2,3.8,90,53,0,0,0,0,1,0,True,16
+126,1,17,0.8,4,12.4,1.7,90,53,0,0,0,0,3,0,False,10
+127,2,12,1.5,4,8.6,1.4,90,53,0,0,0,0,1,0,True,6
+128,1,16,2,6,22.2,3,90,53,0,0,0,0,2,0,False,13
+129,0,0,0,0,0,0,0,53,0,0,0,0,0,0,False,5
+130,0,9,1.8,0,6.4,0.8,58,53,0,0,0,0,2,0,True,12
+131,0,0,0,0,0,0,0,53,0,0,0,0,0,0,False,1
+132,0,0,0,0,0,0,0,53,0,0,0,0,0,0,True,9

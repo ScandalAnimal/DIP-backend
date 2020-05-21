@@ -1,0 +1,31 @@
+@relation Romain_Saïss
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+42,6,12,0.2,66,40,10.6,58,44,1,0,0,0,2,0,False,8
+43,2,17,0.8,17,10.4,2.8,90,44,0,1,1,0,5,0,True,6
+44,-1,4,1,0,10,1.1,72,44,0,0,0,1,1,0,False,7
+45,6,26,0.4,0,19.4,2,90,44,0,0,0,0,0,0,True,18
+46,1,4,0,0,5,0.5,12,44,0,0,0,0,0,0,False,11
+47,0,0,0,0,0,0,0,44,0,0,0,0,0,0,True,16
+48,2,20,26,2,37.4,6.5,90,44,0,0,1,0,1,0,False,13
+49,1,10,0.4,0,11.6,1.2,90,44,0,0,1,0,1,0,False,1

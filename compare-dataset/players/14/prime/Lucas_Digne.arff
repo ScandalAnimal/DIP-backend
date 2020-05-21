@@ -1,0 +1,31 @@
+@relation Lucas_Digne
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+44,1,12,19.3,25,13.6,5.8,90,62,0,0,0,0,2,0,True,15
+45,1,20,26.4,3,11.6,4.1,90,61,0,0,0,0,3,0,True,11
+46,2,14,26.8,2,9.4,3.8,90,60,0,0,0,0,1,0,False,5
+47,6,24,49.6,3,17,7,90,60,0,0,0,0,0,0,True,19
+48,-1,12,42.5,2,25,7,90,60,0,0,0,0,3,0,False,4
+49,6,28,57.3,8,41.2,10.7,90,59,0,1,0,0,1,0,True,17
+50,2,16,58.8,6,21.4,8.6,90,59,0,0,0,0,1,0,False,16
+51,1,14,55.8,11,29.2,9.6,90,59,0,0,0,0,2,0,True,14

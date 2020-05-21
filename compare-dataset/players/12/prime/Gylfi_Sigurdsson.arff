@@ -1,0 +1,31 @@
+@relation Gylfi_Sigurdsson
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+118,5,21,71.6,34,29.2,13.5,90,78,0,1,0,0,2,0,True,20
+119,2,11,14.7,21,8.2,4.4,70,78,0,0,0,0,2,0,False,3
+120,2,23,58,17,19.2,9.4,90,77,0,0,0,0,2,0,True,15
+121,2,16,67.3,31,23.8,12.2,90,76,0,0,0,0,3,0,True,11
+122,1,7,28.2,13,5,4.6,58,76,0,0,0,0,0,0,False,5
+123,6,22,0.8,14,37.6,5.2,3,75,1,0,0,0,0,0,True,19
+124,2,5,1.4,7,3.8,1.2,60,75,0,0,0,0,2,0,False,4
+125,1,4,1.2,2,1,0.4,6,75,0,0,0,0,0,0,True,17

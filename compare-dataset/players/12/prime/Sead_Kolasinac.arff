@@ -1,0 +1,31 @@
+@relation Sead_Kolasinac
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+80,1,15,34.1,13,17,6.4,90,54,0,0,0,0,2,0,True,17
+81,3,21,23.6,0,29.6,5.3,90,54,0,1,1,0,2,0,False,18
+82,1,19,13.8,10,17.4,4.1,90,54,0,0,0,0,2,0,True,2
+83,2,11,2.3,0,13,1.5,90,54,0,0,0,0,1,0,False,12
+84,7,25,2,0,8.4,1,90,54,0,0,0,0,0,0,True,3
+85,1,16,32.6,10,18.4,6.1,90,54,0,0,1,0,1,0,False,15
+86,1,2,0.7,0,0,0,15,54,0,0,0,0,0,0,True,7
+87,1,5,0.3,0,2.4,0.3,3,54,0,0,0,0,0,0,True,20

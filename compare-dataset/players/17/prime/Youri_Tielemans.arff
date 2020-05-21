@@ -1,0 +1,31 @@
+@relation Youri_Tielemans
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+23,9,30,37.2,25,51.4,11.4,90,64,1,0,0,0,1,0,True,5
+24,11,42,47.5,43,58.8,14.9,90,64,1,1,0,0,0,0,False,16
+25,3,8,17.5,6,9,3.3,90,65,0,0,0,0,0,0,False,7
+26,6,23,44.6,25,26.4,9.6,90,66,0,1,0,0,0,0,True,1
+27,3,16,13.9,2,6,2.2,90,67,0,0,0,0,0,0,False,4
+28,2,13,20.7,8,12.4,4.1,90,67,0,0,0,0,1,0,True,8
+29,3,8,14.7,2,1.2,1.8,68,67,0,0,0,0,0,0,True,18
+30,2,11,25.8,22,12.8,6.1,90,67,0,0,0,0,1,0,False,2

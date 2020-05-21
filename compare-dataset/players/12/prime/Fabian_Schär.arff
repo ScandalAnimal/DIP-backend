@@ -1,0 +1,31 @@
+@relation Fabian_Schär
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+42,8,16,1.5,23,42.8,6.7,84,50,1,0,0,0,1,0,True,18
+43,1,10,0.1,10,22.2,3.2,79,50,0,0,0,0,3,0,False,10
+44,6,20,0.9,5,20.6,2.7,90,50,0,0,0,0,0,0,True,4
+45,-1,8,0.3,2,20.6,2.3,90,50,0,0,1,0,5,0,False,9
+46,5,22,0.2,12,24.4,3.7,90,50,0,0,1,0,0,0,True,12
+47,2,10,4.4,0,23.8,2.8,90,50,0,0,0,0,1,0,False,6
+48,0,0,0,0,0,0,0,50,0,0,0,0,0,0,True,20
+49,0,0,0,0,0,0,0,50,0,0,0,0,0,0,False,19

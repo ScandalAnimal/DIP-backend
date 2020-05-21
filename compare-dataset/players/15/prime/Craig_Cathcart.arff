@@ -1,0 +1,31 @@
+@relation Craig_Cathcart
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+121,1,13,0.8,0,12.6,1.3,90,44,0,0,0,0,2,0,False,20
+122,6,23,1.1,0,16.4,1.8,90,44,0,0,0,0,0,0,True,15
+123,2,10,0.1,0,16,1.6,90,44,0,0,0,0,1,0,False,17
+124,7,29,0.7,0,22.8,2.4,90,44,0,0,0,0,0,0,True,3
+125,1,3,0.1,0,0,0,19,44,0,0,0,0,1,0,True,6
+126,6,20,0.3,2,8,1,90,44,0,0,0,0,0,0,False,14
+127,1,17,4.4,18,22.2,4.5,90,44,0,0,0,0,3,0,True,5
+128,1,12,0.1,0,22.8,2.3,90,44,0,0,0,0,2,0,False,16

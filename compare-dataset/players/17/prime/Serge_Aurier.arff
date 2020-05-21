@@ -1,0 +1,31 @@
+@relation Serge_Aurier
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+82,2,18,23.9,20,21.4,6.5,90,49,0,0,0,0,1,0,True,18
+83,1,7,14.1,0,7.6,2.2,83,49,0,0,0,0,2,0,False,10
+84,9,35,11.7,0,23.4,3.5,87,48,0,0,0,0,0,0,False,8
+85,4,25,28,11,17.4,5.6,85,48,0,0,0,0,1,0,True,15
+86,6,36,26.3,0,41.4,6.8,90,48,0,1,0,0,2,0,False,19
+87,1,16,28.5,6,21.6,5.6,90,49,0,0,0,0,2,0,True,3
+88,5,28,6.7,34,29.8,7.1,90,49,0,1,0,0,2,0,False,12
+89,6,22,2.6,4,10.2,1.7,79,50,0,0,0,0,0,0,True,5

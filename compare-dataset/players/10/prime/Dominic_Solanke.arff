@@ -1,0 +1,31 @@
+@relation Dominic_Solanke
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+109,1,7,10.5,2,2.8,1.5,14,55,0,0,0,0,0,0,False,2
+110,1,-1,0.3,54,4.2,5.9,21,55,0,0,0,0,0,0,True,11
+111,1,2,2.1,9,4.8,1.6,26,54,0,0,0,0,1,0,False,9
+112,2,4,11.8,22,3,3.7,90,54,0,0,0,0,1,0,True,8
+113,2,0,12.4,4,2.4,1.9,76,54,0,0,0,0,1,0,False,16
+114,2,2,2.4,26,2.8,3.1,90,54,0,0,0,0,2,0,True,19
+115,2,-1,11.9,8,3.4,2.3,62,54,0,0,0,0,1,0,False,1
+116,2,3,1.3,52,5.4,5.9,61,54,0,0,0,0,0,0,True,14

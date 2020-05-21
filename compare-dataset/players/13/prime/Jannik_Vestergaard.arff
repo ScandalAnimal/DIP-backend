@@ -1,0 +1,31 @@
+@relation Jannik_Vestergaard
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+43,5,23,0.8,34,18.8,5.4,90,51,0,0,1,0,0,0,False,15
+44,1,14,1.9,8,14.2,2.4,90,52,0,0,0,0,3,0,True,3
+45,1,13,23.1,0,14.2,3.7,78,52,0,0,0,0,2,0,False,17
+46,0,0,0,0,0,0,0,52,0,0,0,0,0,0,True,6
+47,2,13,0.3,18,10.2,2.9,90,52,0,0,0,0,1,0,False,20
+48,-1,4,0,0,5.4,0.5,45,52,0,0,0,0,5,0,True,9
+49,1,21,0.5,0,47.2,4.8,90,51,0,0,0,0,2,0,False,11
+50,1,13,0.3,0,20.6,2.1,90,51,0,0,0,0,2,0,True,8

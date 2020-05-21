@@ -1,0 +1,31 @@
+@relation 'Oriol_Romeu Vidal'
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+119,3,18,2.9,0,11.4,1.4,90,45,0,0,0,0,0,0,False,15
+120,1,23,34.1,0,31.6,6.6,90,45,0,0,1,0,3,0,True,3
+121,2,10,5.9,0,15,2.1,90,45,0,0,0,0,2,0,False,17
+122,2,10,4.8,18,13.6,3.6,90,45,0,0,0,0,4,0,True,6
+123,2,10,12.3,2,10.4,2.5,81,45,0,0,0,0,1,0,False,20
+124,2,12,3.4,0,19,2.2,90,45,0,0,0,0,9,0,True,9
+125,2,10,2.5,0,26.6,2.9,90,45,0,0,0,0,2,0,False,11
+126,2,9,1.5,2,11,1.5,90,45,0,0,0,0,2,0,True,8

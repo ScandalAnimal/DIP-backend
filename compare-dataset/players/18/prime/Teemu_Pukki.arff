@@ -1,0 +1,31 @@
+@relation Teemu_Pukki
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+10,2,0,2.3,16,0,1.7,90,70,0,0,0,0,3,0,True,12
+11,2,6,14,40,3.2,5.7,90,69,0,0,0,0,2,0,False,4
+12,2,13,38.1,50,13.2,10.1,90,68,0,0,0,0,2,0,True,18
+13,5,17,11.3,24,16.8,5.2,90,67,0,1,0,0,0,0,False,8
+14,8,31,11.6,28,39.2,7.9,90,66,1,0,0,0,2,0,True,1
+15,8,28,12.3,36,38.6,8.7,90,66,1,0,0,0,2,0,False,16
+16,2,5,14,60,3,7.7,90,66,0,0,0,0,2,0,True,15
+17,9,26,12.7,48,37,9.8,90,66,1,0,0,0,1,0,False,9

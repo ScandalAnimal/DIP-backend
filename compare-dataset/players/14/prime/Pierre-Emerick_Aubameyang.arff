@@ -1,0 +1,31 @@
+@relation Pierre-Emerick_Aubameyang
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+57,5,26,1.6,59,34.6,9.5,90,110,1,0,1,0,2,0,True,2
+58,9,33,25.7,19,42.2,8.7,90,110,1,0,0,0,1,0,False,12
+59,2,0,12.8,47,1,6.1,90,110,0,0,0,0,0,0,True,3
+60,2,7,4.7,8,3.6,1.6,90,111,0,0,0,0,1,0,False,15
+61,2,5,12.4,11,1,2.4,90,111,0,0,0,0,2,0,True,7
+62,8,27,10.6,39,39.6,8.9,90,111,1,0,0,0,1,0,True,20
+63,2,10,30.3,22,11.4,6.4,90,110,0,0,0,0,2,0,False,9
+64,5,10,11.1,37,10.6,5.9,90,110,0,1,0,0,2,0,True,16

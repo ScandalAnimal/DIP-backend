@@ -1,0 +1,31 @@
+@relation Chris_Basham
+
+@attribute gw_index numeric
+@attribute total_points numeric
+@attribute bps numeric
+@attribute creativity numeric
+@attribute threat numeric
+@attribute influence numeric
+@attribute ict_index numeric
+@attribute minutes numeric
+@attribute value numeric
+@attribute goals_scored numeric
+@attribute assists numeric
+@attribute yellow_cards numeric
+@attribute red_cards numeric
+@attribute goals_conceded numeric
+@attribute saves numeric
+@attribute was_home {False,True}
+@attribute opponent_team numeric
+
+@data
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,0
+3,1,7,1.7,4,8,1.4,77,45,0,0,0,0,2,0,True,9
+4,1,17,11.3,3,17.6,3.2,83,45,0,0,0,0,2,0,False,6
+5,2,5,1.1,8,18.8,2.8,83,45,0,0,0,0,1,0,True,16
+6,6,20,1,4,18.8,2.4,90,45,0,0,0,0,0,0,False,8
+7,2,11,1.2,0,12.8,1.4,90,45,0,0,0,0,1,0,True,10
+8,6,20,3.2,6,13.4,2.3,90,45,0,0,0,0,0,0,False,18
+9,7,25,0.7,0,26.8,2.8,90,45,0,0,0,0,0,0,True,1
+10,2,15,0.6,0,23,2.4,90,45,0,0,0,0,1,0,False,19
